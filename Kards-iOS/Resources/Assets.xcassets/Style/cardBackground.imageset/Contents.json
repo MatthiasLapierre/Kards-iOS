@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "card_background.jpg",
       "idiom" : "universal"
     }
   ],
