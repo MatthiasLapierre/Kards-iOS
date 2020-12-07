@@ -36,6 +36,13 @@ extension Font {
           return Font.custom("Oswald-Bold", size: UIFontMetrics.default.scaledValue(for: 34.0))
         }
     }
+    static var uiBannerTitle: Font {
+      if #available(iOS 14, *) {
+        return Font.custom("Oswald-Bold", size: 18.0, relativeTo: .title)
+      } else {
+        return Font.custom("Oswald-Bold", size: 18.0)
+      }
+    }
     static var uiTitle1: Font {
       if #available(iOS 14, *) {
         return Font.custom("Oswald-Bold", size: 28.0, relativeTo: .title)

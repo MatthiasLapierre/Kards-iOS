@@ -13,6 +13,7 @@
 		3995601325793823008D9C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3995601225793823008D9C32 /* Assets.xcassets */; };
 		3995601625793823008D9C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3995601525793823008D9C32 /* Preview Assets.xcassets */; };
 		3995601925793823008D9C32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3995601725793823008D9C32 /* LaunchScreen.storyboard */; };
+		39F5C486257E22570063ED76 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C485257E22570063ED76 /* CardView.swift */; };
 		39FEB0C5257A29FD00204332 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0C4257A29FD00204332 /* HomeView.swift */; };
 		39FEB0C9257A2A1200204332 /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0C8257A2A1200204332 /* NewsListView.swift */; };
 		39FEB0CE257A2A3600204332 /* CardsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0CD257A2A3600204332 /* CardsCollectionView.swift */; };
@@ -47,6 +48,7 @@
 		3995601525793823008D9C32 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3995601825793823008D9C32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3995601A25793823008D9C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39F5C485257E22570063ED76 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		39FEB0C4257A29FD00204332 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		39FEB0C8257A2A1200204332 /* NewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
 		39FEB0CD257A2A3600204332 /* CardsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCollectionView.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			children = (
 				39FEB0E6257A340B00204332 /* SnackbarView.swift */,
 				39FEB106257A3FB900204332 /* MessageBarView.swift */,
+				39F5C485257E22570063ED76 /* CardView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				39FEB107257A3FB900204332 /* MessageBarView.swift in Sources */,
 				39FEB0C5257A29FD00204332 /* HomeView.swift in Sources */,
 				39FEB0D9257A2CCE00204332 /* TabNavView.swift in Sources */,
+				39F5C486257E22570063ED76 /* CardView.swift in Sources */,
 				39FEB0CE257A2A3600204332 /* CardsCollectionView.swift in Sources */,
 				39FEB0DD257A2DC500204332 /* TabViewModel.swift in Sources */,
 				39FEB115257A47AD00204332 /* UIFont+Extensions.swift in Sources */,

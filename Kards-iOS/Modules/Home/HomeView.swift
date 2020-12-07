@@ -35,98 +35,144 @@ struct HomeView: View {
                 Text(String.home),
                 displayMode: .inline
             )
+            .navigationBarHidden(true)
     }
     
     private var contentView: some View {
         ScrollView {
-            VStack {
-                headerView
-                CCGView()
+            VStack(spacing: 50) {
+                HeaderView()
+                ccgView
+                howToPlayView
             }
+            .background(
+                Color.clear
+                    .overlay(
+                        Image.overlay1Background
+                            .resizable()
+                            .scaledToFill()
+                    )
+                    .overlay(
+                        Image.overlay2Background
+                            .resizable()
+                            .scaledToFill()
+                    )
+                    .overlay(
+                        Image.overlay3Background
+                            .resizable()
+                            .scaledToFill()
+                    )
+            )
         }
         .background(Color.backgroundColor)
-        .edgesIgnoringSafeArea([.all])
+        .edgesIgnoringSafeArea(.all)
     }
     
-    private var headerView: some View {
-        Image.logoBanner
-            .resizable()
-            .scaledToFit()
+    private var ccgView: some View {
+        VStack {
+            CardStack()
+            CardView(title: String.ccgTitle, text: String.ccgText)
+        }
+    }
+    
+    private var howToPlayView: some View {
+        VStack {
+            Image.deck
+                .resizable()
+                .frame(width: 320, height: 200, alignment: .center)
+            CardView(title: String.howToPlayTitle, text: String.howToPlayText)
+        }
     }
 }
 
-fileprivate struct CCGView: View {
+fileprivate struct HeaderView: View {
+    
     private struct SizeKey: PreferenceKey {
       static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
         value = value ?? nextValue()
       }
     }
-    
+   
     @State private var height: CGFloat?
     
     var body: some View {
-        VStack {
-            HStack {
-                GeometryReader { proxy in
-                    let cardWidth = proxy.size.width * 0.4
-                    let transformX = proxy.size.width * 0.08
-                    let transformY = proxy.size.width * 0.15
-                    ZStack {
-                        Image.card1
+        return HStack {
+            GeometryReader { proxy in
+                ZStack {
+                    Image.banner
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: proxy.size.width)
+                    VStack {
+                        Image.logo
                             .resizable()
-                            .scaledToFill()
-                            .frame(width: cardWidth)
-                            .rotationEffect(.init(degrees: -25))
-                            .transformEffect(.init(translationX: CGFloat(-transformY), y: CGFloat(transformX)))
-                        Image.card2
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: cardWidth)
-                        
-                        Image.card3
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: cardWidth)
-                            .rotationEffect(.init(degrees: 25))
-                            .transformEffect(.init(translationX: CGFloat(transformY), y: CGFloat(transformX)))
+                            .scaledToFit()
+                            .frame(width: proxy.size.width * 0.4, height: proxy.size.width * 0.4)
+                        Text(String.homeTitle)
+                            .font(Font.uiBannerTitle)
+                            .foregroundColor(Color.bannerTitle)
                     }
-                    .background(GeometryReader { proxy in
-                        Color.clear.preference(key: SizeKey.self, value: proxy.size)
-                    })
-                    .frame(width: proxy.size.width)
-                    .onPreferenceChange(SizeKey.self) { size in
-                      height = size?.height
-                    }
+                    .padding(.vertical, 50)
+                }
+                .background(GeometryReader { proxy in
+                    Color.clear.preference(key: SizeKey.self, value: proxy.size)
+                })
+                .frame(width: proxy.size.width)
+                .onPreferenceChange(SizeKey.self) { size in
+                    height = size?.height
                 }
             }
             .frame(height: height)
-            VStack {
-                Text(verbatim: String.ccgTitle)
-                    .font(Font.uiTitle1)
-                    .foregroundColor(Color.bodyText)
-                Text(verbatim: String.ccgText)
-                    .font(Font.uiBody)
-                    .foregroundColor(Color.bodyText)
-                    .padding(.top, 5)
-            }
-            .padding(.horizontal, 10)
-            .padding(.vertical, 20)
-            .background(
-                Color.cardBackground
-                    .overlay(Image.cardBackground
-                                .resizable()
-                                .opacity(0.8))
-            )
-            .shadow(radius: 5)
         }
-        .background(
-            Color.clear
-                .overlay(
-                    Image.overlay1Background
+    }
+    
+}
+
+fileprivate struct CardStack: View {
+    
+    private struct SizeKey: PreferenceKey {
+      static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
+        value = value ?? nextValue()
+      }
+    }
+   
+    @State private var height: CGFloat?
+    
+    var body: some View {
+        return HStack {
+            GeometryReader { proxy in
+                let cardWidth = proxy.size.width * 0.4
+                let transformX = proxy.size.width * 0.08
+                let transformY = proxy.size.width * 0.15
+                ZStack {
+                    Image.card1
                         .resizable()
                         .scaledToFill()
-                )
-        )
+                        .frame(width: cardWidth)
+                        .rotationEffect(.init(degrees: -25))
+                        .transformEffect(.init(translationX: CGFloat(-transformY), y: CGFloat(transformX)))
+                    Image.card2
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: cardWidth)
+                    
+                    Image.card3
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: cardWidth)
+                        .rotationEffect(.init(degrees: 25))
+                        .transformEffect(.init(translationX: CGFloat(transformY), y: CGFloat(transformX)))
+                }
+                .background(GeometryReader { proxy in
+                    Color.clear.preference(key: SizeKey.self, value: proxy.size)
+                })
+                .frame(width: proxy.size.width)
+                .onPreferenceChange(SizeKey.self) { size in
+                    height = size?.height
+                }
+            }
+            .frame(height: height)
+        }
     }
 }
 

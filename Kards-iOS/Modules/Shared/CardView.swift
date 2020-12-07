@@ -28,53 +28,35 @@
 
 import SwiftUI
 
-extension Image {
-    static var home: Image {
-        Image(systemName: "house.fill")
+struct CardView: View {
+    
+    var title: String
+    var text: String
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(verbatim: title)
+                .font(Font.uiTitle1)
+                .foregroundColor(Color.bodyText)
+            Text(verbatim: text)
+                .font(Font.uiBody)
+                .foregroundColor(Color.bodyText)
+                .padding(.top, 5)
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 30)
+        .background(
+            Color.cardBackgroundColor
+                .overlay(Image.cardBackground
+                            .resizable()
+                            .opacity(0.8))
+        )
+        .shadow(radius: 5)
     }
-    static var cards: Image {
-        Image(systemName: "app")
-    }
-    static var news: Image {
-        Image(systemName: "text.alignleft")
-    }
-    static var close: Image {
-        Image(systemName: "xmark")
-    }
-    static var logo: Image {
-        Image("logo")
-    }
-    static var banner: Image {
-        Image("banner")
-    }
-    static var cardBacks: Image {
-        Image("cardbacks")
-    }
-    static var deck: Image {
-        Image("deck")
-    }
-    static var card1: Image {
-        Image("card1")
-    }
-    static var card2: Image {
-        Image("card2")
-    }
-    static var card3: Image {
-        Image("card3")
-    }
-    static var cardBackground: Image {
-        Image("cardBackground")
-    }
-    static var titleBackground: Image {
-        Image("titleBackground")
-    }
-    static var overlay1Background: Image {
-        Image("overlay1Background")
-    }
-    static var overlay2Background: Image {
-        Image("overlay2Background")
-    }
-    static var overlay3Background: Image {
-        Image("overlay3Background")
+}
+
+struct CardView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardView(title: String.ccgTitle, text: String.ccgText)
     }
 }

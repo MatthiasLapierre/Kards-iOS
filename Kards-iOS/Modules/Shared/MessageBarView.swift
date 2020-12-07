@@ -28,53 +28,51 @@
 
 import SwiftUI
 
-extension Image {
-    static var home: Image {
-        Image(systemName: "house.fill")
-    }
-    static var cards: Image {
-        Image(systemName: "app")
-    }
-    static var news: Image {
-        Image(systemName: "text.alignleft")
-    }
-    static var close: Image {
-        Image(systemName: "xmark")
-    }
-    static var logo: Image {
-        Image("logo")
-    }
-    static var banner: Image {
-        Image("banner")
-    }
-    static var cardBacks: Image {
-        Image("cardbacks")
-    }
-    static var deck: Image {
-        Image("deck")
-    }
-    static var card1: Image {
-        Image("card1")
-    }
-    static var card2: Image {
-        Image("card2")
-    }
-    static var card3: Image {
-        Image("card3")
-    }
-    static var cardBackground: Image {
-        Image("cardBackground")
-    }
-    static var titleBackground: Image {
-        Image("titleBackground")
-    }
-    static var overlay1Background: Image {
-        Image("overlay1Background")
-    }
-    static var overlay2Background: Image {
-        Image("overlay2Background")
-    }
-    static var overlay3Background: Image {
-        Image("overlay3Background")
-    }
+extension AnyTransition {
+  static var moveAndFade: AnyTransition {
+    AnyTransition.move(edge: .bottom)
+      .combined(with: .opacity)
+  }
 }
+
+struct MessageBarView: View {
+  @ObservedObject var messageBus: MessageBus
+  
+  var body: some View {
+    VStack {
+      if messageBus.messageVisible {
+        SnackbarView(
+          state: messageBus.currentMessage!.snackbarState,
+          visible: $messageBus.messageVisible
+        )
+      }
+    }
+    .transition(.moveAndFade)
+    .animation(.default)
+  }
+}
+
+struct MessageBarView_Previews: PreviewProvider {
+  static var previews: some View {
+    let messageBus = MessageBus()
+    messageBus.post(message: Message(level: .warning, message: "This is a warning"))
+    
+    return VStack {
+      Button(action: {
+        messageBus.messageVisible.toggle()
+      }) {
+        Text("Show/Hide")
+      }
+      
+      Button(action: {
+        messageBus.post(message: Message(level: .success, message: "Button clicked!"))
+      }) {
+        Text("Post new message")
+      }
+      
+      MessageBarView(messageBus: messageBus)
+    }
+    .previewLayout(.sizeThatFits)
+  }
+}
+

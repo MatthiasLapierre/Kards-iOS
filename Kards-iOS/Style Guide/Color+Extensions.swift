@@ -29,12 +29,20 @@
 import SwiftUI
 
 extension Color {
+    static var accent: Color {
+        Color("accent")
+    }
+    
     static var backgroundColor: Color {
         Color("backgroundColor")
     }
     
-    static var cardBackground: Color {
-        Color("cardBackground")
+    static var cardBackgroundColor: Color {
+        Color("cardBackgroundColor")
+    }
+    
+    static var bannerTitle: Color {
+        Color("bannerTitle")
     }
     
     static var bodyText: Color {

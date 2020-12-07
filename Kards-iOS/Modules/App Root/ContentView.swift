@@ -40,7 +40,7 @@ struct ContentView: View {
             homeView: homeView,
             cardsCollectionView: cardsCollectionView,
             newsListView: newsListView
-        )
+        )        
         .environmentObject(tabViewModel)
         .background(Color.backgroundColor)
         .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)

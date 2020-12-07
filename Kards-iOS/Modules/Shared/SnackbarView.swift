@@ -28,62 +28,67 @@
 
 import SwiftUI
 
-struct TabNavView<
-    HomeView: View,
-    CardsCollectionView: View,
-    NewsListView: View
->: View {
-    @EnvironmentObject var tabViewModel: TabViewModel
+struct SnackbarState {
+    enum Status: String {
+        case success, warning, error
+        
+        var color: Color {
+            switch self {
+            case .success:
+                return .snackSuccess
+            case .warning:
+                return .snackWarning
+            case .error:
+                return .snackError
+            }
+        }
+        
+        var tagText: String {
+            rawValue.uppercased()
+        }
+    }
     
-    let homeView: HomeView
-    let cardsCollectionView: CardsCollectionView
-    let newsListView: NewsListView
+    let status: Status
+    let message: String
+}
+
+struct SnackbarView: View {
+    var state: SnackbarState
+    @Binding var visible: Bool
     
     var body: some View {
-        TabView(selection: $tabViewModel.selectedTab) {
-            NavigationView {
-                homeView
-            }
-            .tabItem {
-                Text(String.home)
-                Image.home
-            }
-            .tag(MainTab.home)
-            .navigationViewStyle(StackNavigationViewStyle())
-            .accessibility(label: Text(String.home))
+        HStack {
+            Text(state.message)
+                .font(.uiBody)
+                .foregroundColor(.snackText)
+                .animation(.none)
             
-            NavigationView {
-                cardsCollectionView
-            }
-            .tabItem {
-                Text(String.cardsCollection)
-                Image.cards
-            }
-            .tag(MainTab.cardsCollection)
-            .navigationViewStyle(StackNavigationViewStyle())
-            .accessibility(label: Text(String.cardsCollection))
+            Spacer()
             
-            NavigationView {
-                newsListView
-            }
-            .tabItem {
-                Text(String.newsList)
-                Image.news
-            }
-            .tag(MainTab.news)
-            .navigationViewStyle(StackNavigationViewStyle())
-            .accessibility(label: Text(String.newsList))
+            Button(action: {
+                withAnimation {
+                    visible.toggle()
+                }
+            }) {
+                Image.close
+                    .resizable()
+                    .frame(width: 18, height: 18)
+                    .colorMultiply(.white)
+            }.foregroundColor(.snackText)
         }
-        .accentColor(Color.accent)
+        .padding()
+        .background(state.status.color)
     }
 }
 
-struct TabNavView_Previews: PreviewProvider {
+struct SnackbarView_Previews: PreviewProvider {
+    @State static var visible = true
     static var previews: some View {
-        TabNavView(
-            homeView: Text("Home"),
-            cardsCollectionView: Text("Cards"),
-            newsListView: Text("News")
-        ).environmentObject(TabViewModel())
+        VStack {
+            SnackbarView(state: SnackbarState(status: .error, message: "There was a problem."), visible: $visible)
+            SnackbarView(state: SnackbarState(status: .warning, message: "We're going orange."), visible: $visible)
+            SnackbarView(state: SnackbarState(status: .success, message: "Everything looks peachy."), visible: $visible)
+        }
+        .previewLayout(.sizeThatFits)
     }
 }
