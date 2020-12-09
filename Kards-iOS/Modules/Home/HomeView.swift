@@ -45,24 +45,7 @@ struct HomeView: View {
                 ccgView
                 howToPlayView
             }
-            .background(
-                Color.clear
-                    .overlay(
-                        Image.overlay1Background
-                            .resizable()
-                            .scaledToFill()
-                    )
-                    .overlay(
-                        Image.overlay2Background
-                            .resizable()
-                            .scaledToFill()
-                    )
-                    .overlay(
-                        Image.overlay3Background
-                            .resizable()
-                            .scaledToFill()
-                    )
-            )
+            .background(BackgroundView())
         }
         .background(Color.backgroundColor)
         .edgesIgnoringSafeArea(.all)

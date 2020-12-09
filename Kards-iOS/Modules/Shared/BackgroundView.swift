@@ -26,35 +26,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-protocol CardDisplayable  {
-    var id: String { get }
-    var subTitle: String { get }
-    var title: String { get }
-    var text: String { get }
-    var imageUrl: String { get }
-    var features: [Feature] { get }
+import SwiftUI
+
+struct BackgroundView: View {
+    var body: some View {
+        Color.backgroundColor
+            .edgesIgnoringSafeArea(.all)
+            .overlay(
+                Image.overlay1Background
+                    .resizable()
+                    .scaledToFill(),
+                alignment: .topLeading
+            )
+            .overlay(
+                Image.overlay2Background
+                    .resizable()
+                    .scaledToFill(),
+                alignment: .center
+            )
+            .overlay(
+                Image.overlay3Background
+                    .resizable()
+                    .scaledToFill(),
+                alignment: .bottomTrailing
+            )
+    }
 }
 
-extension CardDisplayable where Self: Identifiable {
-    
-}
-
-struct Feature {
-    var title: String
-    var value: String
-}
-
-class PreviewCard: CardDisplayable {
-    var id: String = "ID"
-    var subTitle: String = "Soviet Union"
-    var title: String = "The hammer"
-    var imageUrl: String = "images/card/v8/en/the_hammer.png"
-    var text: String = "Deal 6 damage to a ground unit."
-    var features: [Feature] = [
-        Feature(title: "Nation", value: "Soviet Union"),
-        Feature(title: "Rarity", value: "Limited"),
-        Feature(title: "Type", value: "Order"),
-        Feature(title: "Kredits", value: "3"),
-        Feature(title: "Set", value: "Base")
-    ]
+struct BackgroundView_Previews: PreviewProvider {
+    static var previews: some View {
+        BackgroundView()
+    }
 }

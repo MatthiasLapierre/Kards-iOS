@@ -27,12 +27,17 @@
 // THE SOFTWARE.
 
 import SwiftUI
+import Combine
 import KingfisherSwiftUI
 
 struct CardListView: View {
     
     @ObservedObject private var cardListRepository: CardListRepository
     @State private var isLoading: Bool = false
+    @State private var selectedCard: CardViewModel? = nil
+    @State private var presentCard: Bool = false
+    
+    private var subscriptions = Set<AnyCancellable>()
     
     init(cardListRepository: CardListRepository) {
         self.cardListRepository = cardListRepository
@@ -99,23 +104,7 @@ struct CardListView: View {
     }
     
     var backgroundView: some View {
-        Color.backgroundColor
-            .edgesIgnoringSafeArea(.all)
-            .overlay(
-                Image.overlay1Background
-                    .resizable()
-                    .scaledToFill()
-            )
-            .overlay(
-                Image.overlay2Background
-                    .resizable()
-                    .scaledToFill()
-            )
-            .overlay(
-                Image.overlay3Background
-                    .resizable()
-                    .scaledToFill()
-            )
+        BackgroundView()
     }
     
     var loadingView: some View {
@@ -136,24 +125,19 @@ struct CardListView: View {
     }
     
     func cardItem(for content: CardDisplayable) -> some View {
-        NavigationLink(
-            destination: Text("Destination"),
-            label: {
-                KFImage(URL(string: "\(KardsAPI.shared.environment.baseURL)/\(content.imageUrl)"))
-                    .placeholder {
-                        Image(systemName: "arrow.2.circlepath.circle")
-                            .font(.uiLargeTitle)
-                            .foregroundColor(Color.bodyText)
-                            .opacity(0.3)
-                    }
-                    .resizable()
-                    .scaledToFit()
-            })
-            .onAppear(perform: {
-                if (content.id == cardListRepository.cards.last?.id) {
-                    cardListRepository.loadMore()
-                }
-            })
+        Button(action: {
+            selectedCard = content as? CardViewModel
+        }) {
+            CardImageView(content.imageUrl)
+        }
+        .onAppear(perform: {
+            if (content.id == cardListRepository.cards.last?.id) {
+                cardListRepository.loadMore()
+            }
+        })
+        .fullScreenCover(item: $selectedCard, content: { item in
+            CardDetailsView(card: item)
+        })
     }
     
     func reloadIfRequired() {

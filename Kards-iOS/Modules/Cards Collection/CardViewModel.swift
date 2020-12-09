@@ -28,7 +28,7 @@
 
 import Foundation
 
-class CardViewModel: CardDisplayable {
+struct CardViewModel: CardDisplayable, Identifiable {
     
     private let card: GetCardsQuery.Data.Card.Edge.Node
     
@@ -41,11 +41,34 @@ class CardViewModel: CardDisplayable {
     }
     
     var title: String {
-        return (card.json["title"] as! [String:String])["en"]!
+        return (card.json["title"] as? [String:String])?["en"] ?? ""
+    }
+    
+    var subTitle: String {
+        return card.json["faction"] as? String ?? ""
     }
     
     var imageUrl: String {
         return card.imageUrl
+    }
+    
+    var text: String {
+        return (card.json["text"] as? [String:String])?["en"] ?? ""
+    }
+    
+    var features: [Feature] {
+        let nation = card.json["faction"] as! String
+        let rarity = card.json["rarity"] as! String
+        let type = card.json["type"] as! String
+        let kcredits = card.json["kredits"] as! Int
+        let set = card.json["set"] as! String
+        return [
+            Feature(title: String.cardNation, value: nation),
+            Feature(title: String.cardRarity, value: rarity),
+            Feature(title: String.cardType, value: type),
+            Feature(title: String.cardKredits, value: "\(kcredits)"),
+            Feature(title: String.cardSet, value: set)
+        ]
     }
     
 }

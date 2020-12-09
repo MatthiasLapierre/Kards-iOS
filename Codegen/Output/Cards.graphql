@@ -1,0 +1,19 @@
+query getCards($language: String, $offset: Int, $nationIds: [Int], $kredits: [Int], $q: String, $type: [String], $rarity: [String], $set: [String], $showSpawnables: Boolean) {
+  cards(language: $language, first: 20, offset: $offset, nationIds: $nationIds, kredits: $kredits, q: $q, type: $type, set: $set, rarity: $rarity, showSpawnables: $showSpawnables) {
+        pageInfo {
+            count,
+            hasNextPage
+        },
+        edges {
+            node {
+                id,
+                cardId,
+                importId,
+                json,
+                imageUrl: image(language: $language),
+                thumbUrl: image(type: thumb, language: $language),
+            }
+            
+        }
+    }
+}

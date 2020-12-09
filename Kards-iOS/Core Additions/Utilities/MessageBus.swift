@@ -26,35 +26,75 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-protocol CardDisplayable  {
-    var id: String { get }
-    var subTitle: String { get }
-    var title: String { get }
-    var text: String { get }
-    var imageUrl: String { get }
-    var features: [Feature] { get }
+import class Foundation.Timer
+import Combine
+
+struct Message {
+  enum Level {
+    case error, warning, success
+  }
+  
+  let level: Level
+  let message: String
+  var autoDismiss: Bool = true
 }
 
-extension CardDisplayable where Self: Identifiable {
+extension Message {
+  var snackbarState: SnackbarState {
+    SnackbarState(status: level.snackbarStatus, message: message)
+  }
+}
+
+extension Message.Level {
+  var snackbarStatus: SnackbarState.Status {
+    switch self {
+    case .error:
+      return .error
+    case .warning:
+      return .warning
+    case .success:
+      return .success
+    }
+  }
+}
+
+final class MessageBus: ObservableObject {
+  @Published private(set) var currentMessage: Message?
+  @Published var messageVisible: Bool = false
+  
+  private var currentTimer: AnyCancellable?
+  
+  func post(message: Message) {
+    invalidateTimer()
     
+    currentMessage = message
+    messageVisible = true
+    
+    if message.autoDismiss {
+      currentTimer = createAndStartAutoDismissTimer()
+    }
+  }
+  
+  func dismiss() {
+    invalidateTimer()
+    messageVisible = false
+  }
+  
+  private func createAndStartAutoDismissTimer() -> AnyCancellable {
+    Timer
+      .publish(every: .autoDismissTime, on: .main, in: .common)
+      .autoconnect()
+      .sink { [weak self] _ in
+        guard let self = self else { return }
+        
+        self.messageVisible = false
+        self.invalidateTimer()
+      }
+  }
+  
+  private func invalidateTimer() {
+    currentTimer?.cancel()
+    currentTimer = nil
+  }
 }
 
-struct Feature {
-    var title: String
-    var value: String
-}
-
-class PreviewCard: CardDisplayable {
-    var id: String = "ID"
-    var subTitle: String = "Soviet Union"
-    var title: String = "The hammer"
-    var imageUrl: String = "images/card/v8/en/the_hammer.png"
-    var text: String = "Deal 6 damage to a ground unit."
-    var features: [Feature] = [
-        Feature(title: "Nation", value: "Soviet Union"),
-        Feature(title: "Rarity", value: "Limited"),
-        Feature(title: "Type", value: "Order"),
-        Feature(title: "Kredits", value: "3"),
-        Feature(title: "Set", value: "Base")
-    ]
-}

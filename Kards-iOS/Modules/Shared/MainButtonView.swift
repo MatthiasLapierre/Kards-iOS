@@ -29,11 +29,6 @@
 import SwiftUI
 
 struct MainButtonView: View {
-    private struct SizeKey: PreferenceKey {
-      static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
-        value = value ?? nextValue()
-      }
-    }
     
     var title: String
     var callback: () -> Void

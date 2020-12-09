@@ -57,6 +57,13 @@ extension String {
     static let howToPlayTitle = "HOW TO PLAY?"
     static let howToPlayText = "Ready to jump into the fray and start playing? The best way is to download KARDS and start playing! If you still need additional support after the in-game tutorial, the pages here will give you further insights and help you with anything you might have missed."
     
+    //MARK: Card details
+    static let cardNation = "Nation"
+    static let cardRarity = "Rarity"
+    static let cardType = "Type"
+    static let cardKredits = "Kredits"
+    static let cardSet = "Set"
+    
     // MARK: Empty views
     static let noCardsTitle = "We couldn't find anything"
     static let noCardsMessage = "Try removing some filters."

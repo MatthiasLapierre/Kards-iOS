@@ -30,6 +30,11 @@
 		3995601625793823008D9C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3995601525793823008D9C32 /* Preview Assets.xcassets */; };
 		3995601925793823008D9C32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3995601725793823008D9C32 /* LaunchScreen.storyboard */; };
 		39BBCBFF2580C17B00244A2F /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCBFE2580C17B00244A2F /* LoadMoreView.swift */; };
+		39BBCC022580D0E400244A2F /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC012580D0E400244A2F /* CardDetailsView.swift */; };
+		39BBCC082580D5CF00244A2F /* CardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC072580D5CF00244A2F /* CardImageView.swift */; };
+		39BBCC0C2581044400244A2F /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC0B2581044400244A2F /* BackgroundView.swift */; };
+		39BBCC0F25810DDF00244A2F /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC0E25810DDF00244A2F /* BlurView.swift */; };
+		39BBCC13258111AB00244A2F /* CloseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC12258111AB00244A2F /* CloseView.swift */; };
 		39F5C486257E22570063ED76 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C485257E22570063ED76 /* CardView.swift */; };
 		39F5C48A257E65A40063ED76 /* KardsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C489257E65A40063ED76 /* KardsAPI.swift */; };
 		39F5C48F257E676D0063ED76 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 39F5C48E257E676D0063ED76 /* Apollo */; };
@@ -82,6 +87,11 @@
 		3995601825793823008D9C32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3995601A25793823008D9C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39BBCBFE2580C17B00244A2F /* LoadMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
+		39BBCC012580D0E400244A2F /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
+		39BBCC072580D5CF00244A2F /* CardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImageView.swift; sourceTree = "<group>"; };
+		39BBCC0B2581044400244A2F /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		39BBCC0E25810DDF00244A2F /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		39BBCC12258111AB00244A2F /* CloseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseView.swift; sourceTree = "<group>"; };
 		39F5C485257E22570063ED76 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		39F5C489257E65A40063ED76 /* KardsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KardsAPI.swift; sourceTree = "<group>"; };
 		39F5C492257E6A360063ED76 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -281,6 +291,7 @@
 				39FEB0CD257A2A3600204332 /* CardsCollectionView.swift */,
 				3943DD22257F698B00A5737D /* CardViewModel.swift */,
 				3943DD48257F8A8900A5737D /* CardListView.swift */,
+				39BBCC012580D0E400244A2F /* CardDetailsView.swift */,
 			);
 			path = "Cards Collection";
 			sourceTree = "<group>";
@@ -340,6 +351,10 @@
 				3943DD5B257FB77F00A5737D /* ReloadView.swift */,
 				3943DD5E257FB9E900A5737D /* MainButtonView.swift */,
 				39BBCBFE2580C17B00244A2F /* LoadMoreView.swift */,
+				39BBCC072580D5CF00244A2F /* CardImageView.swift */,
+				39BBCC0B2581044400244A2F /* BackgroundView.swift */,
+				39BBCC0E25810DDF00244A2F /* BlurView.swift */,
+				39BBCC12258111AB00244A2F /* CloseView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -509,12 +524,15 @@
 				39FEB0E1257A2ED100204332 /* Constants.swift in Sources */,
 				39FEB0F0257A3A5A00204332 /* Image+Extensions.swift in Sources */,
 				39FEB107257A3FB900204332 /* MessageBarView.swift in Sources */,
+				39BBCC0C2581044400244A2F /* BackgroundView.swift in Sources */,
+				39BBCC13258111AB00244A2F /* CloseView.swift in Sources */,
 				39FEB0C5257A29FD00204332 /* HomeView.swift in Sources */,
 				3943DD5C257FB77F00A5737D /* ReloadView.swift in Sources */,
 				3943DD23257F698B00A5737D /* CardViewModel.swift in Sources */,
 				39FEB0D9257A2CCE00204332 /* TabNavView.swift in Sources */,
 				39F5C496257E6AB30063ED76 /* CardListService.swift in Sources */,
 				39F5C486257E22570063ED76 /* CardView.swift in Sources */,
+				39BBCC0F25810DDF00244A2F /* BlurView.swift in Sources */,
 				39FEB0CE257A2A3600204332 /* CardsCollectionView.swift in Sources */,
 				39BBCBFF2580C17B00244A2F /* LoadMoreView.swift in Sources */,
 				39FEB0DD257A2DC500204332 /* TabViewModel.swift in Sources */,
@@ -528,12 +546,14 @@
 				39FEB0F3257A3C5000204332 /* Font+Extensions.swift in Sources */,
 				39FEB0C9257A2A1200204332 /* NewsListView.swift in Sources */,
 				3943DD69257FCBE300A5737D /* KardsEnvironment.swift in Sources */,
+				39BBCC082580D5CF00244A2F /* CardImageView.swift in Sources */,
 				3943DD34257F7C9E00A5737D /* CardListRepository.swift in Sources */,
 				3943DD55257F8F0700A5737D /* ActivityIndicator.swift in Sources */,
 				3995601125793821008D9C32 /* ContentView.swift in Sources */,
 				3943DD62257FC37300A5737D /* DataManager.swift in Sources */,
 				3943DD66257FC7A300A5737D /* GraphQLAPI.swift in Sources */,
 				3943DD52257F8EC100A5737D /* LoadingView.swift in Sources */,
+				39BBCC022580D0E400244A2F /* CardDetailsView.swift in Sources */,
 				39FEB10F257A42C700204332 /* PortraitHostingController.swift in Sources */,
 				3943DD5F257FB9E900A5737D /* MainButtonView.swift in Sources */,
 			);
