@@ -28,35 +28,41 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct NoResultsView: View {
     
-    var title: String
-    var text: String
+    let title: String
+    let message: String
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
+        VStack {
+            Spacer()
+            Image.cardBacks
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 300)
+            Text(title)
+                .font(.uiTitle2)
                 .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
+                .multilineTextAlignment(.center)
+                .padding([.leading, .trailing], 20)
+                .padding(.bottom, 8)
+            Text(message)
+                .lineSpacing(5)
                 .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
+                .font(.uiLabel)
+                .multilineTextAlignment(.center)
+                .padding([.leading, .trailing], 20)
+            Spacer()
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
-        )
-        .shadow(radius: 5)
     }
 }
 
-struct CardView_Previews: PreviewProvider {
+struct NoResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
+        NoResultsView(
+            title: String.noCardsTitle,
+            message: String.noCardsMessage
+        )
+        .previewLayout(.sizeThatFits)
     }
 }

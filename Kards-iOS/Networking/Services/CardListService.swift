@@ -26,37 +26,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct CardView: View {
+class CardListService: Service {
     
-    var title: String
-    var text: String
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
-                .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
-                .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
+    func cards(page: Int = 1, completion: @escaping (_ response: Result<GetCardsQuery.Data.Card, KardsAPIError>) -> Void) {
+        let offset = page * Int.pageLimit
+        self.networkClient.graphQLClient.fetch(query: GetCardsQuery(language: "en", offset: offset, showSpawnables: true)) { result in
+            switch result {
+            case .failure(let error):
+                print("Something bad happened \(error)")
+                completion(.failure(.processingError(error)))
+            case .success(let graphQLResult):
+                guard let cards = graphQLResult.data?.cards else {
+                    print("No card")
+                    completion(.failure(.noData))
+                    return
+                }                
+                completion(.success(cards))
+            }
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
-        )
-        .shadow(radius: 5)
     }
-}
-
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
-    }
+    
 }

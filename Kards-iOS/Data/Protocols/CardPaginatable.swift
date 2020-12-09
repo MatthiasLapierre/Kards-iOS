@@ -26,37 +26,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
+import Combine
 
-struct CardView: View {
+protocol CardPaginatable: ObservableObject where ObjectWillChangePublisher == ObservableObjectPublisher {
+    var currentPage: Int { get }
+    var startingPage: Int { get }
+    var defaultPageSize: Int { get }
+    var state: DataState { get }
     
-    var title: String
-    var text: String
+    var cards: [CardDisplayable] { get }
     
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
-                .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
-                .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
-        )
-        .shadow(radius: 5)
-    }
+    func loadMore()
+    func reload()
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
-    }
+extension CardPaginatable {
+    // All content that currently conforms to this prootocol is 1-indexed
+  var startingPage: Int {
+    1
+  }
+  
+  var defaultPageSize: Int {
+    .pageLimit
+  }
 }

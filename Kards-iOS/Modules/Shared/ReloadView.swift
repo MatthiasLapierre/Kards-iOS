@@ -28,35 +28,44 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct ReloadView: View {
     
-    var title: String
-    var text: String
+    private let reloadHandler: () -> Void
+    
+    init(reloadHandler: @escaping () -> Void) {
+        self.reloadHandler = reloadHandler
+    }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
+        VStack {
+            Spacer()
+            Image.tryAgain
+                .padding(.bottom, 30)
+            Text(String.tryAgainTitle)
+                .font(.uiTitle2)
                 .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
+                .multilineTextAlignment(.center)
+                .padding([.leading, .trailing, .bottom], 20)
+            Text(String.tryAgainMessage)
+                .font(.uiLabel)
+                .lineSpacing(8)
                 .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
+                .multilineTextAlignment(.center)
+                .padding([.leading, .trailing, .bottom], 20)
+            MainButtonView(
+                title: String.reload,
+                callback: reloadHandler
+            )
+            .padding([.horizontal, .bottom], 20)
+            Spacer()
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
-        )
-        .shadow(radius: 5)
     }
 }
 
-struct CardView_Previews: PreviewProvider {
+struct ReloadView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
+        ReloadView(reloadHandler: {})
+            .background(Color.backgroundColor)
+            .previewLayout(.sizeThatFits)
     }
 }

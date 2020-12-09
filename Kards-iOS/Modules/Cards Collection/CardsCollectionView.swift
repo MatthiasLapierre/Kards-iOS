@@ -28,18 +28,19 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {
+struct CardsCollectionView: View {        
+    
+    @ObservedObject private var cardListRepository: CardListRepository
+    
+    init(cardListRepository: CardListRepository) {
+        self.cardListRepository = cardListRepository
+    }
+    
     var body: some View {
-        Text("Hello, World!")
+        CardListView(cardListRepository: cardListRepository)
             .navigationBarTitle(
                 Text(String.cardsCollection),
                 displayMode: .inline
-            )
-    }
-}
-
-struct CardsCollectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardsCollectionView()
+            )            
     }
 }

@@ -26,37 +26,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct CardView: View {
+class CardViewModel: CardDisplayable {
     
-    var title: String
-    var text: String
+    private let card: GetCardsQuery.Data.Card.Edge.Node
     
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
-                .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
-                .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
-        )
-        .shadow(radius: 5)
+    init(card: GetCardsQuery.Data.Card.Edge.Node) {
+        self.card = card
     }
-}
-
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
+    
+    var id: String {
+        "\(card.id)"
     }
+    
+    var title: String {
+        return (card.json["title"] as! [String:String])["en"]!
+    }
+    
+    var imageUrl: String {
+        return card.imageUrl
+    }
+    
 }

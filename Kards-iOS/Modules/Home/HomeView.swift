@@ -109,8 +109,8 @@ fileprivate struct HeaderView: View {
                             .scaledToFit()
                             .frame(width: proxy.size.width * 0.4, height: proxy.size.width * 0.4)
                         Text(String.homeTitle)
-                            .font(Font.uiBannerTitle)
-                            .foregroundColor(Color.bannerTitle)
+                            .font(Font.uiHeadline)
+                            .foregroundColor(Color.titleText)
                     }
                     .padding(.vertical, 50)
                 }

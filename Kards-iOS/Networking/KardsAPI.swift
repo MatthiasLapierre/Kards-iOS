@@ -26,37 +26,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
+import Foundation
+import Apollo
 
-struct CardView: View {
+enum KardsAPIError: Error {
+    case requestFailed(Error?, Int)
+    case processingError(Error?)
+    case noData
     
-    var title: String
-    var text: String
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
-                .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
-                .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
+    var localizedDescription: String {
+        switch self {
+        case .requestFailed(let error, let statusCode):
+          return "KardsAPIError::RequestFailed[Status: \(statusCode) | Error: \(error?.localizedDescription ?? "UNKNOWN")]"
+        case .processingError(let error):
+          return "KardsAPIError::ProcessingError[Error: \(error?.localizedDescription ?? "UNKNOWN")]"
+        case .noData:
+          return "KardsAPIError::NoData"
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
-        )
-        .shadow(radius: 5)
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
+class KardsAPI {
+    
+    static let shared = KardsAPI()
+    
+    let environment: KardsEnvironment
+    
+    init(environment: KardsEnvironment = .prod) {
+        self.environment = environment
     }
+    
+    private(set) lazy var graphQLClient = ApolloClient(
+        url: environment.graphQLURL
+    )
+    
 }

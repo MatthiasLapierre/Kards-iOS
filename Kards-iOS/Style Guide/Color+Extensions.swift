@@ -41,12 +41,16 @@ extension Color {
         Color("cardBackgroundColor")
     }
     
-    static var bannerTitle: Color {
-        Color("bannerTitle")
+    static var titleText: Color {
+        Color("titleText")
     }
     
     static var bodyText: Color {
         Color("bodyText")
+    }
+    
+    static var buttontext: Color {
+        Color("buttonText")
     }
     
     static var snackError: Color {

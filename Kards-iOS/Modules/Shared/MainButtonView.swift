@@ -28,35 +28,47 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct MainButtonView: View {
+    private struct SizeKey: PreferenceKey {
+      static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
+        value = value ?? nextValue()
+      }
+    }
     
     var title: String
-    var text: String
+    var callback: () -> Void
+    
+    @State private var height: CGFloat?
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
-                .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
-                .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
+        Button(action: {
+            callback()
+        }) {
+            Text(title.uppercased())
+                .font(.uiButtonLabel)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
-        )
-        .shadow(radius: 5)
+        .buttonStyle(MainButtonStyle())
     }
 }
 
-struct CardView_Previews: PreviewProvider {
+fileprivate struct MainButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(configuration.isPressed ? Color.backgroundColor : Color.white)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .background(
+                Rectangle()
+                    .fill(configuration.isPressed ? Color.white: Color.clear)
+                    .border(Color.white, width: 2)
+            )
+    }
+}
+
+struct MainButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
+        MainButtonView(title: "My button") {}
+            .background(Color.backgroundColor)
+            .previewLayout(.sizeThatFits)
     }
 }

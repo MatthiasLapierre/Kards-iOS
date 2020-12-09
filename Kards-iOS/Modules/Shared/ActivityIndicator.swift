@@ -26,37 +26,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import UIKit
 import SwiftUI
 
-struct CardView: View {
+struct ActivityIndicator: UIViewRepresentable {
     
-    var title: String
-    var text: String
+    var style: UIActivityIndicatorView.Style = .medium
     
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
-                .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
-                .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
-        )
-        .shadow(radius: 5)
+    func makeUIView(context: Context) -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView(style: style)
+        activityIndicator.color = UIColor.progressColor
+        return activityIndicator
     }
-}
-
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
+    
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {
+        uiView.startAnimating()
     }
+    
 }

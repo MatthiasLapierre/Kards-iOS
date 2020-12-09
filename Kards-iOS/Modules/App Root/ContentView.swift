@@ -30,11 +30,15 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var dataManager: DataManager
+    
     private let tabViewModel = TabViewModel()
     
     var body: some View {
         let homeView = HomeView()
-        let cardsCollectionView = CardsCollectionView()
+        let cardsCollectionView = CardsCollectionView(
+            cardListRepository: dataManager.cardListRepository
+        )
         let newsListView = NewsListView()
         TabNavView(
             homeView: homeView,

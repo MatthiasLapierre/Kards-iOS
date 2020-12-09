@@ -32,6 +32,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     fileprivate var messageBus = MessageBus()
+    fileprivate var dataManager = DataManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -61,3 +62,8 @@ extension MessageBus {
   }
 }
 
+extension DataManager {
+  static var current: DataManager {
+    (UIApplication.shared.delegate as! AppDelegate).dataManager
+  }
+}

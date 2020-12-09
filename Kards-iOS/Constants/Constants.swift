@@ -28,6 +28,14 @@
 
 import SwiftUI
 
+extension Int {
+    static let pageLimit: Int = 20
+}
+
+extension CGFloat {
+    static let cardWidth: CGFloat = 120
+}
+
 extension TimeInterval {
     // MARK: Message Banner
     static let autoDismissTime: Self = 3
@@ -39,6 +47,8 @@ extension String {
     static let newsList = "News"
     static let loading = "Loading…"
     static let learnMore = "Lear more"
+    static let loadMore = "Load more"
+    static let reload = "Reload"
     
     //MARK: Home module
     static let homeTitle = "THE WORLD WAR II CARD GAME"
@@ -46,4 +56,10 @@ extension String {
     static let ccgText = "KARDS combines traditional CCG gameplay with innovative mechanics inspired by classic strategy games and real battlefield tactics. Take command and challenge other players in grand-scale warfare on the ground, air, or seas."
     static let howToPlayTitle = "HOW TO PLAY?"
     static let howToPlayText = "Ready to jump into the fray and start playing? The best way is to download KARDS and start playing! If you still need additional support after the in-game tutorial, the pages here will give you further insights and help you with anything you might have missed."
+    
+    // MARK: Empty views
+    static let noCardsTitle = "We couldn't find anything"
+    static let noCardsMessage = "Try removing some filters."
+    static let tryAgainTitle = "Something went wrong."
+    static let tryAgainMessage = "Please, try again."
 }

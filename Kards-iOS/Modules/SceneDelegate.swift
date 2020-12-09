@@ -51,11 +51,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().layer.borderColor = UIColor.clear.cgColor
         UITabBar.appearance().clipsToBounds = true
 
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
-
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
+            // Create the SwiftUI view that provides the window contents.
+            let contentView = ContentView()
+                .environmentObject(DataManager.current)
+            
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = PortraitHostingController(rootView: contentView)
             self.window = window

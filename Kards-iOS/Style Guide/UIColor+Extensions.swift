@@ -38,4 +38,8 @@ extension UIColor {
         UIColor(named: "titleText")!
     }
     
+    static var progressColor: UIColor {
+        UIColor(named: "progressColor")!
+    }
+    
 }

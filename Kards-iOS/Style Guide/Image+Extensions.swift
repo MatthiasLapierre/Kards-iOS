@@ -77,4 +77,7 @@ extension Image {
     static var overlay3Background: Image {
         Image("overlay3Background")
     }
+    static var tryAgain: Image {
+        Image("emojiCrying")
+    }
 }

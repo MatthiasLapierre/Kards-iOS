@@ -28,35 +28,29 @@
 
 import SwiftUI
 
-struct CardView: View {
+struct LoadMoreView: View {
     
-    var title: String
-    var text: String
+    @Binding var isLoading: Bool
+    var callback: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(verbatim: title)
-                .font(Font.uiTitle1)
-                .foregroundColor(Color.titleText)
-            Text(verbatim: text)
-                .font(Font.uiBody)
-                .foregroundColor(Color.bodyText)
-                .padding(.top, 5)
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 30)
-        .background(
-            Color.cardBackgroundColor
-                .overlay(Image.cardBackground
-                            .resizable()
-                            .opacity(0.8))
+        MainButtonView(
+            title: isLoading ? String.loading : String.loadMore,
+            callback: callback
         )
-        .shadow(radius: 5)
+        .disabled(isLoading)
     }
 }
 
-struct CardView_Previews: PreviewProvider {
+struct LoadMoreView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(title: String.ccgTitle, text: String.ccgText)
+        VStack {
+            LoadMoreView(isLoading: .constant(false)) {}
+                .previewLayout(.sizeThatFits)
+                .background(Color.backgroundColor)
+            LoadMoreView(isLoading: .constant(true)) {}
+                .previewLayout(.sizeThatFits)
+                .background(Color.backgroundColor)
+        }
     }
 }
