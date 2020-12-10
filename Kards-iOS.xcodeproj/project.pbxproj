@@ -38,6 +38,7 @@
 		39A964962582280C0023E5A4 /* DeckItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A964952582280C0023E5A4 /* DeckItemView.swift */; };
 		39A9649A258259EE0023E5A4 /* Nation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A96499258259EE0023E5A4 /* Nation.swift */; };
 		39A9649E2582617B0023E5A4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A9649D2582617B0023E5A4 /* Date+Extensions.swift */; };
+		39A964A1258267820023E5A4 /* DeckDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A964A0258267820023E5A4 /* DeckDetailsView.swift */; };
 		39BBCBFF2580C17B00244A2F /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCBFE2580C17B00244A2F /* LoadMoreView.swift */; };
 		39BBCC022580D0E400244A2F /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC012580D0E400244A2F /* CardDetailsView.swift */; };
 		39BBCC082580D5CF00244A2F /* CardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC072580D5CF00244A2F /* CardImageView.swift */; };
@@ -104,6 +105,7 @@
 		39A964952582280C0023E5A4 /* DeckItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckItemView.swift; sourceTree = "<group>"; };
 		39A96499258259EE0023E5A4 /* Nation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nation.swift; sourceTree = "<group>"; };
 		39A9649D2582617B0023E5A4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		39A964A0258267820023E5A4 /* DeckDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckDetailsView.swift; sourceTree = "<group>"; };
 		39BBCBFE2580C17B00244A2F /* LoadMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		39BBCC012580D0E400244A2F /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
 		39BBCC072580D5CF00244A2F /* CardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImageView.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				39A9647E258217790023E5A4 /* DeckListView.swift */,
 				39A9648E25821FD80023E5A4 /* DeckViewModel.swift */,
 				39A964952582280C0023E5A4 /* DeckItemView.swift */,
+				39A964A0258267820023E5A4 /* DeckDetailsView.swift */,
 			);
 			path = Decks;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				3943DD62257FC37300A5737D /* DataManager.swift in Sources */,
 				3943DD66257FC7A300A5737D /* GraphQLAPI.swift in Sources */,
 				3943DD52257F8EC100A5737D /* LoadingView.swift in Sources */,
+				39A964A1258267820023E5A4 /* DeckDetailsView.swift in Sources */,
 				39BBCC022580D0E400244A2F /* CardDetailsView.swift in Sources */,
 				39FEB10F257A42C700204332 /* PortraitHostingController.swift in Sources */,
 				3943DD5F257FB9E900A5737D /* MainButtonView.swift in Sources */,

@@ -45,6 +45,7 @@ extension String {
     static let home = "Home"
     static let cardsCollection = "Cards"
     static let decks = "Decks"
+    static let deck = "Deck"
     static let loading = "Loading…"
     static let learnMore = "Lear more"
     static let loadMore = "Load more"
@@ -63,6 +64,14 @@ extension String {
     static let cardType = "Type"
     static let cardKredits = "Kredits"
     static let cardSet = "Set"
+    
+    //MARK: Deck details
+    static let deckOwner = "Owner"
+    static let deckUpdated = "Updated"
+    static let deckViews = "Views"
+    static let deckGameVersion = "Game Version"
+    static let deckResourceCost = "Resource cost"
+    static let cardBreakdown = "Card breakdown"
     
     // MARK: Empty views
     static let noCardsTitle = "We couldn't find anything"

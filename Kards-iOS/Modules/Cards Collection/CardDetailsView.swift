@@ -58,7 +58,7 @@ struct CardDetailsView: View {
         VStack {
             HStack {
                 Spacer()
-                closeView
+                closeBtnView
             }
             .padding([.top, .trailing], 8)
             HStack {
@@ -79,7 +79,7 @@ struct CardDetailsView: View {
         VStack {
             HStack {
                 Spacer()
-                closeView
+                closeBtnView
             }
             .padding([.top, .trailing], 8)
             ScrollView {
@@ -98,7 +98,7 @@ struct CardDetailsView: View {
         }
     }
     
-    private var closeView: some View {
+    private var closeBtnView: some View {
         CloseView {
             presentationMode.wrappedValue.dismiss()
         }

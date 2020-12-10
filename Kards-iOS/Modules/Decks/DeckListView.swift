@@ -141,6 +141,9 @@ struct DeckListView: View {
                 deckListRepository.loadMore()
             }
         })
+        .fullScreenCover(item: $selectedDeck, content: { item in
+            DeckDetailsView(deck: item)
+        })
     }
     
     private func reloadIfRequired() {

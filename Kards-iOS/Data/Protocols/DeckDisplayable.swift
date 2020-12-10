@@ -38,13 +38,14 @@ protocol DeckDisplayable  {
     var mainNationCards: Int { get }
     var secondNationCards: Int { get }
     var username: String { get }
-    var resources: Int { get }
-    var views: Int { get }
-    var orders: Int { get }
-    var counterMeasures: Int { get }
-    var units: Int { get }
     var backgroundColor: Color { get }
     var image: Image { get }
+    var information: [Information] { get }
+}
+
+struct Information {
+    var title: String
+    var text: String
 }
 
 class PreviewDeck: DeckDisplayable {
@@ -66,17 +67,18 @@ class PreviewDeck: DeckDisplayable {
     
     var username: String = "Paul"
     
-    var resources: Int = 2052
-    
-    var views: Int = 3
-    
-    var orders: Int = 12
-    
-    var counterMeasures: Int = 4
-    
-    var units: Int = 2
-    
     var backgroundColor: Color = Nation(rawValue: 4)!.backgroundColor
     
     var image: Image = Nation(rawValue: 4)!.image
+    
+    var information: [Information] {
+        return [
+            Information(title: String.deckOwner, text: username),
+            Information(title: String.deckUpdated, text: updatedAt),
+            Information(title: String.deckViews, text: "3"),
+            Information(title: String.deckGameVersion, text: "Breakthrough"),
+            Information(title: String.deckResourceCost, text: "1860"),
+            Information(title: String.cardBreakdown, text: "Germany (12) France (11)")
+        ]
+    }
 }

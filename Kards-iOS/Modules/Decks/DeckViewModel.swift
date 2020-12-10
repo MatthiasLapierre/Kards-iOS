@@ -76,32 +76,43 @@ struct DeckViewModel: DeckDisplayable, Identifiable {
         deck.user.username ?? ""
     }
     
-    var resources: Int {
-        deck.resources ?? 0
-    }
-    
-    var views: Int {
-        deck.views ?? 0
-    }
-    
-    var orders: Int {
-        Int(deck.stats?.filter { $0?.key == "orders" }.first??.value ?? "") ?? 0
-    }
-    
-    var counterMeasures: Int {
-        Int(deck.stats?.filter { $0?.key == "countermeasures" }.first??.value ?? "") ?? 0
-    }
-    
-    var units: Int {
-        Int(deck.stats?.filter { $0?.key == "units" }.first??.value ?? "") ?? 0
-    }
-    
     var backgroundColor: Color {
         Nation.init(rawValue: deck.mainNation.id)?.backgroundColor ?? Color.clear
     }
     
     var image: Image {
         Nation.init(rawValue: deck.mainNation.id)?.image ?? Image.soviet
+    }
+    
+    var information: [Information] {
+        var resources: Int {
+            deck.resources ?? 0
+        }
+        
+        var views: Int {
+            deck.views ?? 0
+        }
+        
+        var orders: Int {
+            Int(deck.stats?.filter { $0?.key == "orders" }.first??.value ?? "") ?? 0
+        }
+        
+        var counterMeasures: Int {
+            Int(deck.stats?.filter { $0?.key == "countermeasures" }.first??.value ?? "") ?? 0
+        }
+        
+        var units: Int {
+            Int(deck.stats?.filter { $0?.key == "units" }.first??.value ?? "") ?? 0
+        }
+        
+        return [
+            Information(title: String.deckOwner, text: username),
+            Information(title: String.deckUpdated, text: updatedAt),
+            Information(title: String.deckViews, text: "👀 \(views)"),
+            Information(title: String.deckGameVersion, text: "Breakthrough"),
+            Information(title: String.deckResourceCost, text: "🔨 \(resources)"),
+            Information(title: String.cardBreakdown, text: "Orders (\(orders)) ; Units (\(units)) ; \(mainNation) (\(mainNationCards)) ; \(secondNation) (\(secondNationCards))")
+        ]
     }
     
     private let deck: GetDecksQuery.Data.Deck.Edge.Node

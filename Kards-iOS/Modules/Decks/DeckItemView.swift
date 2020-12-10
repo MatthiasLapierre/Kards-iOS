@@ -30,10 +30,10 @@ import SwiftUI
 
 struct DeckItemView: View {
     
-    private let deckDispayable: DeckDisplayable
+    private let deckDisplayable: DeckDisplayable
     
     init(deck: DeckDisplayable) {
-        self.deckDispayable = deck
+        self.deckDisplayable = deck
     }
     
     var body: some View {
@@ -97,31 +97,31 @@ struct DeckItemView: View {
     }
     
     private var imageView: some View {
-        deckDispayable.image
+        deckDisplayable.image
             .resizable()
             .frame(width: 50, height: 50)
             .scaledToFit()
     }
     
     private var titleView: some View {
-        Text(deckDispayable.name.uppercased())
+        Text(deckDisplayable.name.uppercased())
             .font(.uiTitle1)
             .foregroundColor(.titleText)
     }
     
     private var authorView: some View {
         HStack {
-            Text(deckDispayable.username)
+            Text(deckDisplayable.username)
                 .font(.uiCaption)
                 .foregroundColor(.accent)
-            Text(deckDispayable.updatedAt)
+            Text(deckDisplayable.updatedAt)
                 .font(.uiCaption)
                 .foregroundColor(.bodyText)
         }
     }
     
     private var mainNationView: some View {
-        Text("\(deckDispayable.mainNation.uppercased()) (\(deckDispayable.mainNationCards))")
+        Text("\(deckDisplayable.mainNation.uppercased()) (\(deckDisplayable.mainNationCards))")
             .font(.uiTitle4)
             .foregroundColor(.bodyText)
     }
@@ -134,20 +134,20 @@ struct DeckItemView: View {
     }
     
     private var secondNationView: some View {
-        Text("\(deckDispayable.secondNation.uppercased()) (\(deckDispayable.secondNationCards))")
+        Text("\(deckDisplayable.secondNation.uppercased()) (\(deckDisplayable.secondNationCards))")
             .font(.uiTitle4)
             .foregroundColor(.bodyText)
     }
     
     private var scoreView: some View {
-        Text("\(deckDispayable.score)")
+        Text("\(deckDisplayable.score)")
             .font(.uiTitle4)
-            .foregroundColor(deckDispayable.score.starts(with: "+") ?
+            .foregroundColor(deckDisplayable.score.starts(with: "+") ?
                                 Color.green : Color.red)
     }
     
     private var backgroundView: some View {
-        deckDispayable.backgroundColor
+        deckDisplayable.backgroundColor
             .overlay(Image.deckOverlayBackground)
             .clipped()
     }
