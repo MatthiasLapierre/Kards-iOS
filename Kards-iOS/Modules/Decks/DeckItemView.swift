@@ -41,8 +41,7 @@ struct DeckItemView: View {
     }
     
     @ViewBuilder var contentView: some View {
-        if UIDevice.current.userInterfaceIdiom == .pad
-            && UIDevice.current.orientation.isLandscape {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             largeContentView
         } else {
             normalContentView
@@ -54,7 +53,6 @@ struct DeckItemView: View {
             imageView
             VStack(alignment: .leading) {
                 titleView
-                    .lineLimit(1)
                 HStack {
                     mainNationView
                     nationSeparatorView
@@ -85,15 +83,13 @@ struct DeckItemView: View {
                 mainNationView
                 secondNationView
             }
-            Spacer()
-                .frame(width: 50)
+            .frame(width: 200, alignment: .leading)
             scoreView
+                .frame(width: 50, alignment: .center)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .background(
-            backgroundView
-        )
+        .background(backgroundView)
     }
     
     private var imageView: some View {
@@ -105,6 +101,7 @@ struct DeckItemView: View {
     
     private var titleView: some View {
         Text(deckDisplayable.name.uppercased())
+            .lineLimit(1)
             .font(.uiTitle1)
             .foregroundColor(.titleText)
     }

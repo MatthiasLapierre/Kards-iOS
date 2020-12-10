@@ -45,37 +45,7 @@ struct CardDetailsView: View {
         }
     }
     
-    @ViewBuilder private var contentView: some View {
-        if UIDevice.current.userInterfaceIdiom == .pad
-            && UIDevice.current.orientation.isLandscape {
-            largeContentView
-        } else {
-            normalContentView
-        }
-    }
-    
-    private var largeContentView: some View {
-        VStack {
-            HStack {
-                Spacer()
-                closeBtnView
-            }
-            .padding([.top, .trailing], 8)
-            HStack {
-                imageView
-                VStack {
-                    subTitleView
-                    titleView
-                    textView
-                        .padding(.bottom, 20)
-                    featuresView
-                }
-            }
-            .padding(.all, 20)
-        }
-    }
-    
-    private var normalContentView: some View {
+    private var contentView: some View {
         VStack {
             HStack {
                 Spacer()
