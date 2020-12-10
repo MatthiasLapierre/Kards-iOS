@@ -1,5 +1,9 @@
 # Kards (iOS) - [UNOFFICIAL]
 
+**Important note: This repository is a personal project that aims to study SwiftUI, Combine and GraphQL.**
+
+![Kards](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/banner.jpg)
+
 Kards is a free-to-play World War II-themed online digital collectible card game developed and published by 1939 Games. It was released in early access on Steam on April 12, 2019 and was fully released on April 15, 2020. Mobile ports are expected to be released in 2021 with crossplay capabilities between platforms.
 
 ## Gameplay
@@ -17,7 +21,7 @@ There is also five single-player campaigns that players can progress through, ea
 
 ## Development
 
-__Kards__ runs on iOS 14.0 and greater. It uses SwiftUI and Combine extensively.
+__Kards__ runs on iOS 14.0 and greater. It uses SwiftUI,  Combine and GraphQL extensively.
 
 
 

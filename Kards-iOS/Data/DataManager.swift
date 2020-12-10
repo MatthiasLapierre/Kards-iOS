@@ -29,12 +29,18 @@
 import Combine
 
 final class DataManager: ObservableObject {
+    
     // Content repositories
     private (set) var cardListRepository: CardListRepository
+    private (set) var deckListRepository: DeckListRepository
     
     init() {
         let networkClient = KardsAPI.shared
+        
         let cardListService = CardListService(client: networkClient)
+        let deckListService = DeckListService(client: networkClient)
+        
         self.cardListRepository = CardListRepository(service: cardListService)
+        self.deckListRepository = DeckListRepository(service: deckListService)
     }
 }

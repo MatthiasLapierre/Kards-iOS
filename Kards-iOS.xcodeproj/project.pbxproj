@@ -29,6 +29,15 @@
 		3995601325793823008D9C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3995601225793823008D9C32 /* Assets.xcassets */; };
 		3995601625793823008D9C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3995601525793823008D9C32 /* Preview Assets.xcassets */; };
 		3995601925793823008D9C32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3995601725793823008D9C32 /* LaunchScreen.storyboard */; };
+		39A9647F258217790023E5A4 /* DeckListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A9647E258217790023E5A4 /* DeckListView.swift */; };
+		39A9648325821CEB0023E5A4 /* DeckPaginatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A9648225821CEB0023E5A4 /* DeckPaginatable.swift */; };
+		39A9648625821D0E0023E5A4 /* DeckDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A9648525821D0E0023E5A4 /* DeckDisplayable.swift */; };
+		39A9648925821E960023E5A4 /* DeckListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A9648825821E960023E5A4 /* DeckListRepository.swift */; };
+		39A9648C25821EE30023E5A4 /* DeckListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A9648B25821EE30023E5A4 /* DeckListService.swift */; };
+		39A9648F25821FD80023E5A4 /* DeckViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A9648E25821FD80023E5A4 /* DeckViewModel.swift */; };
+		39A964962582280C0023E5A4 /* DeckItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A964952582280C0023E5A4 /* DeckItemView.swift */; };
+		39A9649A258259EE0023E5A4 /* Nation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A96499258259EE0023E5A4 /* Nation.swift */; };
+		39A9649E2582617B0023E5A4 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A9649D2582617B0023E5A4 /* Date+Extensions.swift */; };
 		39BBCBFF2580C17B00244A2F /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCBFE2580C17B00244A2F /* LoadMoreView.swift */; };
 		39BBCC022580D0E400244A2F /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC012580D0E400244A2F /* CardDetailsView.swift */; };
 		39BBCC082580D5CF00244A2F /* CardImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC072580D5CF00244A2F /* CardImageView.swift */; };
@@ -86,6 +95,15 @@
 		3995601525793823008D9C32 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3995601825793823008D9C32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3995601A25793823008D9C32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39A9647E258217790023E5A4 /* DeckListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListView.swift; sourceTree = "<group>"; };
+		39A9648225821CEB0023E5A4 /* DeckPaginatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckPaginatable.swift; sourceTree = "<group>"; };
+		39A9648525821D0E0023E5A4 /* DeckDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckDisplayable.swift; sourceTree = "<group>"; };
+		39A9648825821E960023E5A4 /* DeckListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListRepository.swift; sourceTree = "<group>"; };
+		39A9648B25821EE30023E5A4 /* DeckListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckListService.swift; sourceTree = "<group>"; };
+		39A9648E25821FD80023E5A4 /* DeckViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckViewModel.swift; sourceTree = "<group>"; };
+		39A964952582280C0023E5A4 /* DeckItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckItemView.swift; sourceTree = "<group>"; };
+		39A96499258259EE0023E5A4 /* Nation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nation.swift; sourceTree = "<group>"; };
+		39A9649D2582617B0023E5A4 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		39BBCBFE2580C17B00244A2F /* LoadMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		39BBCC012580D0E400244A2F /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
 		39BBCC072580D5CF00244A2F /* CardImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardImageView.swift; sourceTree = "<group>"; };
@@ -138,15 +156,10 @@
 			children = (
 				3943DD28257F7B0300A5737D /* CardPaginatable.swift */,
 				3943DD2C257F7BAD00A5737D /* CardDisplayable.swift */,
+				39A9648225821CEB0023E5A4 /* DeckPaginatable.swift */,
+				39A9648525821D0E0023E5A4 /* DeckDisplayable.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		3943DD3D257F856100A5737D /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Requests;
 			sourceTree = "<group>";
 		};
 		3995600025793821008D9C32 = {
@@ -190,6 +203,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		39A9647D258217460023E5A4 /* Decks */ = {
+			isa = PBXGroup;
+			children = (
+				39A9647E258217790023E5A4 /* DeckListView.swift */,
+				39A9648E25821FD80023E5A4 /* DeckViewModel.swift */,
+				39A964952582280C0023E5A4 /* DeckItemView.swift */,
+			);
+			path = Decks;
+			sourceTree = "<group>";
+		};
+		39A96498258259DD0023E5A4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39A96499258259EE0023E5A4 /* Nation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		39F5C4A3257E80F90063ED76 /* Graphql */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,13 +242,14 @@
 		39FEB0B4257A20C100204332 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				3995600E25793821008D9C32 /* SceneDelegate.swift */,
-				39FEB111257A433D00204332 /* Splash */,
 				39FEB0B5257A20ED00204332 /* App Root */,
 				39FEB0C1257A29B200204332 /* Cards Collection */,
+				39A9647D258217460023E5A4 /* Decks */,
 				39FEB0C2257A29C900204332 /* Home */,
 				39FEB0C3257A29D600204332 /* News List */,
+				3995600E25793821008D9C32 /* SceneDelegate.swift */,
 				39FEB0E5257A33E300204332 /* Shared */,
+				39FEB111257A433D00204332 /* Splash */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -252,6 +284,7 @@
 			children = (
 				39F5C492257E6A360063ED76 /* Service.swift */,
 				39F5C495257E6AB30063ED76 /* CardListService.swift */,
+				39A9648B25821EE30023E5A4 /* DeckListService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -268,7 +301,6 @@
 		39FEB0BC257A220600204332 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				3943DD3D257F856100A5737D /* Requests */,
 				39F5C4A3257E80F90063ED76 /* Graphql */,
 				39FEB0B9257A21C700204332 /* Services */,
 				39F5C489257E65A40063ED76 /* KardsAPI.swift */,
@@ -315,6 +347,7 @@
 		39FEB0D6257A2C9000204332 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				39A96498258259DD0023E5A4 /* Model */,
 				3943DD27257F7AED00A5737D /* Protocols */,
 				39FEB0D7257A2C9800204332 /* Repositories */,
 				3943DD2F257F7C4900A5737D /* DataState.swift */,
@@ -327,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				3943DD33257F7C9E00A5737D /* CardListRepository.swift */,
+				39A9648825821E960023E5A4 /* DeckListRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -335,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				39FEB10E257A42C700204332 /* PortraitHostingController.swift */,
+				39A9649D2582617B0023E5A4 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -521,8 +556,12 @@
 				3995600D25793821008D9C32 /* AppDelegate.swift in Sources */,
 				3943DD30257F7C4900A5737D /* DataState.swift in Sources */,
 				39FEB0E7257A340B00204332 /* SnackbarView.swift in Sources */,
+				39A9648325821CEB0023E5A4 /* DeckPaginatable.swift in Sources */,
+				39A9649E2582617B0023E5A4 /* Date+Extensions.swift in Sources */,
+				39A9648925821E960023E5A4 /* DeckListRepository.swift in Sources */,
 				39FEB0E1257A2ED100204332 /* Constants.swift in Sources */,
 				39FEB0F0257A3A5A00204332 /* Image+Extensions.swift in Sources */,
+				39A9648625821D0E0023E5A4 /* DeckDisplayable.swift in Sources */,
 				39FEB107257A3FB900204332 /* MessageBarView.swift in Sources */,
 				39BBCC0C2581044400244A2F /* BackgroundView.swift in Sources */,
 				39BBCC13258111AB00244A2F /* CloseView.swift in Sources */,
@@ -532,7 +571,9 @@
 				39FEB0D9257A2CCE00204332 /* TabNavView.swift in Sources */,
 				39F5C496257E6AB30063ED76 /* CardListService.swift in Sources */,
 				39F5C486257E22570063ED76 /* CardView.swift in Sources */,
+				39A9648C25821EE30023E5A4 /* DeckListService.swift in Sources */,
 				39BBCC0F25810DDF00244A2F /* BlurView.swift in Sources */,
+				39A9647F258217790023E5A4 /* DeckListView.swift in Sources */,
 				39FEB0CE257A2A3600204332 /* CardsCollectionView.swift in Sources */,
 				39BBCBFF2580C17B00244A2F /* LoadMoreView.swift in Sources */,
 				39FEB0DD257A2DC500204332 /* TabViewModel.swift in Sources */,
@@ -542,13 +583,16 @@
 				39FEB118257A48E800204332 /* UIColor+Extensions.swift in Sources */,
 				3995600F25793821008D9C32 /* SceneDelegate.swift in Sources */,
 				3943DD49257F8A8900A5737D /* CardListView.swift in Sources */,
+				39A9648F25821FD80023E5A4 /* DeckViewModel.swift in Sources */,
 				39FEB10C257A400E00204332 /* MessageBus.swift in Sources */,
 				39FEB0F3257A3C5000204332 /* Font+Extensions.swift in Sources */,
 				39FEB0C9257A2A1200204332 /* NewsListView.swift in Sources */,
+				39A964962582280C0023E5A4 /* DeckItemView.swift in Sources */,
 				3943DD69257FCBE300A5737D /* KardsEnvironment.swift in Sources */,
 				39BBCC082580D5CF00244A2F /* CardImageView.swift in Sources */,
 				3943DD34257F7C9E00A5737D /* CardListRepository.swift in Sources */,
 				3943DD55257F8F0700A5737D /* ActivityIndicator.swift in Sources */,
+				39A9649A258259EE0023E5A4 /* Nation.swift in Sources */,
 				3995601125793821008D9C32 /* ContentView.swift in Sources */,
 				3943DD62257FC37300A5737D /* DataManager.swift in Sources */,
 				3943DD66257FC7A300A5737D /* GraphQLAPI.swift in Sources */,

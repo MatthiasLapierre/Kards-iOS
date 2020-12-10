@@ -48,44 +48,52 @@ struct CardDetailsView: View {
     @ViewBuilder private var contentView: some View {
         if UIDevice.current.userInterfaceIdiom == .pad
             && UIDevice.current.orientation.isLandscape {
-            VStack {
-                HStack {
-                    Spacer()
-                    closeView
+            largeContentView
+        } else {
+            normalContentView
+        }
+    }
+    
+    private var largeContentView: some View {
+        VStack {
+            HStack {
+                Spacer()
+                closeView
+            }
+            .padding([.top, .trailing], 8)
+            HStack {
+                imageView
+                VStack {
+                    subTitleView
+                    titleView
+                    textView
+                        .padding(.bottom, 20)
+                    featuresView
                 }
-                .padding([.top, .trailing], 8)
-                HStack {
+            }
+            .padding(.all, 20)
+        }
+    }
+    
+    private var normalContentView: some View {
+        VStack {
+            HStack {
+                Spacer()
+                closeView
+            }
+            .padding([.top, .trailing], 8)
+            ScrollView {
+                VStack {
+                    subTitleView
+                    titleView
                     imageView
-                    VStack {
-                        subTitleView
-                        titleView
-                        textView
-                            .padding(.bottom, 20)
-                        featuresView
-                    }
+                        .padding(.top, 20)
+                        .padding(.bottom, 30)
+                    textView
+                        .padding(.bottom, 20)
+                    featuresView
                 }
                 .padding(.all, 20)
-            }
-        } else {
-            VStack {
-                HStack {
-                    Spacer()
-                    closeView
-                }
-                .padding([.top, .trailing], 8)
-                ScrollView {
-                    VStack {
-                        subTitleView
-                        titleView
-                        imageView
-                            .padding(.top, 20)
-                            .padding(.bottom, 30)
-                        textView
-                            .padding(.bottom, 20)
-                        featuresView
-                    }
-                    .padding(.all, 20)
-                }
             }
         }
     }
@@ -133,7 +141,7 @@ struct CardDetailsView: View {
     private func featureRow(feature: Feature) -> some View {
         HStack {
             Text("\(feature.title):")
-                .font(.uiTitle6)
+                .font(.uiTitle5)
                 .foregroundColor(.bodyText)
             Text(feature.value)
                 .font(.uiLabel)

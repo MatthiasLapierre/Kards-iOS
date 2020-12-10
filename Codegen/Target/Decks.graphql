@@ -1,0 +1,37 @@
+query getDecks($language: String, $offset: Int, $main: [Int], $ally: [Int], $version: Int, $q: String, $includes: [String], $exclude: [String], $sortBy: DeckSortType, $order: DeckOrderType, $resources: Range) {
+decks(language: $language, first: 20, offset: $offset, main: $main, ally: $ally, version: $version, q: $q, includes: $includes, exclude: $exclude, sortBy: $sortBy, order: $order, resources: $resources) {
+        edges {
+            node {
+                id
+                updatedAt
+                slug
+                name
+                views
+                resources
+                mainNation {
+                    id
+                    name
+                }
+                allyNation {
+                    id
+                    name
+                }
+                score {
+                    score
+                }
+                stats {
+                    key
+                    value
+                }
+                user {
+                    id
+                    username
+                }
+            }
+        }
+        pageInfo {
+            count
+            hasNextPage
+        }
+    }
+}

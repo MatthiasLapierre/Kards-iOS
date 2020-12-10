@@ -31,13 +31,13 @@ import SwiftUI
 struct TabNavView<
     HomeView: View,
     CardsCollectionView: View,
-    NewsListView: View
+    DeckListView: View
 >: View {
     @EnvironmentObject var tabViewModel: TabViewModel
     
     let homeView: HomeView
     let cardsCollectionView: CardsCollectionView
-    let newsListView: NewsListView
+    let deckListView: DeckListView
     
     var body: some View {
         TabView(selection: $tabViewModel.selectedTab) {
@@ -64,15 +64,15 @@ struct TabNavView<
             .accessibility(label: Text(String.cardsCollection))
             
             NavigationView {
-                newsListView
+                deckListView
             }
             .tabItem {
-                Text(String.newsList)
-                Image.news
+                Text(String.decks)
+                Image.decks
             }
-            .tag(MainTab.news)
+            .tag(MainTab.decks)
             .navigationViewStyle(StackNavigationViewStyle())
-            .accessibility(label: Text(String.newsList))
+            .accessibility(label: Text(String.decks))
         }
         .accentColor(Color.accent)
     }
@@ -83,7 +83,7 @@ struct TabNavView_Previews: PreviewProvider {
         TabNavView(
             homeView: Text("Home"),
             cardsCollectionView: Text("Cards"),
-            newsListView: Text("News")
+            deckListView: Text("Decks")
         ).environmentObject(TabViewModel())
     }
 }

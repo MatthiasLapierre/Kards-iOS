@@ -14,7 +14,7 @@ let sourceRootURL = parentFolderOfScriptFile
 // root is within your main project
 let targetRootURL = sourceRootURL
     .apollo.childFolderURL(folderName: "Codegen")
-    .apollo.childFolderURL(folderName: "Output")
+    .apollo.childFolderURL(folderName: "Target")
 
 // Set up the URL you want to use to download the project
 let endpoint = URL(string: "https://api.kards.com/graphql")!

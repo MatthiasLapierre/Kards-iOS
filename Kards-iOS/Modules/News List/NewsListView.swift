@@ -32,7 +32,7 @@ struct NewsListView: View {
     var body: some View {
         contentView
             .navigationBarTitle(
-                Text(String.newsList),
+                Text(String.decks),
                 displayMode: .inline
             )
     }

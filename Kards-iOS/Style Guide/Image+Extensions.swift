@@ -35,7 +35,7 @@ extension Image {
     static var cards: Image {
         Image(systemName: "app")
     }
-    static var news: Image {
+    static var decks: Image {
         Image(systemName: "text.alignleft")
     }
     static var close: Image {
@@ -77,7 +77,31 @@ extension Image {
     static var overlay3Background: Image {
         Image("overlay3Background")
     }
+    static var deckOverlayBackground: Image {
+        Image("deckOverlayBackground")
+    }
     static var tryAgain: Image {
         Image("emojiCrying")
+    }
+    static var france: Image {
+        Image("france")
+    }
+    static var britain: Image {
+        Image("britain")
+    }
+    static var usa: Image {
+        Image("usa")
+    }
+    static var soviet: Image {
+        Image("soviet")
+    }
+    static var germany: Image {
+        Image("germany")
+    }
+    static var japan: Image {
+        Image("japan")
+    }
+    static var italy: Image {
+        Image("italy")
     }
 }

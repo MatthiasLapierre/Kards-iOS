@@ -28,38 +28,41 @@
 
 import SwiftUI
 import Combine
-import KingfisherSwiftUI
 
-struct CardListView: View {
+struct DeckListView: View {
     
-    @ObservedObject private var cardListRepository: CardListRepository
+    @ObservedObject private var deckListRepository: DeckListRepository
     @State private var isLoading: Bool = false
-    @State private var selectedCard: CardViewModel? = nil
+    @State private var selectedDeck: DeckViewModel? = nil
     @State private var presentCard: Bool = false
     
     private var subscriptions = Set<AnyCancellable>()
     
-    init(cardListRepository: CardListRepository) {
-        self.cardListRepository = cardListRepository
+    init(deckListRepository: DeckListRepository) {
+        self.deckListRepository = deckListRepository
     }
     
     var body: some View {
         contentView
+            .navigationBarTitle(
+                Text(String.decks),
+                displayMode: .inline
+            )
             .onAppear {
                 reloadIfRequired()
             }
-            .onReceive(self.cardListRepository.objectWillChange) {
-                isLoading = self.cardListRepository.isLoading
+            .onReceive(self.deckListRepository.objectWillChange) {
+                isLoading = self.deckListRepository.isLoading
             }
     }
     
     @ViewBuilder private var contentView: some View {
-        switch cardListRepository.state {
+        switch deckListRepository.state {
         case .initial, .loading:
             loadingView
-        case .hasData where cardListRepository.isEmpty:
+        case .hasData where deckListRepository.isEmpty:
           noResultsView
-        case .failed where cardListRepository.isEmpty:
+        case .failed where deckListRepository.isEmpty:
           reloadView
         case .hasData, .loadingAdditional, .failed:
           listView
@@ -71,7 +74,7 @@ struct CardListView: View {
             backgroundView
             ScrollView {
                 Group {
-                    cardsView
+                    decksView
                     loadMoreView
                     // Hack to make sure there's some spacing at the bottom of the list
                     Color.backgroundColor
@@ -80,9 +83,9 @@ struct CardListView: View {
         }
     }
     
-    private var cardsView: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: .cardWidth))]) {
-            ForEach(cardListRepository.cards, id: \.id, content: cardItem)
+    private var decksView: some View {
+        LazyVStack(spacing: 1) {
+            ForEach(deckListRepository.decks, id: \.id, content: deckItem)
         }
         .padding(.all, 8)
     }
@@ -92,16 +95,16 @@ struct CardListView: View {
             backgroundView
             ReloadView(
                 isLoading: $isLoading,
-                reloadHandler: cardListRepository.reload
+                reloadHandler: deckListRepository.reload
             )
         }
     }
     
     @ViewBuilder private var loadMoreView: some View {
-        if cardListRepository.hasNextPage {
+        if deckListRepository.hasNextPage {
             LoadMoreView(
                 isLoading: $isLoading,
-                callback: cardListRepository.loadMore
+                callback: deckListRepository.loadMore
             )
         }
     }
@@ -127,26 +130,22 @@ struct CardListView: View {
         }
     }
     
-    private func cardItem(for content: CardDisplayable) -> some View {
+    private func deckItem(for content: DeckDisplayable) -> some View {
         Button(action: {
-            selectedCard = content as? CardViewModel
-        }) {
-            CardImageView(content.imageUrl)
-        }
-        .onAppear(perform: {
-            if (content.id == cardListRepository.cards.last?.id) {
-                cardListRepository.loadMore()
-            }
+            selectedDeck = content as? DeckViewModel
+        }, label: {
+            DeckItemView(deck: content)
         })
-        .fullScreenCover(item: $selectedCard, content: { item in
-            CardDetailsView(card: item)
+        .onAppear(perform: {
+            if (content.id == deckListRepository.decks.last?.id) {
+                deckListRepository.loadMore()
+            }
         })
     }
     
     private func reloadIfRequired() {
-      if cardListRepository.state == .initial {
-        cardListRepository.reload()
+      if deckListRepository.state == .initial {
+        deckListRepository.reload()
       }
     }
-    
 }

@@ -35,10 +35,6 @@ protocol CardDisplayable  {
     var features: [Feature] { get }
 }
 
-extension CardDisplayable where Self: Identifiable {
-    
-}
-
 struct Feature {
     var title: String
     var value: String

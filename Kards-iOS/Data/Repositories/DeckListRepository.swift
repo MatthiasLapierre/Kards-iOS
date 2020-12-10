@@ -28,14 +28,14 @@
 
 import Combine
 
-class CardListRepository: ObservableObject, CardPaginatable {
+class DeckListRepository: ObservableObject, DeckPaginatable {
     
-    let service: CardListService
+    let service: DeckListService
     
     private (set) var currentPage: Int = 1
     private (set) var hasNextPage: Bool = false
     
-    var cards: [CardDisplayable] = [] {
+    var decks: [DeckDisplayable] = [] {
       willSet {
         objectWillChange.send()
       }
@@ -44,14 +44,14 @@ class CardListRepository: ObservableObject, CardPaginatable {
     var state: DataState = .initial
     
     var isEmpty: Bool {
-      cards.isEmpty
+      decks.isEmpty
     }
     
     var isLoading: Bool {
         return state == .loading || state == .loadingAdditional
     }
     
-    init(service: CardListService) {
+    init(service: DeckListService) {
         self.service = service
     }
     
@@ -62,7 +62,7 @@ class CardListRepository: ObservableObject, CardPaginatable {
           return
         }
         
-        guard cards.isEmpty || hasNextPage else {
+        guard decks.isEmpty || hasNextPage else {
           return
         }
         
@@ -71,20 +71,20 @@ class CardListRepository: ObservableObject, CardPaginatable {
         
         print("Current page: \(currentPage)")
         
-        service.cards(page: currentPage) { [weak self] result in
+        service.decks(page: currentPage) { [weak self] result in
             guard let `self` = self else { return }
             switch result {
-            case .success(let cards):
-                let viewModels = cards.edges?.compactMap { edge -> CardViewModel? in
+            case .success(let decks):
+                let viewModels = decks.edges?.compactMap { edge -> DeckViewModel? in
                     if let node = edge?.node {
-                        return CardViewModel(card: node)
+                        return DeckViewModel(deck: node)
                     } else {
                         return nil
                     }
                 } ?? []
                 print("Gotten \(viewModels.count) cards")
-                self.cards += viewModels
-                self.hasNextPage = cards.pageInfo.hasNextPage
+                self.decks += viewModels
+                self.hasNextPage = decks.pageInfo.hasNextPage
                 self.state = DataState.hasData
             case .failure(let error):
                 self.currentPage -= 1
@@ -107,19 +107,19 @@ class CardListRepository: ObservableObject, CardPaginatable {
         // Reset current page to 1
         currentPage = startingPage
         
-        service.cards { [weak self] result in
-            guard let `self` = self else { return }            
+        service.decks { [weak self] result in
+            guard let `self` = self else { return }
             switch result {
-            case .success(let cards):
-                let viewModels = cards.edges?.compactMap { edge -> CardViewModel? in
+            case .success(let decks):
+                let viewModels = decks.edges?.compactMap { edge -> DeckViewModel? in
                     if let node = edge?.node {
-                        return CardViewModel(card: node)
+                        return DeckViewModel(deck: node)
                     } else {
                         return nil
                     }
                 } ?? []
-                self.cards = viewModels
-                self.hasNextPage = cards.pageInfo.hasNextPage
+                self.decks = viewModels
+                self.hasNextPage = decks.pageInfo.hasNextPage
                 self.state = DataState.hasData
             case .failure(let error):
                 self.state = DataState.failed

@@ -30,11 +30,8 @@ import SwiftUI
 
 struct ReloadView: View {
     
-    private let reloadHandler: () -> Void
-    
-    init(reloadHandler: @escaping () -> Void) {
-        self.reloadHandler = reloadHandler
-    }
+    @Binding var isLoading: Bool
+    let reloadHandler: () -> Void
     
     var body: some View {
         VStack {
@@ -53,9 +50,10 @@ struct ReloadView: View {
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing, .bottom], 20)
             MainButtonView(
-                title: String.reload,
+                title: isLoading ? String.loading : String.reload,
                 callback: reloadHandler
             )
+            .disabled(isLoading)         
             .padding([.horizontal, .bottom], 20)
             Spacer()
         }
@@ -64,8 +62,17 @@ struct ReloadView: View {
 
 struct ReloadView_Previews: PreviewProvider {
     static var previews: some View {
-        ReloadView(reloadHandler: {})
-            .background(Color.backgroundColor)
-            .previewLayout(.sizeThatFits)
+        VStack {
+            ReloadView(
+                isLoading: .constant(false),
+                reloadHandler: {}
+            )
+            ReloadView(
+                isLoading: .constant(true),
+                reloadHandler: {}
+            )
+        }
+        .background(Color.backgroundColor)
+        .previewLayout(.sizeThatFits)
     }
 }

@@ -28,27 +28,55 @@
 
 import SwiftUI
 
-struct ContentView: View {
+protocol DeckDisplayable  {
+    var id: String { get }
+    var updatedAt: String { get }
+    var name: String { get }
+    var mainNation: String { get }
+    var secondNation: String { get }
+    var score: String { get }    
+    var mainNationCards: Int { get }
+    var secondNationCards: Int { get }
+    var username: String { get }
+    var resources: Int { get }
+    var views: Int { get }
+    var orders: Int { get }
+    var counterMeasures: Int { get }
+    var units: Int { get }
+    var backgroundColor: Color { get }
+    var image: Image { get }
+}
+
+class PreviewDeck: DeckDisplayable {
+    var id: String = "1"
     
-    @EnvironmentObject var dataManager: DataManager
+    var updatedAt: String = "10/12/2020"
     
-    private let tabViewModel = TabViewModel()
+    var name: String = "Blitzkrieg"
     
-    var body: some View {
-        let homeView = HomeView()
-        let cardsCollectionView = CardsCollectionView(
-            cardListRepository: dataManager.cardListRepository
-        )
-        let deckListView = DeckListView(
-            deckListRepository: dataManager.deckListRepository
-        )
-        TabNavView(
-            homeView: homeView,
-            cardsCollectionView: cardsCollectionView,
-            deckListView: deckListView
-        )        
-        .environmentObject(tabViewModel)
-        .background(Color.backgroundColor)
-        .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)
-    }
+    var mainNation: String = "Germany"
+    
+    var secondNation: String = "France"
+    
+    var score: String = "+3"
+    
+    var mainNationCards: Int = 12
+    
+    var secondNationCards: Int = 11
+    
+    var username: String = "Paul"
+    
+    var resources: Int = 2052
+    
+    var views: Int = 3
+    
+    var orders: Int = 12
+    
+    var counterMeasures: Int = 4
+    
+    var units: Int = 2
+    
+    var backgroundColor: Color = Nation(rawValue: 4)!.backgroundColor
+    
+    var image: Image = Nation(rawValue: 4)!.image
 }

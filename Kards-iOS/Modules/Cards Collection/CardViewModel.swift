@@ -30,12 +30,6 @@ import Foundation
 
 struct CardViewModel: CardDisplayable, Identifiable {
     
-    private let card: GetCardsQuery.Data.Card.Edge.Node
-    
-    init(card: GetCardsQuery.Data.Card.Edge.Node) {
-        self.card = card
-    }
-    
     var id: String {
         "\(card.id)"
     }
@@ -69,6 +63,12 @@ struct CardViewModel: CardDisplayable, Identifiable {
             Feature(title: String.cardKredits, value: "\(kcredits)"),
             Feature(title: String.cardSet, value: set)
         ]
+    }
+    
+    private let card: GetCardsQuery.Data.Card.Edge.Node
+    
+    init(card: GetCardsQuery.Data.Card.Edge.Node) {
+        self.card = card
     }
     
 }

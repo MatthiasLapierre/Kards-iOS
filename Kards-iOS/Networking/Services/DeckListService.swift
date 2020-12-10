@@ -26,29 +26,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct ContentView: View {
+class DeckListService: Service {
     
-    @EnvironmentObject var dataManager: DataManager
-    
-    private let tabViewModel = TabViewModel()
-    
-    var body: some View {
-        let homeView = HomeView()
-        let cardsCollectionView = CardsCollectionView(
-            cardListRepository: dataManager.cardListRepository
-        )
-        let deckListView = DeckListView(
-            deckListRepository: dataManager.deckListRepository
-        )
-        TabNavView(
-            homeView: homeView,
-            cardsCollectionView: cardsCollectionView,
-            deckListView: deckListView
-        )        
-        .environmentObject(tabViewModel)
-        .background(Color.backgroundColor)
-        .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)
+    func decks(page: Int = 1, completion: @escaping (_ response: Result<GetDecksQuery.Data.Deck, KardsAPIError>) -> Void) {
+        let offset = page * Int.pageLimit
+        self.networkClient.graphQLClient.fetch(query: GetDecksQuery(language: "en", offset: offset)) { result in
+            switch result {
+            case .failure(let error):
+                print("Something bad happened \(error)")
+                completion(.failure(.processingError(error)))
+            case .success(let graphQLResult):
+                guard let cards = graphQLResult.data?.decks else {
+                    print("No card")
+                    completion(.failure(.noData))
+                    return
+                }
+                completion(.success(cards))
+            }
+        }
     }
+    
 }

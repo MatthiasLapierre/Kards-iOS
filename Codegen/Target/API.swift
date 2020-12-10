@@ -359,7 +359,7 @@ public final class GetCardsQuery: GraphQLQuery {
               GraphQLField("id", type: .nonNull(.scalar(Int.self))),
               GraphQLField("cardId", type: .nonNull(.scalar(String.self))),
               GraphQLField("importId", type: .scalar(String.self)),
-              GraphQLField("json", type: .nonNull(.scalar(JSONObject.self))),
+              GraphQLField("json", type: .nonNull(.scalar(String.self))),
               GraphQLField("image", alias: "imageUrl", arguments: ["language": GraphQLVariable("language")], type: .nonNull(.scalar(String.self))),
               GraphQLField("image", alias: "thumbUrl", arguments: ["type": "thumb", "language": GraphQLVariable("language")], type: .nonNull(.scalar(String.self))),
             ]
@@ -371,7 +371,7 @@ public final class GetCardsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(id: Int, cardId: String, importId: String? = nil, json: JSONObject, imageUrl: String, thumbUrl: String) {
+          public init(id: Int, cardId: String, importId: String? = nil, json: String, imageUrl: String, thumbUrl: String) {
             self.init(unsafeResultMap: ["__typename": "Card", "id": id, "cardId": cardId, "importId": importId, "json": json, "imageUrl": imageUrl, "thumbUrl": thumbUrl])
           }
 
@@ -411,9 +411,9 @@ public final class GetCardsQuery: GraphQLQuery {
             }
           }
 
-          public var json: JSONObject {
+          public var json: String {
             get {
-              return resultMap["json"]! as! JSONObject
+              return resultMap["json"]! as! String
             }
             set {
               resultMap.updateValue(newValue, forKey: "json")

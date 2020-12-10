@@ -26,29 +26,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
+import Combine
 
-struct ContentView: View {
+protocol DeckPaginatable: ObservableObject where ObjectWillChangePublisher == ObservableObjectPublisher {
+    var currentPage: Int { get }
+    var startingPage: Int { get }
+    var defaultPageSize: Int { get }
+    var state: DataState { get }
     
-    @EnvironmentObject var dataManager: DataManager
+    var decks: [DeckDisplayable] { get }
     
-    private let tabViewModel = TabViewModel()
-    
-    var body: some View {
-        let homeView = HomeView()
-        let cardsCollectionView = CardsCollectionView(
-            cardListRepository: dataManager.cardListRepository
-        )
-        let deckListView = DeckListView(
-            deckListRepository: dataManager.deckListRepository
-        )
-        TabNavView(
-            homeView: homeView,
-            cardsCollectionView: cardsCollectionView,
-            deckListView: deckListView
-        )        
-        .environmentObject(tabViewModel)
-        .background(Color.backgroundColor)
-        .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)
-    }
+    func loadMore()
+    func reload()
+}
+
+extension DeckPaginatable {
+    // All content that currently conforms to this prootocol is 1-indexed
+  var startingPage: Int {
+    1
+  }
+  
+  var defaultPageSize: Int {
+    .pageLimit
+  }
 }

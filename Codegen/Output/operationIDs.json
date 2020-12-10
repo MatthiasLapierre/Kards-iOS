@@ -1,6 +1,0 @@
-{
-  "8171902bd0093e7cf2d6a417dbcae35ff1ad0b1a1debbba7fefd292466a9390c": {
-    "name": "getCards",
-    "source": "query getCards($language: String, $offset: Int, $nationIds: [Int], $kredits: [Int], $q: String, $type: [String], $rarity: [String], $set: [String], $showSpawnables: Boolean) {\n  cards(\n    language: $language\n    first: 20\n    offset: $offset\n    nationIds: $nationIds\n    kredits: $kredits\n    q: $q\n    type: $type\n    set: $set\n    rarity: $rarity\n    showSpawnables: $showSpawnables\n  ) {\n    __typename\n    pageInfo {\n      __typename\n      count\n      hasNextPage\n    }\n    edges {\n      __typename\n      node {\n        __typename\n        id\n        cardId\n        importId\n        json\n        imageUrl: image(language: $language)\n        thumbUrl: image(type: thumb, language: $language)\n      }\n    }\n  }\n}"
-  }
-}

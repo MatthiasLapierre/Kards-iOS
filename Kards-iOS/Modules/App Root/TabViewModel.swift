@@ -31,7 +31,7 @@ import Combine
 enum MainTab: Hashable {
     case home
     case cardsCollection
-    case news
+    case decks
 }
 
 final class TabViewModel: ObservableObject {

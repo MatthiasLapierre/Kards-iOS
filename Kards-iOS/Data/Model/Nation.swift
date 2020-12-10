@@ -26,29 +26,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 import SwiftUI
 
-struct ContentView: View {
+enum Nation: Int {
+    case SovietUnion = 1
+    case UnitedState = 2
+    case Japan = 3
+    case Germany = 4
+    case Britain = 5
+    case France = 6
+    case Italy = 7
     
-    @EnvironmentObject var dataManager: DataManager
+    var backgroundColor: Color {
+        switch self {
+        case .SovietUnion:
+            return Color(#colorLiteral(red: 0.3098039216, green: 0.2196078431, blue: 0.1490196078, alpha: 1))
+        case .UnitedState:
+            return Color(#colorLiteral(red: 0.262745098, green: 0.2941176471, blue: 0.1960784314, alpha: 1))
+        case .Japan:
+            return Color(#colorLiteral(red: 0.5647058824, green: 0.4470588235, blue: 0.2352941176, alpha: 1))
+        case .Germany:
+            return Color(#colorLiteral(red: 0.3529411765, green: 0.3725490196, blue: 0.3333333333, alpha: 1))
+        case .Britain:
+            return Color(#colorLiteral(red: 0.5215686275, green: 0.4784313725, blue: 0.3764705882, alpha: 1))
+        case .France:
+            return Color(#colorLiteral(red: 0.1568627451, green: 0.2039215686, blue: 0.3294117647, alpha: 1))
+        case .Italy:
+            return Color(#colorLiteral(red: 0.3333333333, green: 0.3215686275, blue: 0.2823529412, alpha: 1))
+        }
+    }
     
-    private let tabViewModel = TabViewModel()
-    
-    var body: some View {
-        let homeView = HomeView()
-        let cardsCollectionView = CardsCollectionView(
-            cardListRepository: dataManager.cardListRepository
-        )
-        let deckListView = DeckListView(
-            deckListRepository: dataManager.deckListRepository
-        )
-        TabNavView(
-            homeView: homeView,
-            cardsCollectionView: cardsCollectionView,
-            deckListView: deckListView
-        )        
-        .environmentObject(tabViewModel)
-        .background(Color.backgroundColor)
-        .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)
+    var image: Image {
+        switch self {
+        case .SovietUnion:
+            return Image.soviet
+        case .UnitedState:
+            return Image.usa
+        case .Japan:
+            return Image.japan
+        case .Germany:
+            return Image.germany
+        case .Britain:
+            return Image.britain
+        case .France:
+            return Image.france
+        case .Italy:
+            return Image.italy
+        }
     }
 }

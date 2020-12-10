@@ -44,7 +44,7 @@ extension TimeInterval {
 extension String {
     static let home = "Home"
     static let cardsCollection = "Cards"
-    static let newsList = "News"
+    static let decks = "Decks"
     static let loading = "Loading…"
     static let learnMore = "Lear more"
     static let loadMore = "Load more"
