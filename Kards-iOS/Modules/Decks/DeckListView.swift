@@ -142,7 +142,9 @@ struct DeckListView: View {
             }
         })
         .fullScreenCover(item: $selectedDeck, content: { item in
-            DeckDetailsView(deck: item)
+            ClosableView {
+                DeckDetailsView(deck: item)
+            }
         })
     }
     

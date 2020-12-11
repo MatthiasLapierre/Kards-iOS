@@ -139,7 +139,9 @@ struct CardListView: View {
             }
         })
         .fullScreenCover(item: $selectedCard, content: { item in
-            CardDetailsView(card: item)
+            ClosableView {
+                CardDetailsView(card: item)
+            }
         })
     }
     

@@ -30,7 +30,6 @@ import SwiftUI
 
 struct DeckDetailsView: View {
     
-    @Environment(\.presentationMode) var presentationMode
     private let deckDisplayable: DeckDisplayable
     
     init(deck: DeckDisplayable) {
@@ -38,31 +37,15 @@ struct DeckDetailsView: View {
     }
     
     var body: some View {
-        ZStack {
-            BackgroundView()
-            contentView
-        }
+        contentView
     }
     
     private var contentView: some View {
-        VStack {
-            HStack {
-                Spacer()
-                closeBtnView
+        ScrollView {
+            VStack {
+                headerView
+                detailsView
             }
-            .padding([.top, .trailing], 8)
-            ScrollView {
-                VStack {
-                    headerView
-                    detailsView
-                }
-            }
-        }
-    }
-    
-    private var closeBtnView: some View {
-        CloseView {
-            presentationMode.wrappedValue.dismiss()
         }
     }
     

@@ -30,8 +30,6 @@ import SwiftUI
 
 struct CardDetailsView: View {
     
-    @Environment(\.presentationMode) var presentationMode
-    
     private var cardDisplayable: CardDisplayable
     
     init(card: CardDisplayable) {
@@ -39,38 +37,22 @@ struct CardDetailsView: View {
     }
     
     var body: some View {
-        ZStack {
-            BackgroundView()
-            contentView
-        }
+        contentView
     }
     
     private var contentView: some View {
-        VStack {
-            HStack {
-                Spacer()
-                closeBtnView
+        ScrollView {
+            VStack {
+                subTitleView
+                titleView
+                imageView
+                    .padding(.top, 20)
+                    .padding(.bottom, 30)
+                textView
+                    .padding(.bottom, 20)
+                featuresView
             }
-            .padding([.top, .trailing], 8)
-            ScrollView {
-                VStack {
-                    subTitleView
-                    titleView
-                    imageView
-                        .padding(.top, 20)
-                        .padding(.bottom, 30)
-                    textView
-                        .padding(.bottom, 20)
-                    featuresView
-                }
-                .padding(.all, 20)
-            }
-        }
-    }
-    
-    private var closeBtnView: some View {
-        CloseView {
-            presentationMode.wrappedValue.dismiss()
+            .padding(.all, 20)
         }
     }
     

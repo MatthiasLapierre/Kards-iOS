@@ -28,18 +28,41 @@
 
 import SwiftUI
 
-struct BlurView: UIViewRepresentable {
-    var style: UIBlurEffect.Style = .systemMaterial
-    func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView(effect: UIBlurEffect(style: style))
+struct ClosableView<Content: View>: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+    let content: () -> Content
+    
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
     }
-    func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        uiView.effect = UIBlurEffect(style: style)
+    
+    var body: some View {
+        ZStack {
+            BackgroundView()
+            VStack {
+                HStack {
+                    Spacer()
+                    closeBtnView
+                }
+                .padding([.top, .trailing], 8)
+                content()
+            }
+        }
+    }
+    
+    private var closeBtnView: some View {
+        CloseView {
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }
 
-struct Blur_Previews: PreviewProvider {
+struct ClosableView_Previews: PreviewProvider {
     static var previews: some View {
-        BlurView()
+        ClosableView {
+            Text("Hello world")
+        }
     }
 }
