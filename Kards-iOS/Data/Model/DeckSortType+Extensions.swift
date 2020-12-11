@@ -26,26 +26,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Combine
+import Foundation
 
-final class DataManager: ObservableObject {
+extension DeckSortType {
     
-    // Filters
-    private (set) var filtersManager: FiltersManager
-    
-    // Content repositories
-    private (set) var cardListRepository: CardListRepository
-    private (set) var deckListRepository: DeckListRepository
-    
-    init() {
-        let networkClient = KardsAPI.shared
-        
-        let cardListService = CardListService(client: networkClient)
-        let deckListService = DeckListService(client: networkClient)
-        
-        self.filtersManager = FiltersManager()
-        
-        self.cardListRepository = CardListRepository(service: cardListService)
-        self.deckListRepository = DeckListRepository(service: deckListService, filters: filtersManager.deckFilters)
+    var localizedName: String {
+        switch self {
+        case .week:
+            return String.sortByWeek
+        case .month:
+            return String.sortByMonth
+        case .updated:
+            return String.sortByDate
+        case .__unknown(_):
+            return ""
+        }
     }
+    
 }

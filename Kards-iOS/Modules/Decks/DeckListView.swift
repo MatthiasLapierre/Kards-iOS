@@ -35,6 +35,7 @@ struct DeckListView: View {
     @State private var isLoading: Bool = false
     @State private var selectedDeck: DeckViewModel? = nil
     @State private var presentCard: Bool = false
+    @State private var showFilters: Bool = false
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -47,6 +48,25 @@ struct DeckListView: View {
             .navigationBarTitle(
                 Text(String.decks),
                 displayMode: .inline
+            )
+            .navigationBarItems(
+                trailing: Button(
+                    String.filters,
+                    action: {
+                        self.showFilters = true
+                    }
+                )
+                .font(.uiButtonLabel)
+                .foregroundColor(.titleText)
+                .fullScreenCover(isPresented: $showFilters, content: {
+                    ClosableView(dismiss: {
+                        deckListRepository.reload()
+                    }) {
+                        DeckFiltersView(
+                            viewModel: DeckFiltersViewModel(filters: DataManager.current.filtersManager.deckFilters)
+                        )
+                    }
+                })
             )
             .onAppear {
                 reloadIfRequired()

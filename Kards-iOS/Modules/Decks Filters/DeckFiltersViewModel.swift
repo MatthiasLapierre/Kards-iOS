@@ -26,26 +26,57 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 import Combine
 
-final class DataManager: ObservableObject {
+class DeckFiltersViewModel: ObservableObject {
     
-    // Filters
-    private (set) var filtersManager: FiltersManager
+    @Published var deckFilters: DeckFilters
     
-    // Content repositories
-    private (set) var cardListRepository: CardListRepository
-    private (set) var deckListRepository: DeckListRepository
+    private var subscriptions = Set<AnyCancellable>()
     
-    init() {
-        let networkClient = KardsAPI.shared
-        
-        let cardListService = CardListService(client: networkClient)
-        let deckListService = DeckListService(client: networkClient)
-        
-        self.filtersManager = FiltersManager()
-        
-        self.cardListRepository = CardListRepository(service: cardListService)
-        self.deckListRepository = DeckListRepository(service: deckListService, filters: filtersManager.deckFilters)
+    var mainNations: [Nation] {
+        return [
+            Nation.SovietUnion,
+            Nation.UnitedState,
+            Nation.Japan,
+            Nation.Germany,
+            Nation.Britain
+        ]
     }
+    
+    var alliedNations: [Nation] {
+        return [
+            Nation.SovietUnion,
+            Nation.UnitedState,
+            Nation.Japan,
+            Nation.Germany,
+            Nation.Britain,
+            Nation.France,
+            Nation.Italy
+        ]
+    }
+    
+    init(filters: DeckFilters) {
+        self.deckFilters = filters        
+    }
+    
+    func pressMainNation(nation: Nation) {
+        if deckFilters.mainNation.contains(nation) {
+            deckFilters.mainNation.remove(nation)
+        } else {
+            deckFilters.mainNation.insert(nation)
+        }
+        objectWillChange.send()
+    }
+    
+    func pressAlliedNation(nation: Nation) {
+        if deckFilters.alliedNation.contains(nation) {
+            deckFilters.alliedNation.remove(nation)
+        } else {
+            deckFilters.alliedNation.insert(nation)
+        }
+        objectWillChange.send()
+    }
+    
 }

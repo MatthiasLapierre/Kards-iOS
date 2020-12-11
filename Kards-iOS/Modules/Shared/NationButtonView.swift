@@ -26,26 +26,55 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Combine
+import SwiftUI
 
-final class DataManager: ObservableObject {
+struct NationButtonView: View {
     
-    // Filters
-    private (set) var filtersManager: FiltersManager
+    let nation: Nation
+    let callback: () -> Void
     
-    // Content repositories
-    private (set) var cardListRepository: CardListRepository
-    private (set) var deckListRepository: DeckListRepository
+    var body: some View {
+        Button(action: callback, label: {
+            HStack(spacing: 10) {
+                nation.image
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                Text(nation.label)
+                    .font(.uiButtonLabel)
+                    .lineLimit(1)
+                Spacer()
+            }
+        })
+        .buttonStyle(NationButtonStyle(backgroundColor: nation.backgroundColor))
+    }
+}
+
+fileprivate struct NationButtonStyle: ButtonStyle {
+    let backgroundColor: Color
     
-    init() {
-        let networkClient = KardsAPI.shared
-        
-        let cardListService = CardListService(client: networkClient)
-        let deckListService = DeckListService(client: networkClient)
-        
-        self.filtersManager = FiltersManager()
-        
-        self.cardListRepository = CardListRepository(service: cardListService)
-        self.deckListRepository = DeckListRepository(service: deckListService, filters: filtersManager.deckFilters)
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(.titleText)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 10)
+            .background(
+                Rectangle()
+                    .fill(backgroundColor)
+                    .border(Color.white, width: 2)
+                    .overlay(
+                        Rectangle()
+                            .fill(configuration.isPressed ?
+                                Color.init(.sRGB, red: 1.0, green: 1.0, blue: 1.0, opacity: 0.2) :
+                                Color.clear
+                            )
+                    )
+            )
+    }
+}
+
+struct NationButtonView_Previews: PreviewProvider {
+    static var previews: some View {
+        NationButtonView(nation: .France) {}
     }
 }

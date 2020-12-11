@@ -34,6 +34,7 @@ extension Int {
 
 extension CGFloat {
     static let cardWidth: CGFloat = 120
+    static let nationBtnWidth: CGFloat = 120
 }
 
 extension TimeInterval {
@@ -49,6 +50,7 @@ extension String {
     static let learnMore = "Lear more"
     static let loadMore = "Load more"
     static let reload = "Reload"
+    static let filters = "Filters"
     
     //MARK: Card details
     static let cardNation = "Nation"
@@ -63,11 +65,31 @@ extension String {
     static let deckViews = "Views"
     static let deckGameVersion = "Game Version"
     static let deckResourceCost = "Resource cost"
-    static let cardBreakdown = "Card breakdown"
+    static let deckCardBreakdown = "Card breakdown"
     
-    // MARK: Empty views
+    //MARK: Deck filters
+    static let deckFiltersMainNations = "Main nations"
+    static let deckFiltersAlliedNations = "Allied nations"
+    static let deckFiltersName = "Name"
+    static let deckFiltersSortBy = "Sort by"
+    
+    //MARK: Empty views
     static let noCardsTitle = "We couldn't find anything"
     static let noCardsMessage = "Try removing some filters."
     static let tryAgainTitle = "Something went wrong."
     static let tryAgainMessage = "Please, try again."
+    
+    //MARK: Nation
+    static let nationFrance = "France"
+    static let nationBritain = "Britain"
+    static let nationUSA = "United States"
+    static let nationSovietUnion = "Soviet Union"
+    static let nationGermany = "Germany"
+    static let nationJapan = "Japan"
+    static let nationItaly = "Italy"
+    
+    //MARK: Sort by
+    static let sortByWeek = "Top this week"
+    static let sortByMonth = "Top this month"
+    static let sortByDate = "Latest deck"
 }

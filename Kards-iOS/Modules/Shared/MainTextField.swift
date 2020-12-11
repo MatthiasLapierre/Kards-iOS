@@ -28,25 +28,34 @@
 
 import SwiftUI
 
-struct NewsListView: View {
-    var body: some View {
-        contentView
-            .navigationBarTitle(
-                Text(String.decks),
-                displayMode: .inline
-            )
+struct MainTextField: View {
+    
+    private let title: String
+    @Binding private var text: String
+    
+    init(_ title: String, text: Binding<String>) {
+        self.title = title
+        self._text = text
     }
     
-    private var contentView: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 20))]) {
-            Text("Placeholder")
-            Text("Placeholder")
-        }
+    var body: some View {
+        TextField(
+            title,
+            text: $text
+        )
+        .font(.uiBody)
+        .foregroundColor(.bodyText)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 10)
+        .background(
+            Rectangle()
+                .stroke(Color.white, lineWidth: 2)
+        )
     }
 }
 
-struct NewsView_Previews: PreviewProvider {
+struct MainTextField_Previews: PreviewProvider {
     static var previews: some View {
-        NewsListView()
+        MainTextField("Name", text: .constant(""))
     }
 }

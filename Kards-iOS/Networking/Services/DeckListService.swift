@@ -30,9 +30,25 @@ import Foundation
 
 class DeckListService: Service {
     
-    func decks(page: Int = 1, completion: @escaping (_ response: Result<GetDecksQuery.Data.Deck, KardsAPIError>) -> Void) {
-        let offset = page * Int.pageLimit
-        self.networkClient.graphQLClient.fetch(query: GetDecksQuery(language: "en", offset: offset, sortBy: .updated)) { result in
+    func decks(
+        page: Int = 1,
+        mainNations: Set<Nation>? = nil,
+        alliedNations: Set<Nation>? = nil,
+        query: String? = nil,
+        sortBy: DeckSortType? = nil,
+        completion: @escaping (_ response: Result<GetDecksQuery.Data.Deck, KardsAPIError>) -> Void
+    ) {
+        let offset = (page - 1) * Int.pageLimit
+        self.networkClient.graphQLClient.fetch(
+            query: GetDecksQuery(
+                language: "en",
+                offset: offset,
+                main: mainNations?.map { $0.rawValue } ?? nil,
+                ally: alliedNations?.map { $0.rawValue } ?? nil,
+                q: query,
+                sortBy: sortBy,
+                order: .desc)
+        ) { result in
             switch result {
             case .failure(let error):
                 print("Something bad happened \(error)")

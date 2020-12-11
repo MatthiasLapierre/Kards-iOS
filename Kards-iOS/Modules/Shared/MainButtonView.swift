@@ -36,9 +36,7 @@ struct MainButtonView: View {
     @State private var height: CGFloat?
     
     var body: some View {
-        Button(action: {
-            callback()
-        }) {
+        Button(action: callback) {
             Text(title.uppercased())
                 .font(.uiButtonLabel)
         }

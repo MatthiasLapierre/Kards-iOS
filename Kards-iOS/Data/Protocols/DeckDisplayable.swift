@@ -78,7 +78,7 @@ class PreviewDeck: DeckDisplayable {
             Information(title: String.deckViews, text: "3"),
             Information(title: String.deckGameVersion, text: "Breakthrough"),
             Information(title: String.deckResourceCost, text: "1860"),
-            Information(title: String.cardBreakdown, text: "Germany (12) France (11)")
+            Information(title: String.deckCardBreakdown, text: "Germany (12) France (11)")
         ]
     }
 }

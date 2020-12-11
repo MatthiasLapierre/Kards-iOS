@@ -58,7 +58,7 @@ struct DeckViewModel: DeckDisplayable, Identifiable {
         if score > 0 {
             return "+\(score)"
         } else if score < 0 {
-            return "-\(score)"
+            return "\(score)"
         } else {
             return "0"
         }
@@ -111,7 +111,7 @@ struct DeckViewModel: DeckDisplayable, Identifiable {
             Information(title: String.deckViews, text: "👀 \(views)"),
             Information(title: String.deckGameVersion, text: "Breakthrough"),
             Information(title: String.deckResourceCost, text: "🔨 \(resources)"),
-            Information(title: String.cardBreakdown, text: "Orders (\(orders)) ; Units (\(units)) ; \(mainNation) (\(mainNationCards)) ; \(secondNation) (\(secondNationCards))")
+            Information(title: String.deckCardBreakdown, text: "Orders (\(orders)) ; Units (\(units)) ; \(mainNation) (\(mainNationCards)) ; \(secondNation) (\(secondNationCards))")
         ]
     }
     

@@ -38,6 +38,25 @@ enum Nation: Int {
     case France = 6
     case Italy = 7
     
+    var label: String {
+        switch self {
+        case .SovietUnion:
+            return String.nationSovietUnion
+        case .UnitedState:
+            return String.nationUSA
+        case .Japan:
+            return String.nationJapan
+        case .Germany:
+            return String.nationGermany
+        case .Britain:
+            return String.nationBritain
+        case .France:
+            return String.nationFrance
+        case .Italy:
+            return String.nationItaly
+        }
+    }
+    
     var backgroundColor: Color {
         switch self {
         case .SovietUnion:

@@ -26,26 +26,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+import Foundation
 import Combine
 
-final class DataManager: ObservableObject {
-    
-    // Filters
-    private (set) var filtersManager: FiltersManager
-    
-    // Content repositories
-    private (set) var cardListRepository: CardListRepository
-    private (set) var deckListRepository: DeckListRepository
-    
-    init() {
-        let networkClient = KardsAPI.shared
-        
-        let cardListService = CardListService(client: networkClient)
-        let deckListService = DeckListService(client: networkClient)
-        
-        self.filtersManager = FiltersManager()
-        
-        self.cardListRepository = CardListRepository(service: cardListService)
-        self.deckListRepository = DeckListRepository(service: deckListService, filters: filtersManager.deckFilters)
-    }
+final class FiltersManager: ObservableObject {
+    @Published var deckFilters: DeckFilters = DeckFilters()
 }

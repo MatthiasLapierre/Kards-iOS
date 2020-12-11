@@ -32,9 +32,11 @@ struct ClosableView<Content: View>: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    let content: () -> Content
+    private let content: () -> Content
+    private let dismiss: (() -> Void)?
     
-    init(@ViewBuilder content: @escaping () -> Content) {
+    init(dismiss: (() -> Void)? = nil, content: @escaping () -> Content) {
+        self.dismiss = dismiss
         self.content = content
     }
     
@@ -55,6 +57,7 @@ struct ClosableView<Content: View>: View {
     private var closeBtnView: some View {
         CloseView {
             presentationMode.wrappedValue.dismiss()
+            dismiss?()
         }
     }
 }

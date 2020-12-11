@@ -31,7 +31,7 @@ import Foundation
 class CardListService: Service {
     
     func cards(page: Int = 1, completion: @escaping (_ response: Result<GetCardsQuery.Data.Card, KardsAPIError>) -> Void) {
-        let offset = page * Int.pageLimit
+        let offset = (page - 1) * Int.pageLimit
         self.networkClient.graphQLClient.fetch(query: GetCardsQuery(language: "en", offset: offset, showSpawnables: true)) { result in
             switch result {
             case .failure(let error):
