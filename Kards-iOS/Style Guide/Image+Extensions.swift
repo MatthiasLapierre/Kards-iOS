@@ -29,9 +29,6 @@
 import SwiftUI
 
 extension Image {
-    static var home: Image {
-        Image(systemName: "house.fill")
-    }
     static var cards: Image {
         Image(systemName: "app")
     }
@@ -44,27 +41,9 @@ extension Image {
     static var logo: Image {
         Image("logo")
     }
-    static var banner: Image {
-        Image("banner")
-    }
     static var cardBacks: Image {
         Image("cardbacks")
-    }
-    static var deck: Image {
-        Image("deck")
-    }
-    static var card1: Image {
-        Image("card1")
-    }
-    static var card2: Image {
-        Image("card2")
-    }
-    static var card3: Image {
-        Image("card3")
-    }
-    static var cardBackground: Image {
-        Image("cardBackground")
-    }
+    }        
     static var titleBackground: Image {
         Image("titleBackground")
     }

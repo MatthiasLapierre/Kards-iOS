@@ -32,7 +32,7 @@ class DeckListService: Service {
     
     func decks(page: Int = 1, completion: @escaping (_ response: Result<GetDecksQuery.Data.Deck, KardsAPIError>) -> Void) {
         let offset = page * Int.pageLimit
-        self.networkClient.graphQLClient.fetch(query: GetDecksQuery(language: "en", offset: offset)) { result in
+        self.networkClient.graphQLClient.fetch(query: GetDecksQuery(language: "en", offset: offset, sortBy: .updated)) { result in
             switch result {
             case .failure(let error):
                 print("Something bad happened \(error)")

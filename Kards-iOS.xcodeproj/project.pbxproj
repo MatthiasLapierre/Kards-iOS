@@ -45,12 +45,10 @@
 		39BBCC0C2581044400244A2F /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC0B2581044400244A2F /* BackgroundView.swift */; };
 		39BBCC0F25810DDF00244A2F /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC0E25810DDF00244A2F /* BlurView.swift */; };
 		39BBCC13258111AB00244A2F /* CloseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BBCC12258111AB00244A2F /* CloseView.swift */; };
-		39F5C486257E22570063ED76 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C485257E22570063ED76 /* CardView.swift */; };
 		39F5C48A257E65A40063ED76 /* KardsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C489257E65A40063ED76 /* KardsAPI.swift */; };
 		39F5C48F257E676D0063ED76 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 39F5C48E257E676D0063ED76 /* Apollo */; };
 		39F5C493257E6A360063ED76 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C492257E6A360063ED76 /* Service.swift */; };
 		39F5C496257E6AB30063ED76 /* CardListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C495257E6AB30063ED76 /* CardListService.swift */; };
-		39FEB0C5257A29FD00204332 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0C4257A29FD00204332 /* HomeView.swift */; };
 		39FEB0C9257A2A1200204332 /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0C8257A2A1200204332 /* NewsListView.swift */; };
 		39FEB0CE257A2A3600204332 /* CardsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0CD257A2A3600204332 /* CardsCollectionView.swift */; };
 		39FEB0D9257A2CCE00204332 /* TabNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0D8257A2CCE00204332 /* TabNavView.swift */; };
@@ -112,11 +110,9 @@
 		39BBCC0B2581044400244A2F /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		39BBCC0E25810DDF00244A2F /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		39BBCC12258111AB00244A2F /* CloseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseView.swift; sourceTree = "<group>"; };
-		39F5C485257E22570063ED76 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		39F5C489257E65A40063ED76 /* KardsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KardsAPI.swift; sourceTree = "<group>"; };
 		39F5C492257E6A360063ED76 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		39F5C495257E6AB30063ED76 /* CardListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListService.swift; sourceTree = "<group>"; };
-		39FEB0C4257A29FD00204332 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		39FEB0C8257A2A1200204332 /* NewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
 		39FEB0CD257A2A3600204332 /* CardsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCollectionView.swift; sourceTree = "<group>"; };
 		39FEB0D8257A2CCE00204332 /* TabNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavView.swift; sourceTree = "<group>"; };
@@ -248,7 +244,6 @@
 				39FEB0B5257A20ED00204332 /* App Root */,
 				39FEB0C1257A29B200204332 /* Cards Collection */,
 				39A9647D258217460023E5A4 /* Decks */,
-				39FEB0C2257A29C900204332 /* Home */,
 				39FEB0C3257A29D600204332 /* News List */,
 				3995600E25793821008D9C32 /* SceneDelegate.swift */,
 				39FEB0E5257A33E300204332 /* Shared */,
@@ -331,14 +326,6 @@
 			path = "Cards Collection";
 			sourceTree = "<group>";
 		};
-		39FEB0C2257A29C900204332 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				39FEB0C4257A29FD00204332 /* HomeView.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		39FEB0C3257A29D600204332 /* News List */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,7 +369,6 @@
 			children = (
 				39FEB0E6257A340B00204332 /* SnackbarView.swift */,
 				39FEB106257A3FB900204332 /* MessageBarView.swift */,
-				39F5C485257E22570063ED76 /* CardView.swift */,
 				3943DD51257F8EC100A5737D /* LoadingView.swift */,
 				3943DD54257F8F0700A5737D /* ActivityIndicator.swift */,
 				3943DD57257F8FD800A5737D /* NoResultsView.swift */,
@@ -568,12 +554,10 @@
 				39FEB107257A3FB900204332 /* MessageBarView.swift in Sources */,
 				39BBCC0C2581044400244A2F /* BackgroundView.swift in Sources */,
 				39BBCC13258111AB00244A2F /* CloseView.swift in Sources */,
-				39FEB0C5257A29FD00204332 /* HomeView.swift in Sources */,
 				3943DD5C257FB77F00A5737D /* ReloadView.swift in Sources */,
 				3943DD23257F698B00A5737D /* CardViewModel.swift in Sources */,
 				39FEB0D9257A2CCE00204332 /* TabNavView.swift in Sources */,
 				39F5C496257E6AB30063ED76 /* CardListService.swift in Sources */,
-				39F5C486257E22570063ED76 /* CardView.swift in Sources */,
 				39A9648C25821EE30023E5A4 /* DeckListService.swift in Sources */,
 				39BBCC0F25810DDF00244A2F /* BlurView.swift in Sources */,
 				39A9647F258217790023E5A4 /* DeckListView.swift in Sources */,

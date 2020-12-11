@@ -29,29 +29,16 @@
 import SwiftUI
 
 struct TabNavView<
-    HomeView: View,
     CardsCollectionView: View,
     DeckListView: View
 >: View {
     @EnvironmentObject var tabViewModel: TabViewModel
     
-    let homeView: HomeView
     let cardsCollectionView: CardsCollectionView
     let deckListView: DeckListView
     
     var body: some View {
         TabView(selection: $tabViewModel.selectedTab) {
-            NavigationView {
-                homeView
-            }
-            .tabItem {
-                Text(String.home)
-                Image.home
-            }
-            .tag(MainTab.home)
-            .navigationViewStyle(StackNavigationViewStyle())
-            .accessibility(label: Text(String.home))
-            
             NavigationView {
                 cardsCollectionView
             }
@@ -81,7 +68,6 @@ struct TabNavView<
 struct TabNavView_Previews: PreviewProvider {
     static var previews: some View {
         TabNavView(
-            homeView: Text("Home"),
             cardsCollectionView: Text("Cards"),
             deckListView: Text("Decks")
         ).environmentObject(TabViewModel())

@@ -35,7 +35,6 @@ struct ContentView: View {
     private let tabViewModel = TabViewModel()
     
     var body: some View {
-        let homeView = HomeView()
         let cardsCollectionView = CardsCollectionView(
             cardListRepository: dataManager.cardListRepository
         )
@@ -43,7 +42,6 @@ struct ContentView: View {
             deckListRepository: dataManager.deckListRepository
         )
         TabNavView(
-            homeView: homeView,
             cardsCollectionView: cardsCollectionView,
             deckListView: deckListView
         )        
