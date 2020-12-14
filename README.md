@@ -24,5 +24,34 @@ There is also five single-player campaigns that players can progress through, ea
 __Kards__ runs on iOS 14.0 and greater. It uses SwiftUI,  Combine and GraphQL extensively.
 
 
+## Screenshots
+
+### iPhone
+
+![Card list](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/iphone/card_list.png)
+
+![Card details](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/iphone/card_details.png)
+
+![Card filters](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/iphone/card_filters.png)
+
+![Deck list](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/iphone/deck_list.png)
+
+![Deck details](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/iphone/deck_details.png)
+
+![Deck filters](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/iphone/deck_filters.png)
+
+### iPad
+
+![Card list](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/ipad/card_list.png)
+
+![Card details](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/ipad/card_details.png)
+
+![Card filters](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/ipad/card_filters.png)
+
+![Deck list](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/ipad/deck_list.png)
+
+![Deck details](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/ipad/deck_details.png)
+
+![Deck filters](https://github.com/MatthiasLapierre/Kards-iOS/blob/main/Resources/readme_img/ipad/deck_filters.png)
 
 
