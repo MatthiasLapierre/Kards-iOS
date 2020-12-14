@@ -27,8 +27,8 @@
 // THE SOFTWARE.
 
 class DeckFilters {
-    var mainNation: Set<Nation> = []
-    var alliedNation: Set<Nation> = []
+    var mainNations: Set<Nation> = []
+    var alliedNations: Set<Nation> = []
     var query: String = ""
     var sortBy: DeckSortType = .updated
 }

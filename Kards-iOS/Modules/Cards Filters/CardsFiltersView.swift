@@ -28,11 +28,10 @@
 
 import SwiftUI
 
-struct DeckFiltersView: View {
+struct CardsFiltersView: View {
+    @ObservedObject var viewModel: CardsFiltersViewModel
     
-    @ObservedObject var viewModel: DeckFiltersViewModel
-    
-    init(viewModel: DeckFiltersViewModel) {
+    init(viewModel: CardsFiltersViewModel) {
         self.viewModel = viewModel
     }
     
@@ -43,58 +42,96 @@ struct DeckFiltersView: View {
     private var contentView: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 30) {
-                mainNationView
-                alliedNationView
+                nationView
+                kreditsView
+                typesView
+                rarityView
+                setView
                 searchView
-                sortBy
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
         }
     }
     
-    private var mainNationView: some View {
+    private var nationView: some View {
         nationSectionView(
-            String.deckFiltersMainNations,
-            data: viewModel.mainNations,
-            selection: viewModel.deckFilters.mainNations,
-            action: viewModel.pressMainNation
+            String.cardFiltersNations,
+            data: viewModel.nations,
+            selection: viewModel.cardFilters.nations,
+            action: viewModel.pressNation
         )
     }
     
-    private var alliedNationView: some View {
-        nationSectionView(
-            String.deckFiltersAlliedNations,
-            data: viewModel.alliedNations,
-            selection: viewModel.deckFilters.alliedNations,
-            action: viewModel.pressAlliedNation
-        )
-    }
-    
-    private var searchView: some View {
-        sectionView(String.deckFiltersName) {
-            MainTextField(
-                String.deckFiltersName,
-                text: $viewModel.deckFilters.query
-            )
+    private var kreditsView: some View {
+        sectionView(String.cardFiltersKredits) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: .kreditsBtnWidth))], spacing: 5) {
+                ForEach(0..<8) { kredits in
+                    KreditButtonView(kredits, callback: { [unowned viewModel] in
+                        viewModel.pressKredits(kredits)
+                    })
+                    .opacity(viewModel.cardFilters.kredits.isEmpty
+                                || viewModel.cardFilters.kredits.contains(kredits) ?
+                                .activeOpacity : .inactiveOpacity)
+                }
+            }
         }
     }
     
-    private var sortBy: some View {
-        sectionView(String.deckFiltersSortBy) {
+    private var typesView: some View {
+        sectionView(String.cardFiltersTypes) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: .cardTypeBtnWidth))], spacing: 5) {
+                ForEach(viewModel.types, id: \.rawValue) { [unowned viewModel] type in
+                    CardTypeView(type) {
+                        viewModel.pressCardType(type)
+                    }
+                    .opacity(viewModel.cardFilters.types.isEmpty
+                                || viewModel.cardFilters.types.contains(type) ?
+                                .activeOpacity : .inactiveOpacity)
+                }
+            }
+        }
+    }
+    
+    private var rarityView: some View {
+        sectionView(String.cardRarity) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: .cardTypeBtnWidth))], spacing: 5) {
+                ForEach(viewModel.rarityArray, id: \.rawValue) { rarity in
+                    CardRarityView(rarity) { [unowned viewModel] in
+                        viewModel.pressCardRarity(rarity)
+                    }
+                    .opacity(viewModel.cardFilters.rarity.isEmpty
+                                || viewModel.cardFilters.rarity.contains(rarity) ?
+                                .activeOpacity : .inactiveOpacity)
+                }
+            }
+        }
+    }
+    
+    private var setView: some View {
+        sectionView(String.cardSet) {
             HStack {
                 Spacer()
-                Picker(String.deckFiltersSortBy, selection: $viewModel.deckFilters.sortBy) {
-                    ForEach(DeckSortType.allCases, id: \.rawValue) { sortType in
-                        Text(sortType.localizedName)
+                Picker(String.cardFiltersSet, selection: $viewModel.cardFilters.set) {
+                    ForEach(CardSet.allCases, id: \.rawValue) { set in
+                        Text(set.localizedName)
                             .font(.uiButtonLabel)
                             .foregroundColor(.bodyText)
-                            .tag(sortType)
+                            .tag(set)
                     }
                 }
                 .frame(width: .filtersPickerWidth, height: .filtersPickerHeight)
                 Spacer()
             }
+        }
+    }
+    
+    private var searchView: some View {
+        sectionView(String.cardFiltersSearch) {
+            MainTextField(
+                String.deckFiltersName,
+                text: $viewModel.cardFilters.query
+            )
         }
     }
     
@@ -105,8 +142,7 @@ struct DeckFiltersView: View {
                     NationButtonView(nation: nation) {
                         action(nation)
                     }
-                    .opacity(selection.isEmpty || selection.contains(nation) ?
-                                .activeOpacity : .inactiveOpacity)
+                    .opacity(selection.isEmpty || selection.contains(nation) ? 1.0 : 0.3)
                 }
             }
         }
@@ -123,12 +159,8 @@ struct DeckFiltersView: View {
     
 }
 
-struct DeckFiltersView_Previews: PreviewProvider {
+struct CardsFiltersView_Previews: PreviewProvider {
     static var previews: some View {
-        DeckFiltersView(
-            viewModel: DeckFiltersViewModel(
-                filters: DataManager.current.filtersManager.deckFilters
-            )
-        )
+        CardsFiltersView(viewModel: CardsFiltersViewModel(filters: DataManager.current.filtersManager.cardFilters))
     }
 }

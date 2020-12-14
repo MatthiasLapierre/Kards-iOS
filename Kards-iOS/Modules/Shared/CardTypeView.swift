@@ -28,39 +28,43 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {        
+struct CardTypeView: View {
+    private struct SizeKey: PreferenceKey {
+      static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
+        value = value ?? nextValue()
+      }
+    }
     
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
+    @State private var height: CGFloat?
+    private let cardType: CardType
+    private let callback: () -> Void
     
-    init(cardListRepository: CardListRepository) {
-        self.cardListRepository = cardListRepository
+    init(_ cardType: CardType, callback: @escaping () -> Void) {
+        self.cardType = cardType
+        self.callback = callback
     }
     
     var body: some View {
-        CardListView(cardListRepository: cardListRepository)
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: Button(
-                    String.filters,
-                    action: {
-                        self.showFilters = true
+        Button(action: callback) {
+            cardType.image
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity, minHeight: height)
+                .background(
+                    GeometryReader { proxy in
+                        Color.clear.preference(key: SizeKey.self, value: proxy.size)
                     }
                 )
-                .font(.uiButtonLabel)
-                .foregroundColor(.titleText)
-                .fullScreenCover(isPresented: $showFilters, content: {
-                    ClosableView(dismiss: {
-                        cardListRepository.reload()
-                    }) {
-                        CardsFiltersView(
-                            viewModel: CardsFiltersViewModel(filters: DataManager.current.filtersManager.cardFilters)
-                        )
-                    }
-                })
-            )
+        }
+        .onPreferenceChange(SizeKey.self) { size in
+          height = size?.width
+        }
+    }
+}
+
+struct CardTypeView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardTypeView(.Artillery) {}
+            .previewLayout(.fixed(width: 60, height: 60))
     }
 }

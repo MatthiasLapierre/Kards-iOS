@@ -102,7 +102,7 @@ struct DeckItemView: View {
     private var titleView: some View {
         Text(deckDisplayable.name.uppercased())
             .lineLimit(1)
-            .font(.uiTitle1)
+            .font(.uiTitle3)
             .foregroundColor(.titleText)
     }
     
@@ -119,26 +119,26 @@ struct DeckItemView: View {
     
     private var mainNationView: some View {
         Text("\(deckDisplayable.mainNation.uppercased()) (\(deckDisplayable.mainNationCards))")
-            .font(.uiTitle4)
+            .font(.uiLabel)
             .foregroundColor(.bodyText)
     }
     
     private var nationSeparatorView: some View {
         Text("/")
-            .font(.uiTitle4)
+            .font(.uiLabel)
             .foregroundColor(.bodyText)
             .padding(.horizontal, 8)
     }
     
     private var secondNationView: some View {
         Text("\(deckDisplayable.secondNation.uppercased()) (\(deckDisplayable.secondNationCards))")
-            .font(.uiTitle4)
+            .font(.uiLabel)
             .foregroundColor(.bodyText)
     }
     
     private var scoreView: some View {
         Text("\(deckDisplayable.score)")
-            .font(.uiTitle4)
+            .font(.uiTitle5)
             .foregroundColor(deckDisplayable.score.starts(with: "+") ?
                                 Color.green : Color.red)
     }

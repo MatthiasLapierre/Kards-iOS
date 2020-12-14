@@ -30,9 +30,29 @@ import Foundation
 
 class CardListService: Service {
     
-    func cards(page: Int = 1, completion: @escaping (_ response: Result<GetCardsQuery.Data.Card, KardsAPIError>) -> Void) {
+    func cards(
+        page: Int = 1,
+        nations: Set<Nation>? = nil,
+        kredits: Set<Int>? = nil,
+        types: Set<CardType>? = nil,
+        rarity: Set<CardRarity>? = nil,
+        set: CardSet? = nil,
+        query: String? = nil,
+        completion: @escaping (_ response: Result<GetCardsQuery.Data.Card, KardsAPIError>) -> Void
+    ) {
         let offset = (page - 1) * Int.pageLimit
-        self.networkClient.graphQLClient.fetch(query: GetCardsQuery(language: "en", offset: offset, showSpawnables: true)) { result in
+        let query = GetCardsQuery(
+            language: "en",
+            offset: offset,
+            nationIds: normalize(nations: nations),
+            kredits: normalize(kredits: kredits),
+            q: query,
+            type: normalize(types: types),
+            rarity: normalize(rarity: rarity),
+            set: normalize(set: set),
+            showSpawnables: true
+        )
+        self.networkClient.graphQLClient.fetch(query: query) { result in
             switch result {
             case .failure(let error):
                 print("Something bad happened \(error)")
@@ -46,6 +66,46 @@ class CardListService: Service {
                 completion(.success(cards))
             }
         }
+    }
+    
+    private func normalize(nations: Set<Nation>?) -> [Int]? {
+        var nationIds: [Int]? = nil
+        if let nations = nations, nations.count > 0 {
+            nationIds = nations.map { $0.rawValue }
+        }
+        return nationIds
+    }
+    
+    private func normalize(kredits: Set<Int>?) -> [Int]? {
+        var result: [Int]? = nil
+        if let kredits = kredits, kredits.count > 0 {
+            result = Array(kredits)
+        }
+        return result
+    }
+    
+    private func normalize(types: Set<CardType>?) -> [String]? {
+        var result: [String]? = nil
+        if let types = types, types.count > 0 {
+            result = types.map { $0.rawValue }
+        }
+        return result
+    }
+    
+    private func normalize(set: CardSet?) -> [String]? {
+        var result: [String]? = nil
+        if let set = set, set != CardSet.All {
+            result = [set.rawValue]
+        }
+        return result
+    }
+    
+    private func normalize(rarity: Set<CardRarity>?) -> [String]? {
+        var result: [String]? = nil
+        if let rarity = rarity, rarity.count > 0 {
+            result = rarity.map { $0.rawValue }
+        }
+        return result
     }
     
 }

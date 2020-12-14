@@ -31,6 +31,12 @@
 		398E749525837B8E00D9B058 /* FiltersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E749425837B8E00D9B058 /* FiltersManager.swift */; };
 		398E74992583981A00D9B058 /* DeckSortType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E74982583981A00D9B058 /* DeckSortType+Extensions.swift */; };
 		398E74A02583B28500D9B058 /* MainTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E749F2583B28500D9B058 /* MainTextField.swift */; };
+		398E74A32583B43A00D9B058 /* CardFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E74A22583B43A00D9B058 /* CardFilters.swift */; };
+		398E74A62583B54A00D9B058 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E74A52583B54A00D9B058 /* CardType.swift */; };
+		398E74A92583B61B00D9B058 /* CardRarity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E74A82583B61B00D9B058 /* CardRarity.swift */; };
+		398E74AC2583B68100D9B058 /* CardSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E74AB2583B68100D9B058 /* CardSet.swift */; };
+		398E74B22583C27000D9B058 /* CardsFiltersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E74B12583C27000D9B058 /* CardsFiltersViewModel.swift */; };
+		398E74B72583C31900D9B058 /* CardsFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398E74B62583C31900D9B058 /* CardsFiltersView.swift */; };
 		3995600D25793821008D9C32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995600C25793821008D9C32 /* AppDelegate.swift */; };
 		3995600F25793821008D9C32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995600E25793821008D9C32 /* SceneDelegate.swift */; };
 		3995601125793821008D9C32 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995601025793821008D9C32 /* ContentView.swift */; };
@@ -56,6 +62,9 @@
 		39F5C48F257E676D0063ED76 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 39F5C48E257E676D0063ED76 /* Apollo */; };
 		39F5C493257E6A360063ED76 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C492257E6A360063ED76 /* Service.swift */; };
 		39F5C496257E6AB30063ED76 /* CardListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F5C495257E6AB30063ED76 /* CardListService.swift */; };
+		39FD53AF2587533400DBC9E4 /* KreditButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD53AE2587533400DBC9E4 /* KreditButtonView.swift */; };
+		39FD53B22587641700DBC9E4 /* CardTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD53B12587641700DBC9E4 /* CardTypeView.swift */; };
+		39FD53B625876EE400DBC9E4 /* CardRarityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD53B525876EE400DBC9E4 /* CardRarityView.swift */; };
 		39FEB0CE257A2A3600204332 /* CardsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0CD257A2A3600204332 /* CardsCollectionView.swift */; };
 		39FEB0D9257A2CCE00204332 /* TabNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0D8257A2CCE00204332 /* TabNavView.swift */; };
 		39FEB0DD257A2DC500204332 /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FEB0DC257A2DC500204332 /* TabViewModel.swift */; };
@@ -100,6 +109,12 @@
 		398E749425837B8E00D9B058 /* FiltersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersManager.swift; sourceTree = "<group>"; };
 		398E74982583981A00D9B058 /* DeckSortType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeckSortType+Extensions.swift"; sourceTree = "<group>"; };
 		398E749F2583B28500D9B058 /* MainTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTextField.swift; sourceTree = "<group>"; };
+		398E74A22583B43A00D9B058 /* CardFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFilters.swift; sourceTree = "<group>"; };
+		398E74A52583B54A00D9B058 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
+		398E74A82583B61B00D9B058 /* CardRarity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRarity.swift; sourceTree = "<group>"; };
+		398E74AB2583B68100D9B058 /* CardSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSet.swift; sourceTree = "<group>"; };
+		398E74B12583C27000D9B058 /* CardsFiltersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsFiltersViewModel.swift; sourceTree = "<group>"; };
+		398E74B62583C31900D9B058 /* CardsFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsFiltersView.swift; sourceTree = "<group>"; };
 		3995600925793821008D9C32 /* Kards-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kards-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3995600C25793821008D9C32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3995600E25793821008D9C32 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +141,9 @@
 		39F5C489257E65A40063ED76 /* KardsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KardsAPI.swift; sourceTree = "<group>"; };
 		39F5C492257E6A360063ED76 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		39F5C495257E6AB30063ED76 /* CardListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListService.swift; sourceTree = "<group>"; };
+		39FD53AE2587533400DBC9E4 /* KreditButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KreditButtonView.swift; sourceTree = "<group>"; };
+		39FD53B12587641700DBC9E4 /* CardTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeView.swift; sourceTree = "<group>"; };
+		39FD53B525876EE400DBC9E4 /* CardRarityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRarityView.swift; sourceTree = "<group>"; };
 		39FEB0CD257A2A3600204332 /* CardsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCollectionView.swift; sourceTree = "<group>"; };
 		39FEB0D8257A2CCE00204332 /* TabNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavView.swift; sourceTree = "<group>"; };
 		39FEB0DC257A2DC500204332 /* TabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewModel.swift; sourceTree = "<group>"; };
@@ -186,8 +204,18 @@
 			children = (
 				398E749125837ABA00D9B058 /* DeckFilters.swift */,
 				398E749425837B8E00D9B058 /* FiltersManager.swift */,
+				398E74A22583B43A00D9B058 /* CardFilters.swift */,
 			);
 			path = Filters;
+			sourceTree = "<group>";
+		};
+		398E74B02583C25700D9B058 /* Cards Filters */ = {
+			isa = PBXGroup;
+			children = (
+				398E74B62583C31900D9B058 /* CardsFiltersView.swift */,
+				398E74B12583C27000D9B058 /* CardsFiltersViewModel.swift */,
+			);
+			path = "Cards Filters";
 			sourceTree = "<group>";
 		};
 		3995600025793821008D9C32 = {
@@ -245,8 +273,11 @@
 		39A96498258259DD0023E5A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				398E74A82583B61B00D9B058 /* CardRarity.swift */,
+				398E74AB2583B68100D9B058 /* CardSet.swift */,
 				39A96499258259EE0023E5A4 /* Nation.swift */,
 				398E74982583981A00D9B058 /* DeckSortType+Extensions.swift */,
+				398E74A52583B54A00D9B058 /* CardType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,6 +305,7 @@
 			children = (
 				39FEB0B5257A20ED00204332 /* App Root */,
 				39FEB0C1257A29B200204332 /* Cards Collection */,
+				398E74B02583C25700D9B058 /* Cards Filters */,
 				39A9647D258217460023E5A4 /* Decks */,
 				398E748A2583713000D9B058 /* Decks Filters */,
 				3995600E25793821008D9C32 /* SceneDelegate.swift */,
@@ -405,6 +437,9 @@
 				398E7480258366D900D9B058 /* ClosableView.swift */,
 				398E748425836A2600D9B058 /* NationButtonView.swift */,
 				398E749F2583B28500D9B058 /* MainTextField.swift */,
+				39FD53AE2587533400DBC9E4 /* KreditButtonView.swift */,
+				39FD53B12587641700DBC9E4 /* CardTypeView.swift */,
+				39FD53B525876EE400DBC9E4 /* CardRarityView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -581,11 +616,14 @@
 				39A9648625821D0E0023E5A4 /* DeckDisplayable.swift in Sources */,
 				398E749225837ABA00D9B058 /* DeckFilters.swift in Sources */,
 				39FEB107257A3FB900204332 /* MessageBarView.swift in Sources */,
+				398E74A32583B43A00D9B058 /* CardFilters.swift in Sources */,
 				39BBCC0C2581044400244A2F /* BackgroundView.swift in Sources */,
 				39BBCC13258111AB00244A2F /* CloseView.swift in Sources */,
+				398E74A92583B61B00D9B058 /* CardRarity.swift in Sources */,
 				3943DD5C257FB77F00A5737D /* ReloadView.swift in Sources */,
 				398E74A02583B28500D9B058 /* MainTextField.swift in Sources */,
 				3943DD23257F698B00A5737D /* CardViewModel.swift in Sources */,
+				398E74A62583B54A00D9B058 /* CardType.swift in Sources */,
 				398E749525837B8E00D9B058 /* FiltersManager.swift in Sources */,
 				39FEB0D9257A2CCE00204332 /* TabNavView.swift in Sources */,
 				39F5C496257E6AB30063ED76 /* CardListService.swift in Sources */,
@@ -597,6 +635,8 @@
 				39FEB0DD257A2DC500204332 /* TabViewModel.swift in Sources */,
 				3943DD58257F8FD800A5737D /* NoResultsView.swift in Sources */,
 				39FEB115257A47AD00204332 /* UIFont+Extensions.swift in Sources */,
+				39FD53B22587641700DBC9E4 /* CardTypeView.swift in Sources */,
+				39FD53AF2587533400DBC9E4 /* KreditButtonView.swift in Sources */,
 				39FEB0EC257A3A4500204332 /* Color+Extensions.swift in Sources */,
 				39FEB118257A48E800204332 /* UIColor+Extensions.swift in Sources */,
 				3995600F25793821008D9C32 /* SceneDelegate.swift in Sources */,
@@ -607,18 +647,22 @@
 				398E748C2583714900D9B058 /* DeckFiltersViewModel.swift in Sources */,
 				39A964962582280C0023E5A4 /* DeckItemView.swift in Sources */,
 				3943DD69257FCBE300A5737D /* KardsEnvironment.swift in Sources */,
+				398E74AC2583B68100D9B058 /* CardSet.swift in Sources */,
 				39BBCC082580D5CF00244A2F /* CardImageView.swift in Sources */,
 				3943DD34257F7C9E00A5737D /* CardListRepository.swift in Sources */,
+				39FD53B625876EE400DBC9E4 /* CardRarityView.swift in Sources */,
 				3943DD55257F8F0700A5737D /* ActivityIndicator.swift in Sources */,
 				39A9649A258259EE0023E5A4 /* Nation.swift in Sources */,
 				3995601125793821008D9C32 /* ContentView.swift in Sources */,
 				3943DD62257FC37300A5737D /* DataManager.swift in Sources */,
+				398E74B22583C27000D9B058 /* CardsFiltersViewModel.swift in Sources */,
 				398E748525836A2600D9B058 /* NationButtonView.swift in Sources */,
 				3943DD66257FC7A300A5737D /* GraphQLAPI.swift in Sources */,
 				3943DD52257F8EC100A5737D /* LoadingView.swift in Sources */,
 				39A964A1258267820023E5A4 /* DeckDetailsView.swift in Sources */,
 				39BBCC022580D0E400244A2F /* CardDetailsView.swift in Sources */,
 				39FEB10F257A42C700204332 /* PortraitHostingController.swift in Sources */,
+				398E74B72583C31900D9B058 /* CardsFiltersView.swift in Sources */,
 				3943DD5F257FB9E900A5737D /* MainButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

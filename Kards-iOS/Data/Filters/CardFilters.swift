@@ -26,41 +26,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
-
-struct CardsCollectionView: View {        
-    
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
-    
-    init(cardListRepository: CardListRepository) {
-        self.cardListRepository = cardListRepository
-    }
-    
-    var body: some View {
-        CardListView(cardListRepository: cardListRepository)
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: Button(
-                    String.filters,
-                    action: {
-                        self.showFilters = true
-                    }
-                )
-                .font(.uiButtonLabel)
-                .foregroundColor(.titleText)
-                .fullScreenCover(isPresented: $showFilters, content: {
-                    ClosableView(dismiss: {
-                        cardListRepository.reload()
-                    }) {
-                        CardsFiltersView(
-                            viewModel: CardsFiltersViewModel(filters: DataManager.current.filtersManager.cardFilters)
-                        )
-                    }
-                })
-            )
-    }
+class CardFilters {
+    var nations: Set<Nation> = []
+    var query: String = ""
+    var kredits: Set<Int> = []
+    var types: Set<CardType> = []
+    var rarity: Set<CardRarity> = []
+    var set: CardSet = .All
 }

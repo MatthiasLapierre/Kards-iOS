@@ -31,4 +31,5 @@ import Combine
 
 final class FiltersManager: ObservableObject {
     @Published var deckFilters: DeckFilters = DeckFilters()
+    @Published var cardFilters: CardFilters = CardFilters()
 }

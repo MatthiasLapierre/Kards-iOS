@@ -26,41 +26,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
-
-struct CardsCollectionView: View {        
+enum CardSet: String, CaseIterable {
+    case All = ""
+    case Base = "Base"
+    case Allegiance = "Allegiance"
+    case TheatersOfWar = "TheatersOfWar"
+    case Breakthrough = "Breakthrough"
     
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
-    
-    init(cardListRepository: CardListRepository) {
-        self.cardListRepository = cardListRepository
-    }
-    
-    var body: some View {
-        CardListView(cardListRepository: cardListRepository)
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: Button(
-                    String.filters,
-                    action: {
-                        self.showFilters = true
-                    }
-                )
-                .font(.uiButtonLabel)
-                .foregroundColor(.titleText)
-                .fullScreenCover(isPresented: $showFilters, content: {
-                    ClosableView(dismiss: {
-                        cardListRepository.reload()
-                    }) {
-                        CardsFiltersView(
-                            viewModel: CardsFiltersViewModel(filters: DataManager.current.filtersManager.cardFilters)
-                        )
-                    }
-                })
-            )
+    var localizedName: String {
+        switch self {
+        case .All:
+            return String.cardSetAll
+        case .Base:
+            return String.cardSetBase
+        case .Allegiance:
+            return String.cardSAllegiance
+        case .TheatersOfWar:
+            return String.cardSetTheatersOfWar
+        case .Breakthrough:
+            return String.cardSetBreakthrough
+        }
     }
 }

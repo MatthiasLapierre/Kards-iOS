@@ -75,8 +75,8 @@ class DeckListRepository: ObservableObject, DeckPaginatable {
         
         service.decks(
             page: currentPage,
-            mainNations: filters.mainNation,
-            alliedNations: filters.alliedNation,
+            mainNations: filters.mainNations,
+            alliedNations: filters.alliedNations,
             query: filters.query,
             sortBy: filters.sortBy
         ) { [weak self] result in
@@ -90,7 +90,7 @@ class DeckListRepository: ObservableObject, DeckPaginatable {
                         return nil
                     }
                 } ?? []
-                print("Gotten \(viewModels.count) cards")
+                print("Gotten \(viewModels.count) decks")
                 self.decks += viewModels
                 self.hasNextPage = decks.pageInfo.hasNextPage
                 self.state = DataState.hasData
@@ -98,7 +98,7 @@ class DeckListRepository: ObservableObject, DeckPaginatable {
                 self.currentPage -= 1
                 self.state = DataState.failed
                 self.objectWillChange.send()
-                print("Failed to load more cards : \(error)")
+                print("Failed to load more decks : \(error)")
             }
         }
     }
@@ -117,8 +117,8 @@ class DeckListRepository: ObservableObject, DeckPaginatable {
         
         service.decks(
             page: currentPage,
-            mainNations: filters.mainNation,
-            alliedNations: filters.alliedNation,
+            mainNations: filters.mainNations,
+            alliedNations: filters.alliedNations,
             query: filters.query,
             sortBy: filters.sortBy
         ) { [weak self] result in

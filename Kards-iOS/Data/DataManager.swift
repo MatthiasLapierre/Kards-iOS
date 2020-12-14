@@ -45,7 +45,7 @@ final class DataManager: ObservableObject {
         
         self.filtersManager = FiltersManager()
         
-        self.cardListRepository = CardListRepository(service: cardListService)
+        self.cardListRepository = CardListRepository(service: cardListService, filters: filtersManager.cardFilters)
         self.deckListRepository = DeckListRepository(service: deckListService, filters: filtersManager.deckFilters)
     }
 }

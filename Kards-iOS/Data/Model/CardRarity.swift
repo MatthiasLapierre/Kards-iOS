@@ -28,39 +28,13 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {        
+enum CardRarity: String {
+    case Elite = "Elite"
+    case Special = "Special"
+    case Limited = "Limited"
+    case Standard = "Standard"
     
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
-    
-    init(cardListRepository: CardListRepository) {
-        self.cardListRepository = cardListRepository
-    }
-    
-    var body: some View {
-        CardListView(cardListRepository: cardListRepository)
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: Button(
-                    String.filters,
-                    action: {
-                        self.showFilters = true
-                    }
-                )
-                .font(.uiButtonLabel)
-                .foregroundColor(.titleText)
-                .fullScreenCover(isPresented: $showFilters, content: {
-                    ClosableView(dismiss: {
-                        cardListRepository.reload()
-                    }) {
-                        CardsFiltersView(
-                            viewModel: CardsFiltersViewModel(filters: DataManager.current.filtersManager.cardFilters)
-                        )
-                    }
-                })
-            )
+    var image: Image {
+        Image(self.rawValue.lowercased())
     }
 }

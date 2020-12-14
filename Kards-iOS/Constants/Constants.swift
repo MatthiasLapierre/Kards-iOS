@@ -32,9 +32,19 @@ extension Int {
     static let pageLimit: Int = 20
 }
 
+extension Double {
+    static let inactiveOpacity: Double = 0.2
+    static let activeOpacity: Double = 1.0
+}
+
 extension CGFloat {
     static let cardWidth: CGFloat = 120
     static let nationBtnWidth: CGFloat = 120
+    static let kreditsBtnWidth: CGFloat = 60
+    static let cardTypeBtnWidth: CGFloat = 55
+    static let cardRarityBtnHeight: CGFloat = 35
+    static let filtersPickerWidth: CGFloat = 200
+    static let filtersPickerHeight: CGFloat = 100
 }
 
 extension TimeInterval {
@@ -58,6 +68,14 @@ extension String {
     static let cardType = "Type"
     static let cardKredits = "Kredits"
     static let cardSet = "Set"
+    
+    //MARK: Card filters
+    static let cardFiltersNations = "Nations"
+    static let cardFiltersKredits = "Kredits"
+    static let cardFiltersTypes = "Types"
+    static let cardFiltersRarity = "Rarity"
+    static let cardFiltersSet = "Set"
+    static let cardFiltersSearch = "Search"
     
     //MARK: Deck details
     static let deckOwner = "Owner"
@@ -92,4 +110,11 @@ extension String {
     static let sortByWeek = "Top this week"
     static let sortByMonth = "Top this month"
     static let sortByDate = "Latest deck"
+    
+    //MARK: Card Set
+    static let cardSetAll = "All sets"
+    static let cardSetBase = "Base"
+    static let cardSAllegiance = "Allegiance"
+    static let cardSetTheatersOfWar = "Theaters of war"
+    static let cardSetBreakthrough = "Breakthrough"
 }

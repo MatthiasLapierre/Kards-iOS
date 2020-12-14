@@ -31,6 +31,7 @@ import Combine
 class CardListRepository: ObservableObject, CardPaginatable {
     
     let service: CardListService
+    let filters: CardFilters
     
     private (set) var currentPage: Int = 1
     private (set) var hasNextPage: Bool = false
@@ -51,8 +52,9 @@ class CardListRepository: ObservableObject, CardPaginatable {
         return state == .loading || state == .loadingAdditional
     }
     
-    init(service: CardListService) {
+    init(service: CardListService, filters: CardFilters) {
         self.service = service
+        self.filters = filters
     }
     
     func loadMore() {
@@ -71,7 +73,15 @@ class CardListRepository: ObservableObject, CardPaginatable {
         
         print("Current page: \(currentPage)")
         
-        service.cards(page: currentPage) { [weak self] result in
+        service.cards(
+            page: currentPage,
+            nations: filters.nations,
+            kredits: filters.kredits,
+            types: filters.types,
+            rarity: filters.rarity,
+            set: filters.set,
+            query: filters.query
+        ) { [weak self] result in
             guard let `self` = self else { return }
             switch result {
             case .success(let cards):
@@ -107,7 +117,15 @@ class CardListRepository: ObservableObject, CardPaginatable {
         // Reset current page to 1
         currentPage = startingPage
         
-        service.cards { [weak self] result in
+        service.cards(
+            page: currentPage,
+            nations: filters.nations,
+            kredits: filters.kredits,
+            types: filters.types,
+            rarity: filters.rarity,
+            set: filters.set,
+            query: filters.query
+        ) { [weak self] result in
             guard let `self` = self else { return }            
             switch result {
             case .success(let cards):

@@ -28,39 +28,30 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {        
+struct CardRarityView: View {
+    private let cardRarity: CardRarity
+    private let callback: () -> Void
     
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
-    
-    init(cardListRepository: CardListRepository) {
-        self.cardListRepository = cardListRepository
+    init(_ cardRarity: CardRarity, callback: @escaping () -> Void) {
+        self.cardRarity = cardRarity
+        self.callback = callback
     }
     
     var body: some View {
-        CardListView(cardListRepository: cardListRepository)
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: Button(
-                    String.filters,
-                    action: {
-                        self.showFilters = true
-                    }
-                )
-                .font(.uiButtonLabel)
-                .foregroundColor(.titleText)
-                .fullScreenCover(isPresented: $showFilters, content: {
-                    ClosableView(dismiss: {
-                        cardListRepository.reload()
-                    }) {
-                        CardsFiltersView(
-                            viewModel: CardsFiltersViewModel(filters: DataManager.current.filtersManager.cardFilters)
-                        )
-                    }
-                })
-            )
+        Button(action: callback) {
+            cardRarity.image
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(.white)
+                .frame(height: .cardRarityBtnHeight)
+        }
+    }
+}
+
+struct CardRarityView_Previews: PreviewProvider {
+    static var previews: some View {
+        CardRarityView(.Elite) {}
+            .previewLayout(.sizeThatFits)
     }
 }

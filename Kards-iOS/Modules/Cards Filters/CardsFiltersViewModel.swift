@@ -29,21 +29,11 @@
 import Foundation
 import Combine
 
-class DeckFiltersViewModel: ObservableObject {
+class CardsFiltersViewModel: ObservableObject {
     
-    @Published var deckFilters: DeckFilters
+    @Published var cardFilters: CardFilters
     
-    var mainNations: [Nation] {
-        return [
-            Nation.SovietUnion,
-            Nation.UnitedState,
-            Nation.Japan,
-            Nation.Germany,
-            Nation.Britain
-        ]
-    }
-    
-    var alliedNations: [Nation] {
+    var nations: [Nation] {
         return [
             Nation.SovietUnion,
             Nation.UnitedState,
@@ -55,24 +45,73 @@ class DeckFiltersViewModel: ObservableObject {
         ]
     }
     
-    init(filters: DeckFilters) {
-        self.deckFilters = filters        
+    var types: [CardType] {
+        return [
+            CardType.Infantry,
+            CardType.Artillery,
+            CardType.Tank,
+            CardType.Bomber,
+            CardType.Fighter,
+            CardType.Order,
+            CardType.CounterMeasure
+        ]
     }
     
-    func pressMainNation(nation: Nation) {
-        if deckFilters.mainNations.contains(nation) {
-            deckFilters.mainNations.remove(nation)
+    var rarityArray: [CardRarity] {
+        return [
+            CardRarity.Elite,
+            CardRarity.Special,
+            CardRarity.Limited,
+            CardRarity.Standard
+        ]
+    }
+    
+    var sets: [CardSet] {
+        return [
+            CardSet.All,
+            CardSet.Base,
+            CardSet.Allegiance,
+            CardSet.TheatersOfWar,
+            CardSet.Breakthrough
+        ]
+    }
+    
+    init(filters: CardFilters) {
+        self.cardFilters = filters
+    }
+    
+    func pressNation(_ nation: Nation) {
+        if cardFilters.nations.contains(nation) {
+            cardFilters.nations.remove(nation)
         } else {
-            deckFilters.mainNations.insert(nation)
+            cardFilters.nations.insert(nation)
         }
         objectWillChange.send()
     }
     
-    func pressAlliedNation(nation: Nation) {
-        if deckFilters.alliedNations.contains(nation) {
-            deckFilters.alliedNations.remove(nation)
+    func pressKredits(_ kredits: Int) {
+        if cardFilters.kredits.contains(kredits) {
+            cardFilters.kredits.remove(kredits)
         } else {
-            deckFilters.alliedNations.insert(nation)
+            cardFilters.kredits.insert(kredits)
+        }
+        objectWillChange.send()
+    }
+    
+    func pressCardType(_ type: CardType) {
+        if cardFilters.types.contains(type) {
+            cardFilters.types.remove(type)
+        } else {
+            cardFilters.types.insert(type)
+        }
+        objectWillChange.send()
+    }
+    
+    func pressCardRarity(_ rarity: CardRarity) {
+        if cardFilters.rarity.contains(rarity) {
+            cardFilters.rarity.remove(rarity)
+        } else {
+            cardFilters.rarity.insert(rarity)
         }
         objectWillChange.send()
     }
