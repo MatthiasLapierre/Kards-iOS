@@ -27,9 +27,28 @@
 // THE SOFTWARE.
 
 enum DataState {
-  case initial
-  case loading
-  case loadingAdditional
-  case hasData
-  case failed
+    case initial
+    case loading
+    case loadingAdditional
+    case hasData
+    case failed(KardsAPIError)
+}
+
+extension DataState: Equatable {
+    static func ==(lhs: DataState, rhs: DataState) -> Bool {
+        switch (lhs, rhs) {
+        case (let .failed(lhsError), let .failed(rhsError)):
+            return lhsError == rhsError
+        case (.hasData, .hasData):
+            return true
+        case (.loadingAdditional, .loadingAdditional):
+            return true
+        case (.loading, .loading):
+            return true
+        case (.initial, .initial):
+            return true
+        default:
+            return false
+        }
+    }
 }

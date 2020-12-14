@@ -36,12 +36,27 @@ enum KardsAPIError: Error {
     
     var localizedDescription: String {
         switch self {
-        case .requestFailed(let error, let statusCode):
-          return "KardsAPIError::RequestFailed[Status: \(statusCode) | Error: \(error?.localizedDescription ?? "UNKNOWN")]"
+        case .requestFailed(_, let statusCode):
+          return String(format: String.requestFailed, statusCode)
         case .processingError(let error):
-          return "KardsAPIError::ProcessingError[Error: \(error?.localizedDescription ?? "UNKNOWN")]"
+            return error?.localizedDescription ?? String.processingError
         case .noData:
-          return "KardsAPIError::NoData"
+            return String.noData
+        }
+    }
+}
+
+extension KardsAPIError: Equatable {
+    static func == (lhs: KardsAPIError, rhs: KardsAPIError) -> Bool {
+        switch (lhs, rhs) {
+        case (.requestFailed, .requestFailed):
+            return true
+        case (.processingError, .processingError):
+            return true
+        case (.noData, .noData):
+            return true
+        default:
+            return false
         }
     }
 }

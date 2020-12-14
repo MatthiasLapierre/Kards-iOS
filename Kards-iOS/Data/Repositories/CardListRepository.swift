@@ -101,7 +101,7 @@ class CardListRepository: ObservableObject, CardPaginatable {
                 self.state = DataState.hasData
             case .failure(let error):
                 self.currentPage -= 1
-                self.state = DataState.failed
+                self.state = DataState.failed(error)
                 print("Failed to load more cards : \(error)")
             }
         }
@@ -140,7 +140,7 @@ class CardListRepository: ObservableObject, CardPaginatable {
                 self.hasNextPage = cards.pageInfo.hasNextPage
                 self.state = DataState.hasData
             case .failure(let error):
-                self.state = DataState.failed
+                self.state = DataState.failed(error)
                 print("Failed to reload cards : \(error)")
             }
         }

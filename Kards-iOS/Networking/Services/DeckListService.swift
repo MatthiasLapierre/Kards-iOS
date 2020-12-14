@@ -56,7 +56,7 @@ class DeckListService: Service {
                 completion(.failure(.processingError(error)))
             case .success(let graphQLResult):
                 guard let cards = graphQLResult.data?.decks else {
-                    print("No card")
+                    print("No deck")
                     completion(.failure(.noData))
                     return
                 }

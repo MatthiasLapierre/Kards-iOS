@@ -64,9 +64,12 @@ struct DeckListView: View {
             .onAppear {
                 reloadIfRequired()
             }
-            .onReceive(repository.objectWillChange) {
+            .onChange(of: repository.state, perform: { state in
+                if case DataState.failed(let error) = state {
+                    MessageBus.current.post(message: Message(level: .error, message: error.localizedDescription))
+                }
                 isLoading = repository.isLoading
-            }
+            })
     }
 }
 

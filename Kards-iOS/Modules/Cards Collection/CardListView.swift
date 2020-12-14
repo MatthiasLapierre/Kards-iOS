@@ -49,9 +49,12 @@ struct CardListView: View {
             .onAppear {
                 reloadIfRequired()
             }
-            .onReceive(self.repository.objectWillChange) {
-                isLoading = self.repository.isLoading
-            }
+            .onChange(of: repository.state, perform: { state in
+                if case DataState.failed(let error) = state {
+                    MessageBus.current.post(message: Message(level: .error, message: error.localizedDescription))
+                }
+                isLoading = repository.isLoading
+            })            
     }
     
 }

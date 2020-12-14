@@ -121,4 +121,9 @@ extension String {
     static let cardSAllegiance = "Allegiance"
     static let cardSetTheatersOfWar = "Theaters of war"
     static let cardSetBreakthrough = "Breakthrough"
+    
+    //MARK: Error
+    static let requestFailed = "An error has occured (code: %@)"
+    static let processingError = "Failed to parse data"
+    static let noData = "No result"
 }

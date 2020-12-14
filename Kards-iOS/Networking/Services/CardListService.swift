@@ -30,7 +30,7 @@ import Foundation
 
 class CardListService: Service {
     
-    // MARK:- Internal
+    // MARK: - Internal
     func cards(
         page: Int = 1,
         nations: Set<Nation>? = nil,
@@ -68,6 +68,8 @@ class CardListService: Service {
             }
         }
     }
+    
+    // MARK: - Private
     
     private func normalize(nations: Set<Nation>?) -> [Int]? {
         var nationIds: [Int]? = nil
