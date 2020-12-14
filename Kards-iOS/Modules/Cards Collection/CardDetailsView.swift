@@ -30,7 +30,7 @@ import SwiftUI
 
 struct CardDetailsView: View {
     
-    private var cardDisplayable: CardDisplayable
+    private let cardDisplayable: CardDisplayable
     
     init(card: CardDisplayable) {
         self.cardDisplayable = card
@@ -39,8 +39,11 @@ struct CardDetailsView: View {
     var body: some View {
         contentView
     }
-    
-    private var contentView: some View {
+}
+
+// MARK: - Private
+private extension CardDetailsView {
+    var contentView: some View {
         ScrollView {
             VStack {
                 subTitleView
@@ -56,33 +59,33 @@ struct CardDetailsView: View {
         }
     }
     
-    private var imageView: some View {
+    var imageView: some View {
         CardImageView(cardDisplayable.imageUrl)
-            .frame(width: 200)
+            .frame(width: .cardWidth)
     }
     
-    private var titleView: some View {
+    var titleView: some View {
         Text(cardDisplayable.title.uppercased())
             .multilineTextAlignment(.center)
             .font(.uiLargeTitle)
             .foregroundColor(.titleText)
     }
     
-    private var subTitleView: some View {
+    var subTitleView: some View {
         Text(cardDisplayable.subTitle.uppercased())
             .multilineTextAlignment(.center)
             .font(.uiTitle3)
             .foregroundColor(.titleText)
     }
     
-    private var textView: some View {
+    var textView: some View {
         Text(cardDisplayable.text)
             .multilineTextAlignment(.center)
             .font(.uiTitle3)
             .foregroundColor(.bodyText)
     }
     
-    private var featuresView: some View {
+    var featuresView: some View {
         VStack(alignment: .leading, spacing: 10) {
             ForEach(0..<cardDisplayable.features.count) {
                 featureRow(feature: cardDisplayable.features[$0])
@@ -90,7 +93,7 @@ struct CardDetailsView: View {
         }
     }
     
-    private func featureRow(feature: Feature) -> some View {
+    func featureRow(feature: Feature) -> some View {
         HStack {
             Text("\(feature.title):")
                 .font(.uiTitle5)

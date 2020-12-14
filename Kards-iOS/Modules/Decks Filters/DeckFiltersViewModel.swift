@@ -31,6 +31,8 @@ import Combine
 
 class DeckFiltersViewModel: ObservableObject {
     
+    // MARK: - Public properties
+    
     @Published var deckFilters: DeckFilters
     
     var mainNations: [Nation] {
@@ -55,9 +57,13 @@ class DeckFiltersViewModel: ObservableObject {
         ]
     }
     
+    // MARK: - Initializers
+    
     init(filters: DeckFilters) {
         self.deckFilters = filters        
     }
+    
+    // MARK: - Handle events
     
     func pressMainNation(nation: Nation) {
         if deckFilters.mainNations.contains(nation) {

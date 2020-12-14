@@ -30,7 +30,7 @@ import SwiftUI
 
 struct DeckFiltersView: View {
     
-    @ObservedObject var viewModel: DeckFiltersViewModel
+    @ObservedObject private var viewModel: DeckFiltersViewModel
     
     init(viewModel: DeckFiltersViewModel) {
         self.viewModel = viewModel
@@ -40,7 +40,11 @@ struct DeckFiltersView: View {
         contentView
     }
     
-    private var contentView: some View {
+}
+
+// MARK: - Private
+private extension DeckFiltersView {
+    var contentView: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 30) {
                 mainNationView
@@ -53,7 +57,7 @@ struct DeckFiltersView: View {
         }
     }
     
-    private var mainNationView: some View {
+    var mainNationView: some View {
         nationSectionView(
             String.deckFiltersMainNations,
             data: viewModel.mainNations,
@@ -62,7 +66,7 @@ struct DeckFiltersView: View {
         )
     }
     
-    private var alliedNationView: some View {
+    var alliedNationView: some View {
         nationSectionView(
             String.deckFiltersAlliedNations,
             data: viewModel.alliedNations,
@@ -71,7 +75,7 @@ struct DeckFiltersView: View {
         )
     }
     
-    private var searchView: some View {
+    var searchView: some View {
         sectionView(String.deckFiltersName) {
             MainTextField(
                 String.deckFiltersName,
@@ -80,7 +84,7 @@ struct DeckFiltersView: View {
         }
     }
     
-    private var sortBy: some View {
+    var sortBy: some View {
         sectionView(String.deckFiltersSortBy) {
             HStack {
                 Spacer()
@@ -98,11 +102,11 @@ struct DeckFiltersView: View {
         }
     }
     
-    private func nationSectionView(_ title: String, data: [Nation], selection: Set<Nation>, action: @escaping (Nation) -> ()) -> some View {
+    func nationSectionView(_ title: String, data: [Nation], selection: Set<Nation>, action: @escaping (Nation) -> ()) -> some View {
         sectionView(title) {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: .nationBtnWidth))]) {
                 ForEach(data, id: \.rawValue) { nation in
-                    NationButtonView(nation: nation) {
+                    NationButtonView(nation) {
                         action(nation)
                     }
                     .opacity(selection.isEmpty || selection.contains(nation) ?
@@ -112,7 +116,7 @@ struct DeckFiltersView: View {
         }
     }
     
-    private func sectionView<Content: View>(_ title: String, @ViewBuilder content: @escaping () -> Content) -> some View {
+    func sectionView<Content: View>(_ title: String, @ViewBuilder content: @escaping () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(.uiTitle3)
@@ -120,7 +124,6 @@ struct DeckFiltersView: View {
             content()
         }
     }
-    
 }
 
 struct DeckFiltersView_Previews: PreviewProvider {

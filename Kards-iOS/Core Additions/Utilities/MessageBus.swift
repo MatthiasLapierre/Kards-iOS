@@ -29,6 +29,7 @@
 import class Foundation.Timer
 import Combine
 
+/// Notification to deliver.
 struct Message {
   enum Level {
     case error, warning, success
@@ -58,6 +59,7 @@ extension Message.Level {
   }
 }
 
+/// Allows publish-subscribe-style communication between components without requiring the components to explicitly be aware of each other.
 final class MessageBus: ObservableObject {
   @Published private(set) var currentMessage: Message?
   @Published var messageVisible: Bool = false

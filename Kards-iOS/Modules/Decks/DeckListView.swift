@@ -31,7 +31,7 @@ import Combine
 
 struct DeckListView: View {
     
-    @ObservedObject private var deckListRepository: DeckListRepository
+    @ObservedObject private var repository: DeckListRepository
     @State private var isLoading: Bool = false
     @State private var selectedDeck: DeckViewModel? = nil
     @State private var presentCard: Bool = false
@@ -39,8 +39,8 @@ struct DeckListView: View {
     
     private var subscriptions = Set<AnyCancellable>()
     
-    init(deckListRepository: DeckListRepository) {
-        self.deckListRepository = deckListRepository
+    init(repository: DeckListRepository) {
+        self.repository = repository
     }
     
     var body: some View {
@@ -50,46 +50,53 @@ struct DeckListView: View {
                 displayMode: .inline
             )
             .navigationBarItems(
-                trailing: Button(
-                    String.filters,
-                    action: {
-                        self.showFilters = true
-                    }
-                )
-                .font(.uiButtonLabel)
-                .foregroundColor(.titleText)
-                .fullScreenCover(isPresented: $showFilters, content: {
-                    ClosableView(dismiss: {
-                        deckListRepository.reload()
-                    }) {
-                        DeckFiltersView(
-                            viewModel: DeckFiltersViewModel(filters: DataManager.current.filtersManager.deckFilters)
-                        )
-                    }
-                })
+                trailing: trailingNavigationBarButtonView
+                    .fullScreenCover(isPresented: $showFilters, content: {
+                        ClosableView(dismiss: {
+                            repository.reload()
+                        }) {
+                            DeckFiltersView(
+                                viewModel: DeckFiltersViewModel(filters: DataManager.current.filtersManager.deckFilters)
+                            )
+                        }
+                    })
             )
             .onAppear {
                 reloadIfRequired()
             }
-            .onReceive(self.deckListRepository.objectWillChange) {
-                isLoading = self.deckListRepository.isLoading
+            .onReceive(repository.objectWillChange) {
+                isLoading = repository.isLoading
             }
     }
-    
-    @ViewBuilder private var contentView: some View {
-        switch deckListRepository.state {
+}
+
+// MARK: - Private
+private extension DeckListView {
+    @ViewBuilder var contentView: some View {
+        switch repository.state {
         case .initial, .loading:
             loadingView
-        case .hasData where deckListRepository.isEmpty:
+        case .hasData where repository.isEmpty:
           noResultsView
-        case .failed where deckListRepository.isEmpty:
+        case .failed where repository.isEmpty:
           reloadView
         case .hasData, .loadingAdditional, .failed:
           listView
         }
     }
     
-    private var listView: some View {
+    var trailingNavigationBarButtonView: some View {
+        Button(
+            String.filters,
+            action: {
+                self.showFilters = true
+            }
+        )
+        .font(.uiButtonLabel)
+        .foregroundColor(.titleText)
+    }
+    
+    var listView: some View {
         ZStack {
             backgroundView
             ScrollView {
@@ -103,44 +110,44 @@ struct DeckListView: View {
         }
     }
     
-    private var decksView: some View {
+    var decksView: some View {
         LazyVStack(spacing: 1) {
-            ForEach(deckListRepository.decks, id: \.id, content: deckItem)
+            ForEach(repository.elements, id: \.id, content: deckItem)
         }
         .padding(.all, 8)
     }
     
-    private var reloadView: some View {
+    var reloadView: some View {
         ZStack {
             backgroundView
             ReloadView(
                 isLoading: $isLoading,
-                reloadHandler: deckListRepository.reload
+                reloadHandler: repository.reload
             )
         }
     }
     
-    @ViewBuilder private var loadMoreView: some View {
-        if deckListRepository.hasNextPage {
+    @ViewBuilder var loadMoreView: some View {
+        if repository.hasNextPage {
             LoadMoreView(
                 isLoading: $isLoading,
-                callback: deckListRepository.loadMore
+                callback: repository.loadMore
             )
         }
     }
     
-    private var backgroundView: some View {
+    var backgroundView: some View {
         BackgroundView()
     }
     
-    private var loadingView: some View {
+    var loadingView: some View {
         ZStack {
             backgroundView
             LoadingView()
         }
     }
     
-    private var noResultsView: some View {
+    var noResultsView: some View {
         ZStack {
             backgroundView
             NoResultsView(
@@ -150,15 +157,15 @@ struct DeckListView: View {
         }
     }
     
-    private func deckItem(for content: DeckDisplayable) -> some View {
+    func deckItem(for content: DeckDisplayable) -> some View {
         Button(action: {
             selectedDeck = content as? DeckViewModel
         }, label: {
             DeckItemView(deck: content)
         })
         .onAppear(perform: {
-            if (content.id == deckListRepository.decks.last?.id) {
-                deckListRepository.loadMore()
+            if (content.id == repository.elements.last?.id) {
+                repository.loadMore()
             }
         })
         .fullScreenCover(item: $selectedDeck, content: { item in
@@ -168,9 +175,9 @@ struct DeckListView: View {
         })
     }
     
-    private func reloadIfRequired() {
-      if deckListRepository.state == .initial {
-        deckListRepository.reload()
+    func reloadIfRequired() {
+      if repository.state == .initial {
+        repository.reload()
       }
     }
 }

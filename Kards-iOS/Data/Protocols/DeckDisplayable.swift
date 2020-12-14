@@ -48,6 +48,7 @@ struct Information {
     var text: String
 }
 
+/// Sample deck to use in previews.
 class PreviewDeck: DeckDisplayable {
     var id: String = "1"
     

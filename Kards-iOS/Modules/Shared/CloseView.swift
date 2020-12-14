@@ -30,7 +30,7 @@ import SwiftUI
 
 struct CloseView: View {
     
-    var callback: () -> Void
+    let callback: () -> Void
     
     var body: some View {
         Button(action: callback) {

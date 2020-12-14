@@ -30,8 +30,13 @@ import SwiftUI
 
 struct NationButtonView: View {
     
-    let nation: Nation
-    let callback: () -> Void
+    private let nation: Nation
+    private let callback: () -> Void
+    
+    init(_ nation: Nation, callback: @escaping () -> Void) {
+        self.nation = nation
+        self.callback = callback
+    }
     
     var body: some View {
         Button(action: callback, label: {
@@ -75,6 +80,6 @@ fileprivate struct NationButtonStyle: ButtonStyle {
 
 struct NationButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        NationButtonView(nation: .France) {}
+        NationButtonView(.France) {}
     }
 }

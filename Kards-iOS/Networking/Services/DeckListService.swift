@@ -30,6 +30,7 @@ import Foundation
 
 class DeckListService: Service {
     
+    // MARK:- Internal
     func decks(
         page: Int = 1,
         mainNations: Set<Nation>? = nil,

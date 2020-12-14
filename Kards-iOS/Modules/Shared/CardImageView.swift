@@ -58,6 +58,6 @@ struct CardImageView: View {
 
 struct CardImageView_Previews: PreviewProvider {
     static var previews: some View {
-        CardImageView("https://www.kards.com/images/card/v8/en/the_hammer.png")
+        CardImageView("images/card/v8/en/the_hammer.png")
     }
 }

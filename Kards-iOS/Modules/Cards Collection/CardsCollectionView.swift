@@ -38,29 +38,41 @@ struct CardsCollectionView: View {
     }
     
     var body: some View {
-        CardListView(cardListRepository: cardListRepository)
+        contentView
+    }
+    
+}
+
+//MARK: - Private
+private extension CardsCollectionView {
+    var contentView: some View {
+        CardListView(repository: cardListRepository)
             .navigationBarTitle(
                 Text(String.cardsCollection),
                 displayMode: .inline
             )
             .navigationBarItems(
-                trailing: Button(
-                    String.filters,
-                    action: {
-                        self.showFilters = true
-                    }
-                )
-                .font(.uiButtonLabel)
-                .foregroundColor(.titleText)
-                .fullScreenCover(isPresented: $showFilters, content: {
-                    ClosableView(dismiss: {
+                trailing: trailingNavigationBarButtonView
+                    .fullScreenCover(isPresented: $showFilters, content: {
+                        ClosableView(dismiss: {
                         cardListRepository.reload()
-                    }) {
-                        CardsFiltersView(
-                            viewModel: CardsFiltersViewModel(filters: DataManager.current.filtersManager.cardFilters)
-                        )
-                    }
-                })
+                        }) {
+                            CardsFiltersView(
+                                viewModel: CardsFiltersViewModel(filters: DataManager.current.filtersManager.cardFilters)
+                            )
+                        }
+                    })
             )
+    }
+    
+    var trailingNavigationBarButtonView: some View {
+        Button(
+            String.filters,
+            action: {
+                self.showFilters = true
+            }
+        )
+        .font(.uiButtonLabel)
+        .foregroundColor(.titleText)
     }
 }

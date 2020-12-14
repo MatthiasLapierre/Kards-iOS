@@ -40,6 +40,7 @@ struct Feature {
     var value: String
 }
 
+/// Sample card to use in previews.
 class PreviewCard: CardDisplayable {
     var id: String = "ID"
     var subTitle: String = "Soviet Union"

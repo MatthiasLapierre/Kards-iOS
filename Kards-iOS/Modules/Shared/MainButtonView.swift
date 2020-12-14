@@ -30,10 +30,15 @@ import SwiftUI
 
 struct MainButtonView: View {
     
-    var title: String
-    var callback: () -> Void
+    private let title: String
+    private let callback: () -> Void
     
     @State private var height: CGFloat?
+    
+    init(_ title: String, callback: @escaping () -> Void) {
+        self.title = title
+        self.callback = callback
+    }
     
     var body: some View {
         Button(action: callback) {
@@ -60,7 +65,7 @@ fileprivate struct MainButtonStyle: ButtonStyle {
 
 struct MainButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        MainButtonView(title: "My button") {}
+        MainButtonView("My button") {}
             .background(Color.backgroundColor)
             .previewLayout(.sizeThatFits)
     }

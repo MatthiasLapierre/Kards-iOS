@@ -31,6 +31,8 @@ import Combine
 
 class CardsFiltersViewModel: ObservableObject {
     
+    // MARK: - Public properties
+    
     @Published var cardFilters: CardFilters
     
     var nations: [Nation] {
@@ -76,9 +78,13 @@ class CardsFiltersViewModel: ObservableObject {
         ]
     }
     
+    // MARK: - Initializers
+    
     init(filters: CardFilters) {
         self.cardFilters = filters
     }
+    
+    // MARK: - Handle events
     
     func pressNation(_ nation: Nation) {
         if cardFilters.nations.contains(nation) {

@@ -26,29 +26,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import SwiftUI
+import Combine
 
-struct LoadMoreView: View {
+/// Help to load small chunks of data at a time. Loading partial data on demand reduces usage of network bandwidth and system resources.
+protocol Paginatable: ObservableObject where ObjectWillChangePublisher == ObservableObjectPublisher {
+    associatedtype Element
     
-    @Binding var isLoading: Bool
-    let callback: () -> Void
+    // Managing the state of the deck list.
+    var currentPage: Int { get }
+    var startingPage: Int { get }
+    var defaultPageSize: Int { get }
+    var state: DataState { get }
     
-    var body: some View {
-        MainButtonView(
-            isLoading ? String.loading : String.loadMore,
-            callback: callback
-        )
-        .disabled(isLoading)
-    }
-}
-
-struct LoadMoreView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LoadMoreView(isLoading: .constant(false)) {}
-            LoadMoreView(isLoading: .constant(true)) {}
-        }
-        .previewLayout(.sizeThatFits)
-        .background(Color.backgroundColor)
-    }
+    /// Data source
+    var elements: [Element] { get }
+    
+    /// Load the next page
+    func loadMore()
+    
+    /// Come back to the first page.
+    func reload()
 }

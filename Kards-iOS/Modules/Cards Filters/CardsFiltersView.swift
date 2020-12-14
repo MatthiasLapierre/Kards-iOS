@@ -29,7 +29,7 @@
 import SwiftUI
 
 struct CardsFiltersView: View {
-    @ObservedObject var viewModel: CardsFiltersViewModel
+    @ObservedObject private var viewModel: CardsFiltersViewModel
     
     init(viewModel: CardsFiltersViewModel) {
         self.viewModel = viewModel
@@ -39,7 +39,11 @@ struct CardsFiltersView: View {
         contentView
     }
     
-    private var contentView: some View {
+}
+
+// MARK: - Private
+private extension CardsFiltersView {
+    var contentView: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 30) {
                 nationView
@@ -54,7 +58,7 @@ struct CardsFiltersView: View {
         }
     }
     
-    private var nationView: some View {
+    var nationView: some View {
         nationSectionView(
             String.cardFiltersNations,
             data: viewModel.nations,
@@ -63,7 +67,7 @@ struct CardsFiltersView: View {
         )
     }
     
-    private var kreditsView: some View {
+    var kreditsView: some View {
         sectionView(String.cardFiltersKredits) {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: .kreditsBtnWidth))], spacing: 5) {
                 ForEach(0..<8) { kredits in
@@ -78,7 +82,7 @@ struct CardsFiltersView: View {
         }
     }
     
-    private var typesView: some View {
+    var typesView: some View {
         sectionView(String.cardFiltersTypes) {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: .cardTypeBtnWidth))], spacing: 5) {
                 ForEach(viewModel.types, id: \.rawValue) { [unowned viewModel] type in
@@ -93,7 +97,7 @@ struct CardsFiltersView: View {
         }
     }
     
-    private var rarityView: some View {
+    var rarityView: some View {
         sectionView(String.cardRarity) {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: .cardTypeBtnWidth))], spacing: 5) {
                 ForEach(viewModel.rarityArray, id: \.rawValue) { rarity in
@@ -108,7 +112,7 @@ struct CardsFiltersView: View {
         }
     }
     
-    private var setView: some View {
+    var setView: some View {
         sectionView(String.cardSet) {
             HStack {
                 Spacer()
@@ -126,7 +130,7 @@ struct CardsFiltersView: View {
         }
     }
     
-    private var searchView: some View {
+    var searchView: some View {
         sectionView(String.cardFiltersSearch) {
             MainTextField(
                 String.deckFiltersName,
@@ -135,11 +139,11 @@ struct CardsFiltersView: View {
         }
     }
     
-    private func nationSectionView(_ title: String, data: [Nation], selection: Set<Nation>, action: @escaping (Nation) -> ()) -> some View {
+    func nationSectionView(_ title: String, data: [Nation], selection: Set<Nation>, action: @escaping (Nation) -> ()) -> some View {
         sectionView(title) {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: .nationBtnWidth))]) {
                 ForEach(data, id: \.rawValue) { nation in
-                    NationButtonView(nation: nation) {
+                    NationButtonView(nation) {
                         action(nation)
                     }
                     .opacity(selection.isEmpty || selection.contains(nation) ? 1.0 : 0.3)
@@ -148,7 +152,7 @@ struct CardsFiltersView: View {
         }
     }
     
-    private func sectionView<Content: View>(_ title: String, @ViewBuilder content: @escaping () -> Content) -> some View {
+    func sectionView<Content: View>(_ title: String, @ViewBuilder content: @escaping () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(.uiTitle3)
@@ -156,7 +160,6 @@ struct CardsFiltersView: View {
             content()
         }
     }
-    
 }
 
 struct CardsFiltersView_Previews: PreviewProvider {

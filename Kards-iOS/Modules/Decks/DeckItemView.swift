@@ -39,7 +39,11 @@ struct DeckItemView: View {
     var body: some View {
         contentView
     }
-    
+        
+}
+
+// MARK: - Private
+private extension DeckItemView {
     @ViewBuilder var contentView: some View {
         if UIDevice.current.userInterfaceIdiom == .pad {
             largeContentView
@@ -48,7 +52,7 @@ struct DeckItemView: View {
         }
     }
     
-    private var normalContentView: some View {
+    var normalContentView: some View {
         HStack {
             imageView
             VStack(alignment: .leading) {
@@ -71,7 +75,7 @@ struct DeckItemView: View {
         )
     }
     
-    private var largeContentView: some View {
+    var largeContentView: some View {
         HStack {
             imageView
             VStack(alignment: .leading) {
@@ -92,21 +96,21 @@ struct DeckItemView: View {
         .background(backgroundView)
     }
     
-    private var imageView: some View {
+    var imageView: some View {
         deckDisplayable.image
             .resizable()
             .frame(width: 50, height: 50)
             .scaledToFit()
     }
     
-    private var titleView: some View {
+    var titleView: some View {
         Text(deckDisplayable.name.uppercased())
             .lineLimit(1)
             .font(.uiTitle3)
             .foregroundColor(.titleText)
     }
     
-    private var authorView: some View {
+    var authorView: some View {
         HStack {
             Text(deckDisplayable.username)
                 .font(.uiCaption)
@@ -117,33 +121,33 @@ struct DeckItemView: View {
         }
     }
     
-    private var mainNationView: some View {
+    var mainNationView: some View {
         Text("\(deckDisplayable.mainNation.uppercased()) (\(deckDisplayable.mainNationCards))")
             .font(.uiLabel)
             .foregroundColor(.bodyText)
     }
     
-    private var nationSeparatorView: some View {
+    var nationSeparatorView: some View {
         Text("/")
             .font(.uiLabel)
             .foregroundColor(.bodyText)
             .padding(.horizontal, 8)
     }
     
-    private var secondNationView: some View {
+    var secondNationView: some View {
         Text("\(deckDisplayable.secondNation.uppercased()) (\(deckDisplayable.secondNationCards))")
             .font(.uiLabel)
             .foregroundColor(.bodyText)
     }
     
-    private var scoreView: some View {
+    var scoreView: some View {
         Text("\(deckDisplayable.score)")
             .font(.uiTitle5)
             .foregroundColor(deckDisplayable.score.starts(with: "+") ?
                                 Color.green : Color.red)
     }
     
-    private var backgroundView: some View {
+    var backgroundView: some View {
         deckDisplayable.backgroundColor
             .overlay(Image.deckOverlayBackground)
             .clipped()

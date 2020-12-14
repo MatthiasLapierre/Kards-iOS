@@ -48,16 +48,16 @@ enum KardsAPIError: Error {
 
 class KardsAPI {
     
+    // MARK: - Properties
     static let shared = KardsAPI()
-    
-    let environment: KardsEnvironment
-    
-    init(environment: KardsEnvironment = .prod) {
-        self.environment = environment
-    }
-    
+    let environment: KardsEnvironment    
     private(set) lazy var graphQLClient = ApolloClient(
         url: environment.graphQLURL
     )
+    
+    // MARK: - Initializers
+    init(environment: KardsEnvironment = .prod) {
+        self.environment = environment
+    }
     
 }

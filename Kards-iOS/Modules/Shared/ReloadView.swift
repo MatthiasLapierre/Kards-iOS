@@ -50,7 +50,7 @@ struct ReloadView: View {
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing, .bottom], 20)
             MainButtonView(
-                title: isLoading ? String.loading : String.reload,
+                isLoading ? String.loading : String.reload,
                 callback: reloadHandler
             )
             .disabled(isLoading)         

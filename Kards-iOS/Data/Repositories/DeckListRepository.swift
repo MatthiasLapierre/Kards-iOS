@@ -30,33 +30,35 @@ import Combine
 
 class DeckListRepository: ObservableObject, DeckPaginatable {
     
+    //MARK: - Data source
+    @Published  var elements: [DeckDisplayable] = []
+    @Published var state: DataState = .initial
+    
+    //MARK: - Service
     let service: DeckListService
+    
+    //MARK: - Filters
     let filters: DeckFilters
     
-    private (set) var currentPage: Int = 1
-    private (set) var hasNextPage: Bool = false
-    
-    var decks: [DeckDisplayable] = [] {
-      willSet {
-        objectWillChange.send()
-      }
-    }
-    
-    var state: DataState = .initial
-    
+    //MARK: - State
     var isEmpty: Bool {
-      decks.isEmpty
+        elements.isEmpty
     }
-    
     var isLoading: Bool {
         return state == .loading || state == .loadingAdditional
     }
     
+    //MARK: - Paging
+    private (set) var currentPage: Int = 1
+    private (set) var hasNextPage: Bool = false
+    
+    //MARK: - Initializers
     init(service: DeckListService, filters: DeckFilters) {
         self.service = service
         self.filters = filters
     }
     
+    //MARK: - DeckPaginatable
     func loadMore() {
         print("Loading more cards")
         
@@ -64,7 +66,7 @@ class DeckListRepository: ObservableObject, DeckPaginatable {
           return
         }
         
-        guard decks.isEmpty || hasNextPage else {
+        guard elements.isEmpty || hasNextPage else {
           return
         }
         
@@ -91,13 +93,12 @@ class DeckListRepository: ObservableObject, DeckPaginatable {
                     }
                 } ?? []
                 print("Gotten \(viewModels.count) decks")
-                self.decks += viewModels
+                self.elements += viewModels
                 self.hasNextPage = decks.pageInfo.hasNextPage
                 self.state = DataState.hasData
             case .failure(let error):
                 self.currentPage -= 1
                 self.state = DataState.failed
-                self.objectWillChange.send()
                 print("Failed to load more decks : \(error)")
             }
         }
@@ -109,8 +110,6 @@ class DeckListRepository: ObservableObject, DeckPaginatable {
         }
         
         state = .loading
-        
-        objectWillChange.send()
         
         // Reset current page to 1
         currentPage = startingPage
@@ -132,12 +131,11 @@ class DeckListRepository: ObservableObject, DeckPaginatable {
                         return nil
                     }
                 } ?? []
-                self.decks = viewModels
+                self.elements = viewModels
                 self.hasNextPage = decks.pageInfo.hasNextPage
                 self.state = DataState.hasData
             case .failure(let error):
                 self.state = DataState.failed
-                self.objectWillChange.send()
                 print("Failed to reload cards : \(error)")
             }
         }

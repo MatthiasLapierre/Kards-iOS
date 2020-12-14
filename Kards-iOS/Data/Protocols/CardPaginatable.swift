@@ -28,16 +28,9 @@
 
 import Combine
 
-protocol CardPaginatable: ObservableObject where ObjectWillChangePublisher == ObservableObjectPublisher {
-    var currentPage: Int { get }
-    var startingPage: Int { get }
-    var defaultPageSize: Int { get }
-    var state: DataState { get }
+/// Help to load small chunks of data at a time. Loading partial data on demand reduces usage of network bandwidth and system resources.
+protocol CardPaginatable: Paginatable where Element == CardDisplayable {
     
-    var cards: [CardDisplayable] { get }
-    
-    func loadMore()
-    func reload()
 }
 
 extension CardPaginatable {

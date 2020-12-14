@@ -29,16 +29,20 @@
 import SwiftUI
 
 extension Int {
+    // MARK: Paging
     static let pageLimit: Int = 20
 }
 
 extension Double {
+    // MARK: Opacity
     static let inactiveOpacity: Double = 0.2
     static let activeOpacity: Double = 1.0
 }
 
 extension CGFloat {
-    static let cardWidth: CGFloat = 120
+    // MARK: View dimensions
+    static let cardThumbWidth: CGFloat = 120
+    static let cardWidth: CGFloat = 200
     static let nationBtnWidth: CGFloat = 120
     static let kreditsBtnWidth: CGFloat = 60
     static let cardTypeBtnWidth: CGFloat = 55

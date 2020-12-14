@@ -31,6 +31,8 @@ import SwiftUI
 
 struct DeckViewModel: DeckDisplayable, Identifiable {
     
+    // MARK: - Public properties
+    
     var id: String {
         "\(deck.id)"
     }
@@ -115,7 +117,11 @@ struct DeckViewModel: DeckDisplayable, Identifiable {
         ]
     }
     
+    // MARK: - Private properties
+    
     private let deck: GetDecksQuery.Data.Deck.Edge.Node
+    
+    // MARK: - Initializers
     
     init(deck: GetDecksQuery.Data.Deck.Edge.Node) {
         self.deck = deck

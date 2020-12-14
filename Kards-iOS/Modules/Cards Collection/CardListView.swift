@@ -32,15 +32,16 @@ import KingfisherSwiftUI
 
 struct CardListView: View {
     
-    @ObservedObject private var cardListRepository: CardListRepository
+    @ObservedObject private var repository: CardListRepository
     @State private var isLoading: Bool = false
     @State private var selectedCard: CardViewModel? = nil
     @State private var presentCard: Bool = false
     
     private var subscriptions = Set<AnyCancellable>()
     
-    init(cardListRepository: CardListRepository) {
-        self.cardListRepository = cardListRepository
+    //MARK: - Initializers
+    init(repository: CardListRepository) {
+        self.repository = repository
     }
     
     var body: some View {
@@ -48,25 +49,29 @@ struct CardListView: View {
             .onAppear {
                 reloadIfRequired()
             }
-            .onReceive(self.cardListRepository.objectWillChange) {
-                isLoading = self.cardListRepository.isLoading
+            .onReceive(self.repository.objectWillChange) {
+                isLoading = self.repository.isLoading
             }
     }
     
-    @ViewBuilder private var contentView: some View {
-        switch cardListRepository.state {
+}
+
+// MARK: - Private
+private extension CardListView {
+    @ViewBuilder var contentView: some View {
+        switch repository.state {
         case .initial, .loading:
             loadingView
-        case .hasData where cardListRepository.isEmpty:
+        case .hasData where repository.isEmpty:
           noResultsView
-        case .failed where cardListRepository.isEmpty:
+        case .failed where repository.isEmpty:
           reloadView
         case .hasData, .loadingAdditional, .failed:
           listView
         }
     }
     
-    private var listView: some View {
+    var listView: some View {
         ZStack {
             backgroundView
             ScrollView {
@@ -80,44 +85,44 @@ struct CardListView: View {
         }
     }
     
-    private var cardsView: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: .cardWidth))]) {
-            ForEach(cardListRepository.cards, id: \.id, content: cardItem)
+    var cardsView: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: .cardThumbWidth))]) {
+            ForEach(repository.elements, id: \.id, content: cardItem)
         }
         .padding(.all, 8)
     }
     
-    private var reloadView: some View {
+    var reloadView: some View {
         ZStack {
             backgroundView
             ReloadView(
                 isLoading: $isLoading,
-                reloadHandler: cardListRepository.reload
+                reloadHandler: repository.reload
             )
         }
     }
     
-    @ViewBuilder private var loadMoreView: some View {
-        if cardListRepository.hasNextPage {
+    @ViewBuilder var loadMoreView: some View {
+        if repository.hasNextPage {
             LoadMoreView(
                 isLoading: $isLoading,
-                callback: cardListRepository.loadMore
+                callback: repository.loadMore
             )
         }
     }
     
-    private var backgroundView: some View {
+    var backgroundView: some View {
         BackgroundView()
     }
     
-    private var loadingView: some View {
+    var loadingView: some View {
         ZStack {
             backgroundView
             LoadingView()
         }
     }
     
-    private var noResultsView: some View {
+    var noResultsView: some View {
         ZStack {
             backgroundView
             NoResultsView(
@@ -127,15 +132,15 @@ struct CardListView: View {
         }
     }
     
-    private func cardItem(for content: CardDisplayable) -> some View {
+    func cardItem(for content: CardDisplayable) -> some View {
         Button(action: {
             selectedCard = content as? CardViewModel
         }) {
             CardImageView(content.imageUrl)
         }
         .onAppear(perform: {
-            if (content.id == cardListRepository.cards.last?.id) {
-                cardListRepository.loadMore()
+            if (content.id == repository.elements.last?.id) {
+                repository.loadMore()
             }
         })
         .fullScreenCover(item: $selectedCard, content: { item in
@@ -145,10 +150,9 @@ struct CardListView: View {
         })
     }
     
-    private func reloadIfRequired() {
-      if cardListRepository.state == .initial {
-        cardListRepository.reload()
+    func reloadIfRequired() {
+      if repository.state == .initial {
+        repository.reload()
       }
     }
-    
 }

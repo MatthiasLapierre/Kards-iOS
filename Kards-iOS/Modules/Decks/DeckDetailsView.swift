@@ -40,7 +40,11 @@ struct DeckDetailsView: View {
         contentView
     }
     
-    private var contentView: some View {
+}
+
+// MARK: - Private
+private extension DeckDetailsView {
+    var contentView: some View {
         ScrollView {
             VStack {
                 headerView
@@ -49,7 +53,7 @@ struct DeckDetailsView: View {
         }
     }
     
-    private var headerView: some View {
+    var headerView: some View {
         VStack {
             Text(String.deck.uppercased())
                 .multilineTextAlignment(.center)
@@ -62,7 +66,7 @@ struct DeckDetailsView: View {
         }
     }
     
-    private var detailsView: some View {
+    var detailsView: some View {
         HStack(alignment: .top) {
             informationView
             Spacer()
@@ -72,7 +76,7 @@ struct DeckDetailsView: View {
         .padding(.top, 40)
     }
     
-    private var informationView: some View {
+    var informationView: some View {
         VStack(alignment: .leading, spacing: 20) {
             ForEach(0..<deckDisplayable.information.count) {
                 let information = deckDisplayable.information[$0]
@@ -81,14 +85,14 @@ struct DeckDetailsView: View {
         }
     }
     
-    private var scoreView: some View {
+    var scoreView: some View {
         Text(deckDisplayable.score)
             .font(.uiLargeTitle)
             .foregroundColor(deckDisplayable.score.starts(with: "+") ?
                                 Color.green : Color.red)
     }
     
-    private func informationItemView(title: String, text: String) -> some View {
+    func informationItemView(title: String, text: String) -> some View {
         VStack(alignment: .leading) {
             Text(title)
                 .font(.uiTitle5)

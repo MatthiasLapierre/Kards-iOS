@@ -30,8 +30,10 @@ import Foundation
 
 class Service {
     
+    // MARK: - Properties
     let networkClient: KardsAPI
     
+    // MARK: - Initializers
     init(client: KardsAPI) {
         self.networkClient = client
     }

@@ -30,6 +30,8 @@ import SwiftUI
 
 class PortraitHostingController<Content>: UIHostingController<Content> where Content: View {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        // Lock the view controller's oritentation on iPhone.
+        // Support all orientations for iPads.
         UIDevice.current.userInterfaceIdiom == .pad ? .all : .portrait
     }
 }

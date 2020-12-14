@@ -35,18 +35,25 @@ struct ContentView: View {
     private let tabViewModel = TabViewModel()
     
     var body: some View {
+        contentView
+            .background(BackgroundView())
+            .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)
+            .environmentObject(tabViewModel)
+    }
+}
+
+// MARK: - Private
+private extension ContentView {
+    var contentView: some View {
         let cardsCollectionView = CardsCollectionView(
             cardListRepository: dataManager.cardListRepository
         )
         let deckListView = DeckListView(
-            deckListRepository: dataManager.deckListRepository
+            repository: dataManager.deckListRepository
         )
-        TabNavView(
+        return TabNavView(
             cardsCollectionView: cardsCollectionView,
             deckListView: deckListView
-        )        
-        .environmentObject(tabViewModel)
-        .background(Color.backgroundColor)
-        .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)
+        )
     }
 }

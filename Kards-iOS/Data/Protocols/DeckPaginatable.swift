@@ -28,16 +28,9 @@
 
 import Combine
 
-protocol DeckPaginatable: ObservableObject where ObjectWillChangePublisher == ObservableObjectPublisher {
-    var currentPage: Int { get }
-    var startingPage: Int { get }
-    var defaultPageSize: Int { get }
-    var state: DataState { get }
+/// Help to load small chunks of data at a time. Loading partial data on demand reduces usage of network bandwidth and system resources.
+protocol DeckPaginatable: Paginatable where Element == DeckDisplayable {
     
-    var decks: [DeckDisplayable] { get }
-    
-    func loadMore()
-    func reload()
 }
 
 extension DeckPaginatable {

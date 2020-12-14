@@ -30,6 +30,8 @@ import Foundation
 
 struct CardViewModel: CardDisplayable, Identifiable {
     
+    // MARK: - Public properties
+    
     var id: String {
         "\(card.id)"
     }
@@ -65,7 +67,11 @@ struct CardViewModel: CardDisplayable, Identifiable {
         ]
     }
     
+    // MARK: - Private properties
+    
     private let card: GetCardsQuery.Data.Card.Edge.Node
+    
+    // MARK: - Initializers
     
     init(card: GetCardsQuery.Data.Card.Edge.Node) {
         self.card = card
