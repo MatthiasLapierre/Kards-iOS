@@ -341,11 +341,11 @@
 		39FEB0B6257A214300204332 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				39ABA2252588AC3D005DA89A /* MainCoordinator.swift */,
-				39ABA2282588AE2A005DA89A /* Coordinator.swift */,
-				39ABA22B2588AF9A005DA89A /* CardsCollectionCoordinator.swift */,
-				39ABA22E2588B17C005DA89A /* DeckListCoordinator.swift */,
 				39ABA2332588B41F005DA89A /* CardListCoordinator.swift */,
+				39ABA22B2588AF9A005DA89A /* CardsCollectionCoordinator.swift */,
+				39ABA2282588AE2A005DA89A /* Coordinator.swift */,
+				39ABA22E2588B17C005DA89A /* DeckListCoordinator.swift */,
+				39ABA2252588AC3D005DA89A /* MainCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -521,7 +521,6 @@
 				3995600525793821008D9C32 /* Sources */,
 				3995600625793821008D9C32 /* Frameworks */,
 				3995600725793821008D9C32 /* Resources */,
-				39F5C498257E71750063ED76 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -591,26 +590,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		39F5C498257E71750063ED76 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"${SRCROOT}\"/Codegen\nxcrun -sdk macosx swift run\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3995600525793821008D9C32 /* Sources */ = {
