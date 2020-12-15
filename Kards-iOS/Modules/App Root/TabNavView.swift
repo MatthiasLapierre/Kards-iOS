@@ -31,8 +31,8 @@ import SwiftUI
 struct TabNavView<
     CardsCollectionView: View,
     DeckListView: View
->: View {
-    @EnvironmentObject var tabViewModel: TabViewModel
+>: View {    
+    @EnvironmentObject private var tabViewModel: TabViewModel
     
     let cardsCollectionView: CardsCollectionView
     let deckListView: DeckListView

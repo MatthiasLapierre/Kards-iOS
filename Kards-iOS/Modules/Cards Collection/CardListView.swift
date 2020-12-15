@@ -32,6 +32,7 @@ import KingfisherSwiftUI
 
 struct CardListView: View {
     
+    private weak var delegate: CardListViewDelegate? = nil
     @ObservedObject private var repository: CardListRepository
     @State private var isLoading: Bool = false
     @State private var selectedCard: CardViewModel? = nil
@@ -40,7 +41,8 @@ struct CardListView: View {
     private var subscriptions = Set<AnyCancellable>()
     
     //MARK: - Initializers
-    init(repository: CardListRepository) {
+    init(delegate: CardListViewDelegate, repository: CardListRepository) {
+        self.delegate = delegate
         self.repository = repository
     }
     
@@ -146,10 +148,8 @@ private extension CardListView {
                 repository.loadMore()
             }
         })
-        .fullScreenCover(item: $selectedCard, content: { item in
-            ClosableView {
-                CardDetailsView(card: item)
-            }
+        .fullScreenCover(item: $selectedCard, content: { item in            
+            delegate?.cardDetailsView(card: item)
         })
     }
     

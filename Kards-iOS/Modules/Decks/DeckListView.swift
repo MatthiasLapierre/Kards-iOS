@@ -31,6 +31,7 @@ import Combine
 
 struct DeckListView: View {
     
+    private weak var delegate: DeckListViewDelegate? = nil
     @ObservedObject private var repository: DeckListRepository
     @State private var isLoading: Bool = false
     @State private var selectedDeck: DeckViewModel? = nil
@@ -39,7 +40,8 @@ struct DeckListView: View {
     
     private var subscriptions = Set<AnyCancellable>()
     
-    init(repository: DeckListRepository) {
+    init(delegate: DeckListViewDelegate, repository: DeckListRepository) {
+        self.delegate = delegate
         self.repository = repository
     }
     
@@ -52,13 +54,9 @@ struct DeckListView: View {
             .navigationBarItems(
                 trailing: trailingNavigationBarButtonView
                     .fullScreenCover(isPresented: $showFilters, content: {
-                        ClosableView(dismiss: {
+                        delegate?.deckFiltersView {
                             repository.reload()
-                        }) {
-                            DeckFiltersView(
-                                viewModel: DeckFiltersViewModel(filters: DataManager.current.filtersManager.deckFilters)
-                            )
-                        }
+                        }                        
                     })
             )
             .onAppear {
@@ -172,9 +170,7 @@ private extension DeckListView {
             }
         })
         .fullScreenCover(item: $selectedDeck, content: { item in
-            ClosableView {
-                DeckDetailsView(deck: item)
-            }
+            delegate?.deckDetailsView(deck: item)
         })
     }
     

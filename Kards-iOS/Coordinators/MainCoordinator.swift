@@ -28,49 +28,47 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {        
+protocol MainViewDelegate: class {
+    func cardCollectionView() -> AnyView
+    func deckListView() -> AnyView
+}
+
+class MainCoordinator: Coordinator {
     
-    private weak var delegate: CardsCollectionViewDelegate? = nil
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
+    private let dataManager: DataManager
     
-    init(delegate: CardsCollectionViewDelegate, repository: CardListRepository) {
-        self.delegate = delegate
-        self.cardListRepository = repository
+    lazy var cardsCollectionCoordinator: CardsCollectionCoordinator = {
+        return CardsCollectionCoordinator(dataManager: dataManager)
+    }()
+    
+    lazy var deckListCoordinator: DeckListCoordinator = {
+        return DeckListCoordinator(dataManager: dataManager)
+    }()
+    
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
     }
     
-    var body: some View {
-        contentView
+    func rootView() -> AnyView {
+        let viewModel = TabViewModel()
+        let routingView = MainView(
+            delegate: self,
+            viewModel: viewModel
+        )
+        .environmentObject(dataManager)
+        return AnyView(routingView)
     }
     
 }
 
-//MARK: - Private
-private extension CardsCollectionView {
-    var contentView: some View {
-        delegate?.cardListView()
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: trailingNavigationBarButtonView
-                    .fullScreenCover(isPresented: $showFilters, content: {
-                        delegate?.cardFiltersView {
-                            cardListRepository.reload()
-                        }                        
-                    })
-            )
+extension MainCoordinator : MainViewDelegate {
+    
+    func cardCollectionView() -> AnyView {
+        return self.cardsCollectionCoordinator.rootView()
     }
     
-    var trailingNavigationBarButtonView: some View {
-        Button(
-            String.filters,
-            action: {
-                self.showFilters = true
-            }
-        )
-        .font(.uiButtonLabel)
-        .foregroundColor(.titleText)
+    func deckListView() -> AnyView {
+        return self.deckListCoordinator.rootView()
     }
+    
 }

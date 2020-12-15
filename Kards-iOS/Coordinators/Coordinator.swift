@@ -28,49 +28,6 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {        
-    
-    private weak var delegate: CardsCollectionViewDelegate? = nil
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
-    
-    init(delegate: CardsCollectionViewDelegate, repository: CardListRepository) {
-        self.delegate = delegate
-        self.cardListRepository = repository
-    }
-    
-    var body: some View {
-        contentView
-    }
-    
-}
-
-//MARK: - Private
-private extension CardsCollectionView {
-    var contentView: some View {
-        delegate?.cardListView()
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: trailingNavigationBarButtonView
-                    .fullScreenCover(isPresented: $showFilters, content: {
-                        delegate?.cardFiltersView {
-                            cardListRepository.reload()
-                        }                        
-                    })
-            )
-    }
-    
-    var trailingNavigationBarButtonView: some View {
-        Button(
-            String.filters,
-            action: {
-                self.showFilters = true
-            }
-        )
-        .font(.uiButtonLabel)
-        .foregroundColor(.titleText)
-    }
+protocol Coordinator {
+    func rootView() -> AnyView
 }

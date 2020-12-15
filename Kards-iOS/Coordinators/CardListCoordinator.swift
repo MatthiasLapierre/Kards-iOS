@@ -28,32 +28,31 @@
 
 import SwiftUI
 
-struct ContentView: View {
+protocol CardListViewDelegate: class {
+    func cardDetailsView(card: CardDisplayable) -> AnyView
+}
+
+class CardListCoordinator: Coordinator {
+    fileprivate let dataManager: DataManager
     
-    @EnvironmentObject var dataManager: DataManager
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
+    }
     
-    private let tabViewModel = TabViewModel()
-    
-    var body: some View {
-        contentView
-            .background(BackgroundView())
-            .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)
-            .environmentObject(tabViewModel)
+    func rootView() -> AnyView {
+        let routingView = CardListView(
+            delegate: self,
+            repository: dataManager.cardListRepository
+        )
+        return AnyView(routingView)
     }
 }
 
-// MARK: - Private
-private extension ContentView {
-    var contentView: some View {
-        let cardsCollectionView = CardsCollectionView(
-            cardListRepository: dataManager.cardListRepository
-        )
-        let deckListView = DeckListView(
-            repository: dataManager.deckListRepository
-        )
-        return TabNavView(
-            cardsCollectionView: cardsCollectionView,
-            deckListView: deckListView
-        )
+extension CardListCoordinator: CardListViewDelegate {
+    func cardDetailsView(card: CardDisplayable) -> AnyView {
+        let view = ClosableView {
+            CardDetailsView(card: card)
+        }
+        return AnyView(view)
     }
 }

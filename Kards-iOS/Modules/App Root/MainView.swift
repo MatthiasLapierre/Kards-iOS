@@ -28,49 +28,32 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {        
+struct MainView: View {
     
-    private weak var delegate: CardsCollectionViewDelegate? = nil
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
+    @EnvironmentObject private var dataManager: DataManager
+        
+    private weak var delegate: MainViewDelegate?
+    @ObservedObject private var tabViewModel: TabViewModel
     
-    init(delegate: CardsCollectionViewDelegate, repository: CardListRepository) {
+    init(delegate: MainViewDelegate, viewModel: TabViewModel) {
         self.delegate = delegate
-        self.cardListRepository = repository
+        self.tabViewModel = viewModel
     }
     
     var body: some View {
         contentView
+            .background(BackgroundView())
+            .overlay(MessageBarView(messageBus: MessageBus.current), alignment: .bottom)
     }
-    
 }
 
-//MARK: - Private
-private extension CardsCollectionView {
-    var contentView: some View {
-        delegate?.cardListView()
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: trailingNavigationBarButtonView
-                    .fullScreenCover(isPresented: $showFilters, content: {
-                        delegate?.cardFiltersView {
-                            cardListRepository.reload()
-                        }                        
-                    })
-            )
-    }
-    
-    var trailingNavigationBarButtonView: some View {
-        Button(
-            String.filters,
-            action: {
-                self.showFilters = true
-            }
+// MARK: - Private
+private extension MainView {
+    var contentView: some View {        
+        return TabNavView(
+            cardsCollectionView: delegate?.cardCollectionView(),
+            deckListView: delegate?.deckListView()
         )
-        .font(.uiButtonLabel)
-        .foregroundColor(.titleText)
+        .environmentObject(tabViewModel)
     }
 }

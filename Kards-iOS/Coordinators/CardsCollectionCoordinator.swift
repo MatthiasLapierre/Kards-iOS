@@ -28,49 +28,45 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {        
-    
-    private weak var delegate: CardsCollectionViewDelegate? = nil
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
-    
-    init(delegate: CardsCollectionViewDelegate, repository: CardListRepository) {
-        self.delegate = delegate
-        self.cardListRepository = repository
-    }
-    
-    var body: some View {
-        contentView
-    }
-    
+protocol CardsCollectionViewDelegate: class {
+    func cardListView() -> AnyView
+    func cardFiltersView(dismiss: @escaping () -> Void) -> AnyView
 }
 
-//MARK: - Private
-private extension CardsCollectionView {
-    var contentView: some View {
-        delegate?.cardListView()
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: trailingNavigationBarButtonView
-                    .fullScreenCover(isPresented: $showFilters, content: {
-                        delegate?.cardFiltersView {
-                            cardListRepository.reload()
-                        }                        
-                    })
-            )
+class CardsCollectionCoordinator: Coordinator {
+    fileprivate let dataManager: DataManager
+    
+    lazy var cardListCoordinator: CardListCoordinator = {
+       CardListCoordinator(dataManager: dataManager)
+    }()
+    
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
     }
     
-    var trailingNavigationBarButtonView: some View {
-        Button(
-            String.filters,
-            action: {
-                self.showFilters = true
-            }
+    func rootView() -> AnyView {
+        let routingView = CardsCollectionView(
+            delegate: self,
+            repository: dataManager.cardListRepository
         )
-        .font(.uiButtonLabel)
-        .foregroundColor(.titleText)
+        return AnyView(routingView)
+    }
+}
+
+extension CardsCollectionCoordinator: CardsCollectionViewDelegate {
+    
+    func cardListView() -> AnyView {
+        return cardListCoordinator.rootView()
+    }
+    
+    func cardFiltersView(dismiss: @escaping () -> Void) -> AnyView {
+        let view = ClosableView(dismiss: dismiss) {
+            CardsFiltersView(
+                viewModel: CardsFiltersViewModel(
+                    filters: DataManager.current.filtersManager.cardFilters
+                )
+            )
+        }
+        return AnyView(view)
     }
 }

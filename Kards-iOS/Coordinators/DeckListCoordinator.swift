@@ -28,49 +28,43 @@
 
 import SwiftUI
 
-struct CardsCollectionView: View {        
-    
-    private weak var delegate: CardsCollectionViewDelegate? = nil
-    @ObservedObject private var cardListRepository: CardListRepository
-    @State private var showFilters: Bool = false
-    
-    init(delegate: CardsCollectionViewDelegate, repository: CardListRepository) {
-        self.delegate = delegate
-        self.cardListRepository = repository
-    }
-    
-    var body: some View {
-        contentView
-    }
-    
+protocol DeckListViewDelegate: class {
+    func deckDetailsView(deck: DeckDisplayable) -> AnyView
+    func deckFiltersView(dismiss: @escaping () -> Void) -> AnyView
 }
 
-//MARK: - Private
-private extension CardsCollectionView {
-    var contentView: some View {
-        delegate?.cardListView()
-            .navigationBarTitle(
-                Text(String.cardsCollection),
-                displayMode: .inline
-            )
-            .navigationBarItems(
-                trailing: trailingNavigationBarButtonView
-                    .fullScreenCover(isPresented: $showFilters, content: {
-                        delegate?.cardFiltersView {
-                            cardListRepository.reload()
-                        }                        
-                    })
-            )
+class DeckListCoordinator: Coordinator {
+    private let dataManager: DataManager
+    
+    init(dataManager: DataManager) {
+        self.dataManager = dataManager
     }
     
-    var trailingNavigationBarButtonView: some View {
-        Button(
-            String.filters,
-            action: {
-                self.showFilters = true
-            }
+    func rootView() -> AnyView {
+        let routingView = DeckListView(
+            delegate: self,
+            repository: dataManager.deckListRepository
         )
-        .font(.uiButtonLabel)
-        .foregroundColor(.titleText)
+        return AnyView(routingView)
+    }
+}
+
+extension DeckListCoordinator: DeckListViewDelegate {
+    func deckDetailsView(deck: DeckDisplayable) -> AnyView {
+        let view = ClosableView {
+            DeckDetailsView(deck: deck)
+        }
+        return AnyView(view)
+    }
+    
+    func deckFiltersView(dismiss: @escaping () -> Void) -> AnyView {
+        let view = ClosableView(dismiss: dismiss) {
+            DeckFiltersView(
+                viewModel: DeckFiltersViewModel(
+                    filters: DataManager.current.filtersManager.deckFilters
+                )
+            )
+        }
+        return AnyView(view)
     }
 }
