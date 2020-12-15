@@ -55,7 +55,9 @@ private extension CardDetailsView {
                     .padding(.bottom, 20)
                 featuresView
             }
-            .padding(.all, 20)
+            .frame(maxWidth: .infinity)
+            .padding([.horizontal, .top], 8)
+            .padding(.bottom, 20)
         }
     }
     

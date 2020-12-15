@@ -53,8 +53,8 @@ private extension CardsFiltersView {
                 setView
                 searchView
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
+            .padding([.horizontal, .top], 8)
+            .padding(.bottom, 20)
         }
     }
     

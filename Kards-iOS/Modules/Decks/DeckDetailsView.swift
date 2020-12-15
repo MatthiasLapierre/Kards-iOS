@@ -50,6 +50,8 @@ private extension DeckDetailsView {
                 headerView
                 detailsView
             }
+            .padding([.horizontal, .top], 8)
+            .padding(.bottom, 20)
         }
     }
     
